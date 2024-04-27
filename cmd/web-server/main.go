@@ -8,4 +8,6 @@ import (
 
 func main(){
     fmt.Println("Test")
+
+    tools.ConnectDB()
 }

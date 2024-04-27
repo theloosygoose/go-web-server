@@ -8,7 +8,7 @@ import (
 )
 
 func ConnectDB(){
-    connStr := "postgres://postgres:password@localhost:5432/db-dad?sslmode=disable"
+    connStr := "postgres://postgres:password@localhost:5432/dadphoto?sslmode=disable"
 
     db, err := sql.Open("postgres", connStr)
     defer db.Close()
