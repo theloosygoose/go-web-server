@@ -35,6 +35,7 @@ func (h PhotoHandler) HandlerPhotoShow() http.HandlerFunc {
 
 			photos = append(photos, photo)
 		}
+
 		render(w, r, photo.Show(photos))
 	})
 }

@@ -1,0 +1,31 @@
+package admin
+
+import (
+"github.com/theloosygoose/goserver/internal/view/layout"
+)
+
+templ Show() {
+@layout.Base() {
+<h1>This is the Admin View</h1>
+<div>
+    <form method="POST" action="/addphoto">
+        <label for="name-input">
+            Name
+            <input type="text" name="name" id="name-input" />
+        </label>
+        <label for="location-input">
+            Location
+            <input type="text" name="location" id="location-input" />
+        </label>
+        <label for="date-input">
+            Date
+            <input type="text" name="date" id="date-input" />
+        </label>
+        <label for="imagepath-input">
+            ImagePath
+            <input type="text" name="imagepath" id="imagepath-input" />
+        </label>
+    </form>
+</div>
+}
+}
