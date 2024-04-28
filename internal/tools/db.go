@@ -4,15 +4,10 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-    _ "github.com/lib/pq"
-)
+	"os"
 
-const (
-	host     = "localhost"
-	port     = 5432
-	user     = "postgres"
-	password = "password"
-	dbname   = "dadphoto"
+	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
 )
 
 type PGdb struct {*sql.DB}
@@ -22,8 +17,23 @@ func NewDB(sqldb *sql.DB) PGdb {
 }
 
 func Connect() *sql.DB {
-	connInfo := fmt.Sprintf("host=%s port=%d \n user=%s password=%s \n dbname=%s sslmode=disable",
+    err := godotenv.Load(".env")
+    if err != nil {
+        log.Fatal("Error Loading .env file")
+    }
+
+    var (
+        host = os.Getenv("DB_HOST")
+        port = os.Getenv("DB_PORT")
+        user = os.Getenv("DB_USER")
+        password = os.Getenv("DB_PASS")
+        dbname = os.Getenv("DB_NAME")
+    )
+
+
+	connInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		host, port, user, password, dbname)
+    log.Println(connInfo)
 
 	db, err := sql.Open("postgres", connInfo)
 	if err != nil {
