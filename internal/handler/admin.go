@@ -19,6 +19,8 @@ type AdminHandler struct {
 func (h AdminHandler) AdminAddPhoto() http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
+        r.ParseMultipartForm(20)
+
 		details := types.Photo{
 			Name:      r.FormValue("name"),
 			Location:  r.FormValue("location"),

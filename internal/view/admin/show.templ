@@ -8,7 +8,7 @@ templ Show() {
 @layout.Base() {
 <h1>This is the Admin View</h1>
 <div>
-    <form method="POST" action="/addphoto">
+    <form enctype="multipart/form-data" method="POST" action="/addphoto">
         <label for="name-input">
             Name
             <input type="text" name="name" id="name-input" />
