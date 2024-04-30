@@ -11,5 +11,5 @@ build:
 	@mv ./main ./bin/main
 
 generate:
-	@npx tailwindcss -i ./internal/view/input.css -o ./internal/view/dist/tailwind.css
+	@npx tailwindcss -i ./internal/view/dist/input.css -o ./internal/view/dist/tailwind.css
 	@templ generate

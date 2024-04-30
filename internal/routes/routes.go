@@ -13,15 +13,15 @@ func NewServer(db *sql.DB) *http.ServeMux {
     pHandler := handler.PhotoHandler{DB: db}
     aHandler := handler.AdminHandler{DB: db}
 
-	r.HandleFunc("GET /", pHandler.HandlerPhotoShow())
-    r.HandleFunc("POST /addphoto", aHandler.AdminAddPhoto())
+    fs := http.FileServer(http.Dir("./internal/view/dist"))
 
-    r.HandleFunc("GET /admin", aHandler.HandlerAdminShow())
+    r.Handle("/dist/", http.StripPrefix("/dist/", fs))
 
+	r.HandleFunc("/", pHandler.HandlerPhotoShow())
+    r.HandleFunc("/addphoto", aHandler.AdminAddPhoto())
 
-    // Static Files
-    fs := http.FileServer(http.Dir("./../view/dist"))
-    r.Handle("GET /static", fs)
+    r.HandleFunc("/admin", aHandler.HandlerAdminShow())
+
 
 	return r
 }
