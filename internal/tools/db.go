@@ -6,7 +6,6 @@ import (
 	"log"
 	"os"
 
-	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
 
@@ -17,11 +16,6 @@ func NewDB(sqldb *sql.DB) PGdb {
 }
 
 func Connect() *sql.DB {
-    err := godotenv.Load(".env")
-    if err != nil {
-        log.Fatal("Error Loading .env file")
-    }
-
     var (
         host = os.Getenv("DB_HOST")
         port = os.Getenv("DB_PORT")
