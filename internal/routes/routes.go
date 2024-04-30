@@ -9,6 +9,7 @@ import (
 
 func NewServer(db *sql.DB) *http.ServeMux {
 	r := http.NewServeMux()
+    fs := http.FileServer(http.Dir("./../view/dist"))
 
     pHandler := handler.PhotoHandler{DB: db}
     aHandler := handler.AdminHandler{DB: db}
@@ -17,6 +18,10 @@ func NewServer(db *sql.DB) *http.ServeMux {
     r.HandleFunc("POST /addphoto", aHandler.AdminAddPhoto())
 
     r.HandleFunc("GET /admin", aHandler.HandlerAdminShow())
+
+
+    // Static Files
+    r.Handle("/static", fs)
 
 	return r
 }
