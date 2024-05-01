@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 
 	"github.com/theloosygoose/goserver/internal/types"
 	"github.com/theloosygoose/goserver/internal/view/admin"
@@ -58,7 +59,7 @@ func (h AdminHandler) AdminAddPhoto() http.HandlerFunc {
         osFile.Write(fileBytes)
         defer osFile.Close()
 
-        details.ImagePath = osFile.Name() 
+        details.ImagePath = "images/" + filepath.Base(osFile.Name())
 
         log.Println("---FILE UPLOAD COMPLETE---")
 
