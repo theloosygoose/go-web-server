@@ -12,7 +12,7 @@ templ Show(photos []types.Photo) {
             @components.Card(){
                 <p>{photo.Name} taken at Location: {photo.Location}</p>
                 <p>{photo.Date} img location: {photo.ImagePath}</p>
-                <img src="{photo.ImagePath}" alt="{photo.Name}"/>
+                <img src={photo.ImagePath} alt={photo.Name}/>
             }
         }
     }
