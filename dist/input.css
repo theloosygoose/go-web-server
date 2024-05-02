@@ -129,10 +129,15 @@
         --accent-950: #edf8ed;
 
     }
+    @font-face {
+        font-family: "Inconsolata", monospace;
+        font-optical-sizing: auto;
+        font-style: normal;
+        src: url(https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap);
+    }
 
     html {
-        font-family: "Inconsolata", monospace;
-        @apply bg-background-100;
+        @apply bg-background-500;
         @apply text-text-500;
     }
 }
