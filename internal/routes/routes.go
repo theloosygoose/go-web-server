@@ -16,7 +16,7 @@ func NewServer(db *sql.DB) *http.ServeMux {
 
     dist := os.Getenv("STATIC_DIR")
     fs := http.FileServer(http.Dir(dist))
-    r.Handle("GET /dist", fs)
+    r.Handle("/dist", fs)
 
 	r.HandleFunc("GET /", pHandler.HandlerPhotoShow())
     r.HandleFunc("POST /addphoto", aHandler.AdminAddPhoto())
