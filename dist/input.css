@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind variants;
+
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
 
 @layer base {
@@ -129,15 +131,7 @@
         --accent-950: #edf8ed;
 
     }
-    @font-face {
-        font-family: "Inconsolata", monospace;
-        font-optical-sizing: auto;
-        font-style: normal;
-        src: url(https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap);
-    }
-
     html {
-        @apply bg-background-500;
-        @apply text-text-500;
+        background-color: black;
     }
 }

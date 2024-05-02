@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["internal/view/**/*.templ"],
+  content: ["./internal/view/**/*.templ"],
   theme: {
     colors: {
      'text': {
@@ -68,6 +68,9 @@ module.exports = {
            900: 'var(--accent-900)',
            950: 'var(--accent-950)',
          },
+    },
+    fontFamily: {
+        inconsolata: ["Inconsolata", "monospace"]
     },
     extend: {},
   },
