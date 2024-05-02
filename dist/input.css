@@ -132,6 +132,6 @@
 
     }
     html {
-        background-color: black;
+        font-family: "Inconsolata", monospace;
     }
 }

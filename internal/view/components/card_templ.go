@@ -23,7 +23,7 @@ func Card() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div>This is a card")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"max-h-full max-w-full\">This is a card")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
