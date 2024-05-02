@@ -10,9 +10,7 @@ templ Show(photos []types.Photo) {
     @layout.Base(){
         for _, photo := range photos{
             @components.Card(){
-                <p>{photo.Name} taken at Location: {photo.Location}</p>
-                <p>{photo.Date} img location: {photo.ImagePath}</p>
-                <img class="max-w-md" src={photo.ImagePath} alt={photo.Name}/>
+                <img class="object-cover max-w-md" src={photo.ImagePath} alt={photo.Name}/>
             }
         }
     }
