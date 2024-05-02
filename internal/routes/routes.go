@@ -2,6 +2,7 @@ package routes
 
 import (
 	"database/sql"
+	"log"
 	"net/http"
 	"os"
 
@@ -15,6 +16,7 @@ func NewServer(db *sql.DB) *http.ServeMux {
     aHandler := handler.AdminHandler{DB: db}
 
     dist := os.Getenv("STATIC_DIR")
+    log.Println(dist)
     fs := http.FileServer(http.Dir(dist))
     r.Handle("/dist", fs)
 
