@@ -59,7 +59,7 @@ func (h AdminHandler) AdminAddPhoto() http.HandlerFunc {
         osFile.Write(fileBytes)
         defer osFile.Close()
 
-        details.ImagePath = "images/" + filepath.Base(osFile.Name())
+        details.ImagePath = filepath.Base(osFile.Name())
 
         log.Println("---FILE UPLOAD COMPLETE---")
 

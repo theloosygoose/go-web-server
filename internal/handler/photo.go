@@ -36,6 +36,25 @@ func (h PhotoHandler) HandlerPhotoShow() http.HandlerFunc {
 			photos = append(photos, photo)
 		}
 
-		render(w, r, photo.Show(photos))
+		render(w, r, photo.PhotoCard(photos))
 	})
+}
+
+func (h PhotoHandler) HandlerMainPhotoShow() http.HandlerFunc{
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        id := r.PathValue("id") 
+        query := `SELECT (name, location, date) 
+        FROM photos 
+        WHERE imagepath = ?`
+
+        results := h.DB.QueryRow(query, id)
+
+        var p types.Photo
+        err := results.Scan(&p.Name, &p.Location, &p.Date)
+        if err != nil {
+            log.Println("Main Photo not Found",  err)
+        }
+
+        render(w, r, photo.MainPhoto(p))
+    })
 }

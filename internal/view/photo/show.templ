@@ -3,14 +3,35 @@ package photo
 import (
 	"github.com/theloosygoose/goserver/internal/types"
 	"github.com/theloosygoose/goserver/internal/view/components"
+    "fmt"
 )
 
-templ Show(photos []types.Photo) {
+templ PhotoCard(photos []types.Photo) {
 	@components.PhotoContainer() {
 		for _, photo := range photos {
 			@components.Card() {
-				<img class="object-cover" src={ photo.ImagePath } alt={ photo.Name }/>
+				<img 
+                class="object-cover" 
+                src={ fmt.Sprintf("image/%s", photo.ImagePath) } 
+                alt={ photo.Name }
+                hx-trigger="click"
+                hx-target="#main-photo"
+                hx-swap="innerHTML"
+                hx-get={ fmt.Sprintf("/photodata/%s", photo.ImagePath) }
+                />
 			}
 		}
 	}
+}
+
+templ MainPhoto(photo types.Photo){
+    <img
+        class="object-cover" 
+        src={ fmt.Sprintf("image/%s", photo.ImagePath) } 
+        alt={ photo.Name }
+    />
+
+    <p> Name { photo.Name }</p>
+    <p> Location { photo.Location }</p>
+    <p> Date { photo.Date }</p>
 }
