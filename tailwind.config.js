@@ -68,7 +68,7 @@ module.exports = {
            900: 'var(--accent-900)',
            950: 'var(--accent-950)',
          },
-    }
+    },
     extend: {},
   },
   plugins: [],
