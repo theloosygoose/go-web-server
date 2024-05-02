@@ -131,6 +131,10 @@
   }
 }
 
-html{
-    font-family: "Inconsolata", monospace;
+@layer base{
+    html{
+        font-family: "Inconsolata", monospace;
+        @apply bg-background-100;
+        @apply text-text-500;
+    }
 }
