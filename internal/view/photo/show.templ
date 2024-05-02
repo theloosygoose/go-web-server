@@ -1,8 +1,8 @@
 package photo 
 
 import (
-"github.com/theloosygoose/goserver/internal/view/layout"
-"github.com/theloosygoose/goserver/internal/types"
+    "github.com/theloosygoose/goserver/internal/view/layout"
+    "github.com/theloosygoose/goserver/internal/types"
 	"github.com/theloosygoose/goserver/internal/view/components"
 )
 
@@ -12,7 +12,7 @@ templ Show(photos []types.Photo) {
             @components.Card(){
                 <p>{photo.Name} taken at Location: {photo.Location}</p>
                 <p>{photo.Date} img location: {photo.ImagePath}</p>
-                <img src={photo.ImagePath} alt={photo.Name}/>
+                <img class="max-w-md" src={photo.ImagePath} alt={photo.Name}/>
             }
         }
     }
