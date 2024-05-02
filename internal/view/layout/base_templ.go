@@ -23,7 +23,7 @@ func Base() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><script src=\"https://unpkg.com/htmx.org@1.9.12\"></script><link rel=\"stylesheet\" href=\"/dist/tailwind.css\"><title>Don Photography</title></head><body class=\"bg-background-200 text-text-50\"><div class=\"container mx-auto px-32\"><h1 class=\"text-6xl font-bold\">Don Photography</h1><div id=\"photo-container\" class=\"grid grid-cols-4 gap-6\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><script src=\"https://unpkg.com/htmx.org@1.9.12\"></script><link rel=\"stylesheet\" href=\"/dist/tailwind.css\"><title>Don Photography</title></head><body class=\"font-mono bg-background-200 text-text-50\"><div class=\"container mx-auto px-32\"><h1 class=\"text-6xl font-bold\">Don Photography</h1><div id=\"photo-container\" class=\"grid grid-cols-4 gap-6\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
