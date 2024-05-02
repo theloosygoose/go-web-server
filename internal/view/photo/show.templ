@@ -1,17 +1,16 @@
 package photo 
 
 import (
-    "github.com/theloosygoose/goserver/internal/view/layout"
-    "github.com/theloosygoose/goserver/internal/types"
+	"github.com/theloosygoose/goserver/internal/types"
 	"github.com/theloosygoose/goserver/internal/view/components"
 )
 
 templ Show(photos []types.Photo) {
-    @layout.Base(){
-        for _, photo := range photos{
-            @components.Card(){
-                <img class="object-cover" src={photo.ImagePath} alt={photo.Name}/>
-            }
-        }
-    }
+	@components.PhotoContainer() {
+		for _, photo := range photos {
+			@components.Card() {
+				<img class="object-cover" src={ photo.ImagePath } alt={ photo.Name }/>
+			}
+		}
+	}
 }

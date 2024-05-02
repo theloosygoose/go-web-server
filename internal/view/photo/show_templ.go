@@ -13,7 +13,6 @@ import "bytes"
 import (
 	"github.com/theloosygoose/goserver/internal/types"
 	"github.com/theloosygoose/goserver/internal/view/components"
-	"github.com/theloosygoose/goserver/internal/view/layout"
 )
 
 func Show(photos []types.Photo) templ.Component {
@@ -49,7 +48,7 @@ func Show(photos []types.Photo) templ.Component {
 					var templ_7745c5c3_Var4 string
 					templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(photo.ImagePath)
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 13, Col: 62}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 12, Col: 51}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 					if templ_7745c5c3_Err != nil {
@@ -62,7 +61,7 @@ func Show(photos []types.Photo) templ.Component {
 					var templ_7745c5c3_Var5 string
 					templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(photo.Name)
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 13, Col: 79}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 12, Col: 70}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 					if templ_7745c5c3_Err != nil {
@@ -87,7 +86,7 @@ func Show(photos []types.Photo) templ.Component {
 			}
 			return templ_7745c5c3_Err
 		})
-		templ_7745c5c3_Err = layout.Base().Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = components.PhotoContainer().Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

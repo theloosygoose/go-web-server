@@ -1,9 +1,22 @@
 package components
 
+import "github.com/theloosygoose/goserver/internal/view/layout"
 
 templ Card() {
-    <div class="max-h-full max-w-full">
-    This is a card
-    {children...}
-    </div>
+<div class="max-h-full max-w-full">
+    { children... }
+</div>
+}
+
+templ PhotoContainer() {
+    @layout.Base() {
+        <div id="main-photo" class="mx-[10%] flex justify-center align-middle mb-[50%]">
+            <p>
+               This is a test photo 
+            </p>
+        </div>
+        <div id="photo-container" class="grid grid-flow-col auto-cols-max gap-3 justify-center align-middle">
+            { children... }
+        </div>
+    }
 }
