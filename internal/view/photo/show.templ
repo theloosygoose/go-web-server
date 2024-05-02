@@ -10,7 +10,7 @@ templ Show(photos []types.Photo) {
     @layout.Base(){
         for _, photo := range photos{
             @components.Card(){
-                <img class="object-cover max-w-md" src={photo.ImagePath} alt={photo.Name}/>
+                <img class="object-cover h-48 w-48" src={photo.ImagePath} alt={photo.Name}/>
             }
         }
     }

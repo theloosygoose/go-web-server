@@ -13,11 +13,16 @@ templ Base() {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet"/>
     <title>Don Photography</title>
+    <style>
+    html {
+        font-family: "Inconsolata", monospace;
+    }
+    </style>
 </head>
 
 <body>
     <div class="container mx-auto px-32">
-        <h1 class="text-3xl font-bold">Don Photography</h1>
+        <h1 class="text-6xl font-bold">Don Photography</h1>
         <div id="photo-container" class="grid grid-cols-4 gap-6">
         { children... }
         </div>
