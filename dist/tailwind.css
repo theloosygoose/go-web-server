@@ -614,12 +614,12 @@ html {
   display: grid;
 }
 
-.max-h-full {
-  max-height: 100%;
+.h-dvh {
+  height: 100dvh;
 }
 
-.max-w-full {
-  max-width: 100%;
+.max-w-56 {
+  max-width: 14rem;
 }
 
 .auto-cols-max {
@@ -634,8 +634,12 @@ html {
   justify-content: center;
 }
 
-.gap-3 {
-  gap: 0.75rem;
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.text-balance {
+  text-wrap: balance;
 }
 
 .bg-background {
@@ -648,9 +652,9 @@ html {
      object-fit: cover;
 }
 
-.px-32 {
-  padding-left: 8rem;
-  padding-right: 8rem;
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .text-center {
@@ -665,9 +669,9 @@ html {
   font-family: Inconsolata, monospace;
 }
 
-.text-6xl {
-  font-size: 3.75rem;
-  line-height: 1;
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .font-bold {
@@ -681,4 +685,24 @@ html {
 
 .underline {
   text-decoration-line: underline;
+}
+
+@media (min-width: 768px) {
+  .md\:h-\[50\%\] {
+    height: 50%;
+  }
+
+  .md\:px-32 {
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
+
+  .md\:text-left {
+    text-align: left;
+  }
+
+  .md\:text-6xl {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
 }

@@ -33,7 +33,7 @@ func Show() templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h1>This is the Admin View</h1><div><form enctype=\"multipart/form-data\" method=\"POST\" action=\"/addphoto\"><label for=\"name-input\">Name <input type=\"text\" name=\"name\" id=\"name-input\"></label> <label for=\"location-input\">Location <input type=\"text\" name=\"location\" id=\"location-input\"></label> <label for=\"date-input\">Date <input type=\"text\" name=\"date\" id=\"date-input\"></label> <label for=\"imagepath-input\">ImagePath <input type=\"text\" name=\"imagepath\" id=\"imagepath-input\"></label> <label for=\"imagefile-input\">Image File <input type=\"file\" name=\"imageFile\" id=\"imagefile-input\"></label> <button type=\"submit\">Upload</button></form></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h1>This is the Admin View</h1><div><form enctype=\"multipart/form-data\" method=\"POST\" action=\"/addphoto\"><label for=\"name-input\">Name <input type=\"text\" name=\"name\" id=\"name-input\"></label> <label for=\"location-input\">Location <input type=\"text\" name=\"location\" id=\"location-input\"></label> <label for=\"date-input\">Date <input type=\"text\" name=\"date\" id=\"date-input\"></label> <label for=\"imagefile-input\">Image File <input type=\"file\" name=\"imageFile\" id=\"imagefile-input\"></label> <button type=\"submit\">Upload</button></form></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

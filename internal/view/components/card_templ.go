@@ -25,7 +25,7 @@ func Card() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"max-h-full max-w-full\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"max-w-56\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -63,7 +63,7 @@ func PhotoContainer() templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"main-photo\" class=\"mx-[10%] flex justify-center align-middle mb-[50%]\"><p>This is a test photo </p></div><div id=\"photo-container\" class=\"grid grid-flow-col auto-cols-max gap-3 justify-center align-middle\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"main-photo\" class=\"mx-[10%] flex justify-center align-middle mb-[50%] h-dvh md:h-[50%]\"><p>This is a test photo </p></div><div id=\"photo-container\" class=\"grid grid-flow-col auto-cols-max gap-2 justify-center align-middle\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
