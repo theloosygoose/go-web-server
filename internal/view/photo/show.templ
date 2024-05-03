@@ -25,13 +25,17 @@ templ PhotoCard(photos []types.Photo) {
 }
 
 templ MainPhoto(photo types.Photo){
-    <img
-        class="object-cover" 
-        src={ "images/" + photo.ImagePath } 
-        alt={ photo.Name }
-    />
-
-    <p> Name { photo.Name }</p>
-    <p> Location { photo.Location }</p>
-    <p> Date { photo.Date }</p>
+    <div class="grid grid-cols-4 h-full px-8">
+        <img
+            class="object-cover hover:col-span-3 col-span-2 gap-y-4" 
+            src={ "images/" + photo.ImagePath } 
+            alt={ photo.Name }
+        />
+        <div class="container flex-col h-full">
+            <p>Name: { photo.Name }</p>
+            <p>Location: { photo.Location }</p>
+            <p>Date: { photo.Date }</p>
+            <p>Desc: This is a test description.  I will implment the data base thing later but for now this will do</p>
+        </div>
+    </div>
 }
