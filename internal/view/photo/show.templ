@@ -31,7 +31,7 @@ templ MainPhoto(photo types.Photo){
             src={ "images/" + photo.ImagePath } 
             alt={ photo.Name }
         />
-        <div class="container flex-col h-full">
+        <div class="container flex-col h-full col-span-full">
             <p>Name: { photo.Name }</p>
             <p>Location: { photo.Location }</p>
             <p>Date: { photo.Date }</p>
