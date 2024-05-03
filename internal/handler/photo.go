@@ -46,7 +46,7 @@ func (h PhotoHandler) HandlerMainPhotoShow() http.HandlerFunc{
         id := r.PathValue("id") 
         query := `SELECT (id, name, location, date, imagepath) 
         FROM photos 
-        WHERE id = ?`
+        WHERE id = ?;`
 
         results := h.DB.QueryRow(query, id)
 
