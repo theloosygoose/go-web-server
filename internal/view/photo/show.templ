@@ -3,6 +3,7 @@ package photo
 import (
 	"github.com/theloosygoose/goserver/internal/types"
 	"github.com/theloosygoose/goserver/internal/view/components"
+    "fmt"
 )
 
 templ PhotoCard(photos []types.Photo) {
@@ -16,7 +17,7 @@ templ PhotoCard(photos []types.Photo) {
                 hx-trigger="click"
                 hx-target="#main-photo"
                 hx-swap="innerHTML"
-                hx-get={ "/photodata/" + photo.ID }
+                hx-get={ fmt.Sprintf("/photodata/%d", photo.ID) }
                 />
 			}
 		}
