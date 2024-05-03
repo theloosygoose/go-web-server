@@ -25,7 +25,7 @@ templ PhotoCard(photos []types.Photo) {
 }
 
 templ MainPhoto(photo types.Photo){
-    <div class="grid grid-cols-4 h-full px-8 gap-8 mt-8">
+    <div class="grid grid-cols-5 h-full gap-4 mt-8">
         <img
             class="object-cover hover:col-span-3 col-span-2" 
             src={ "images/" + photo.ImagePath } 
