@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+    "os/exec"
 
 	"github.com/theloosygoose/goserver/internal/types"
 	"github.com/theloosygoose/goserver/internal/view/admin"
@@ -67,7 +68,13 @@ func (h AdminHandler) AdminAddPhoto() http.HandlerFunc {
         }
         year, month, day := ctime.Created(s).Local().Date()
         details.Date = fmt.Sprintf("%v %v, %v", year, month, day)
-        
+
+        //image magick
+        mincmd := exec.Command("magick", osFile.Name(), "-resize", "500x500", "min_" + osFile.Name())
+        err = mincmd.Run()
+        if err != nil {
+            fmt.Println(err)
+        }
 
         log.Println("---FILE UPLOAD COMPLETE---")
 
