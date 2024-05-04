@@ -7,7 +7,7 @@ build:
 	@npx tailwindcss -i ./dist/input.css -o ./dist/tailwind.css
 	@npx tailwindcss -o ./dist/tailwind.css --minify
 	@templ generate
-	@go build -o/bin/main cmd/goserver/main.go
+	@go build -o ./bin/main ./cmd/goserver/main.go
 
 generate:
 	@npx tailwindcss -i ./dist/input.css -o ./dist/tailwind.css
