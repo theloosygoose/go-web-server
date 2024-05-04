@@ -11,7 +11,7 @@ import (
 
 	"github.com/theloosygoose/goserver/internal/types"
 	"github.com/theloosygoose/goserver/internal/view/admin"
-    "github.com/evanoberholster/imagemeta"
+    "github.com/containers/podman/v5/pkg/ctime"
 )
 
 type AdminHandler struct {
@@ -26,7 +26,6 @@ func (h AdminHandler) AdminAddPhoto() http.HandlerFunc {
 		details := types.Photo{
 			Name:      r.FormValue("name"),
 			Location:  r.FormValue("location"),
-			Date:      r.FormValue("date"),
 		}
 
         file, fileHeader, err := r.FormFile("imageFile")
@@ -62,11 +61,12 @@ func (h AdminHandler) AdminAddPhoto() http.HandlerFunc {
 
         details.ImagePath = filepath.Base(osFile.Name())
 
-        meta, err := imagemeta.Decode(osFile)
-        if err != nil {
+        s, err := osFile.Stat()
+        if err != nil{
             fmt.Println(err)
         }
-        log.Printf("MetaData:: %v\n", meta)
+        details.Date = ctime.Created(s).String()
+        
 
         log.Println("---FILE UPLOAD COMPLETE---")
 
