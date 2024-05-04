@@ -65,7 +65,8 @@ func (h AdminHandler) AdminAddPhoto() http.HandlerFunc {
         if err != nil{
             fmt.Println(err)
         }
-        details.Date = ctime.Created(s).String()
+        year, month, day := ctime.Created(s).Local().Date()
+        details.Date = fmt.Sprintf("%v %v, %v", year, month, day)
         
 
         log.Println("---FILE UPLOAD COMPLETE---")
