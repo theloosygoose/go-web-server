@@ -11,6 +11,7 @@ import (
 
 	"github.com/theloosygoose/goserver/internal/types"
 	"github.com/theloosygoose/goserver/internal/view/admin"
+    "github.com/evanoberholster/imagemeta"
 )
 
 type AdminHandler struct {
@@ -60,6 +61,12 @@ func (h AdminHandler) AdminAddPhoto() http.HandlerFunc {
         defer osFile.Close()
 
         details.ImagePath = filepath.Base(osFile.Name())
+
+        meta, err := imagemeta.Decode(osFile)
+        if err != nil {
+            fmt.Println(err)
+        }
+        log.Printf("MetaData:: %v\n", meta)
 
         log.Println("---FILE UPLOAD COMPLETE---")
 
