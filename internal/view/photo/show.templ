@@ -28,7 +28,7 @@ templ PhotoCard(photos []types.Photo) {
 
 templ MainPhoto(photo types.Photo){
     <div class="htmx-added:opacity-0 opacity-100 transition-opacity delay-150 duration-500 ease-in-out grid grid-cols-5 gap-4">
-        <img src="/spinner.gif" class="htmx-indicator" id="main-indicator" /> 
+        <img src="dist/spinner.gif" class="htmx-indicator" id="main-indicator" /> 
         <img
             class={ "col-span-3 max-h-full", min(photo) }
             src={ os.Getenv("PHOTO_DIR") + photo.ImagePath } 
