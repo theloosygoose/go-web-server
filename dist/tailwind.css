@@ -450,56 +450,41 @@ html {
   font-family: "Inconsolata", monospace;
 }
 
-.blur-load {
+.blur-load{
   background-size: cover;
   background-position: center;
-  filter: blur(10px);
+  background-repeat: no-repeat;
 }
 
-.blur-load img {
-  opacity: 0;
-  transition: opacity 250ms ease-in-out;
-}
-
-.blur-load::before {
+.blur-load::before{
   content: "";
   position: absolute;
-  inset: 0;
-  opacity: 0;
-  animation: pulse 1.5s infinite;
-  background-color: white;
+  inset:0;
+  animation: pulse 2.5s infinite;
+  opacity: 0.1;
 }
 
 @keyframes pulse {
-  0% {
+  0%{
     opacity: 0;
   }
 
-  50% {
-    opacity: 0.15;
+  50%{
+    opacity: 0.1;
   }
 
-  100% {
+  100%{
     opacity: 0;
   }
 }
 
 .blur-load.loaded::before{
-  animation: none;
   content: none;
+  animation: none;
 }
 
-.blur-load.loaded{
+.blur-load.loaded > img {
   opacity: 1;
-}
-
-img {
-  -o-object-position: center;
-     object-position: center;
-  -o-object-fit: cover;
-     object-fit: cover;
-  display: block;
-  width: 100%;
 }
 
 *, ::before, ::after {
@@ -644,6 +629,14 @@ img {
   }
 }
 
+.z-0 {
+  z-index: 0;
+}
+
+.z-20 {
+  z-index: 20;
+}
+
 .col-span-2 {
   grid-column: span 2 / span 2;
 }
@@ -678,9 +671,8 @@ img {
   display: grid;
 }
 
-.h-fit {
-  height: -moz-fit-content;
-  height: fit-content;
+.h-96 {
+  height: 24rem;
 }
 
 .h-full {
@@ -689,6 +681,10 @@ img {
 
 .max-h-full {
   max-height: 100%;
+}
+
+.w-80 {
+  width: 20rem;
 }
 
 .grid-cols-5 {
@@ -734,6 +730,11 @@ img {
      object-fit: cover;
 }
 
+.object-center {
+  -o-object-position: center;
+     object-position: center;
+}
+
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
@@ -763,36 +764,6 @@ img {
 .text-text {
   --tw-text-opacity: 1;
   color: rgb(9 9 6 / var(--tw-text-opacity));
-}
-
-.opacity-100 {
-  opacity: 1;
-}
-
-.transition-opacity {
-  transition-property: opacity;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.delay-150 {
-  transition-delay: 150ms;
-}
-
-.duration-500 {
-  transition-duration: 500ms;
-}
-
-.ease-in-out {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.htmx-added\:opacity-0.htmx-added {
-  opacity: 0;
-}
-
-.htmx-added .htmx-added\:opacity-0 {
-  opacity: 0;
 }
 
 @media (min-width: 768px) {

@@ -1,13 +1,18 @@
-const blurredImageDiv = document.querySelector(".blur-load")
+const blurImg = document.querySelectorAll(".blur-load")
 
-const img = blurredImageDiv.querySelector("img")
+blurImg.forEach(div => {
+    const img = div.querySelector("img")
 
-function loaded() {
-    blurredImageDiv.classList.add("loaded")
-}
+    function loaded() {
+        div.classList.add("loaded")
+    }
 
-if (img.complete) {
-    loaded()
-} else {
-    img.addEventListener("load", loaded)
-}
+    if (img.complete){
+        loaded()
+    } else{
+        img.addEventListener("load", loaded)
+    }
+})
+
+
+
