@@ -27,10 +27,10 @@ templ PhotoCard(photos []types.Photo) {
 }
 
 templ MainPhoto(photo types.Photo){
-    <div class="transition delay-150 duration-300 ease-in-out grid grid-cols-5 gap-4">
+    <div class="htmx-added:opacity-0 opacity-100 transition-opacity delay-150 duration-500 ease-in-out grid grid-cols-5 gap-4">
         <img src="/spinner.gif" class="htmx-indicator" id="main-indicator" /> 
         <img
-            class={"col-span-3 max-h-full", min(photo)}
+            class={ "col-span-3 max-h-full", min(photo) }
             src={ os.Getenv("PHOTO_DIR") + photo.ImagePath } 
             alt={ photo.Name }
         />
@@ -44,6 +44,6 @@ templ MainPhoto(photo types.Photo){
 }
 
 css min(min_path types.Photo){
-    background-image: { "url(" + min_path.ImagePathMin + ")"};
+    background-image: { "url(\"" + templ.URL(os.Getenv("PHOTO_DIR") + min_path.ImagePathMin) + "\")"};
 }
 

@@ -8,7 +8,7 @@ templ Show() {
 @layout.Base() {
 <h1>This is the Admin View</h1>
 <div>
-    <form enctype="multipart/form-data" hx-post="/addphoto">
+    <form id="form" hx-encoding="multipart/form-data" hx-post="/addphoto">
         <label for="name-input">
             Name
             <input type="text" name="name" id="name-input" />
@@ -25,7 +25,13 @@ templ Show() {
             Upload
             <img src="/spinner.gif" class="htmx-indicator"/>
         </button>
+        <progress id="progress" value="0" max="100"></progress>
     </form>
 </div>
+<script type="text/javascript">
+    htmx.on('#form', "htmx:xhr:progress", function(evt){
+            htmx.find('#progress').setAttribute('value', evt.detail.loaded/evt.detail.total * 100)
+        })
+</script>
 }
 }
