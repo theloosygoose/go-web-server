@@ -72,7 +72,7 @@ func (h AdminHandler) AdminAddPhoto() http.HandlerFunc {
 		details.Date = fmt.Sprintf("%v %v, %v", year, month, day)
 
 		//image magick
-		mincmd := exec.Command("magick", osFile.Name(), "-resize", "500x500", "min_"+osFile.Name())
+		mincmd := exec.Command("sudo", "magick", osFile.Name(), "-resize", "500x500", "min_" + osFile.Name())
 
 		err = mincmd.Run()
 		if err != nil {
