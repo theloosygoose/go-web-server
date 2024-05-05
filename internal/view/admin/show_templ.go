@@ -33,7 +33,7 @@ func Show() templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h1>This is the Admin View</h1><div><form enctype=\"multipart/form-data\" method=\"POST\" action=\"/addphoto\"><label for=\"name-input\">Name <input type=\"text\" name=\"name\" id=\"name-input\"></label> <label for=\"location-input\">Location <input type=\"text\" name=\"location\" id=\"location-input\"></label> <label for=\"date-input\">Date <input type=\"text\" name=\"date\" id=\"date-input\"></label> <label for=\"imagefile-input\">Image File <input type=\"file\" name=\"imageFile\" id=\"imagefile-input\"></label> <button type=\"submit\">Upload</button></form></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h1>This is the Admin View</h1><div><form id=\"form\" hx-encoding=\"multipart/form-data\" hx-post=\"/addphoto\"><label for=\"name-input\">Name <input type=\"text\" name=\"name\" id=\"name-input\"></label> <label for=\"location-input\">Location <input type=\"text\" name=\"location\" id=\"location-input\"></label> <label for=\"imagefile-input\">Image File <input type=\"file\" name=\"imageFile\" id=\"imagefile-input\"></label> <button type=\"submit\">Upload <img src=\"dist/spinner.svg\" class=\"stroke-primary fill-primary htmx-indicator\"></button> <progress id=\"progress\" value=\"0\" max=\"100\"></progress></form></div><script type=\"text/javascript\">\n    htmx.on('#form', \"htmx:xhr:progress\", function (evt) {\n        htmx.find('#progress').setAttribute('value', evt.detail.loaded / evt.detail.total * 100)\n    })\n</script>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
