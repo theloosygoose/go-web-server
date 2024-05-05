@@ -63,6 +63,7 @@ func (h AdminHandler) AdminAddPhoto() http.HandlerFunc {
 		defer osFile.Close()
 
 		details.ImagePath = filepath.Base(osFile.Name())
+		details.ImagePathMin = "min_" + details.ImagePath
 
 		s, err := osFile.Stat()
 		if err != nil {
@@ -72,27 +73,27 @@ func (h AdminHandler) AdminAddPhoto() http.HandlerFunc {
 		details.Date = fmt.Sprintf("%v %v, %v", year, month, day)
 
 		//image magick
-		mincmd := exec.Command("sudo", "magick", osFile.Name(), "-resize", "500x500", "min_" + osFile.Name())
-
+		mincmd := exec.Command("sudo", "magick", 
+            osFile.Name(), "-resize", "500x500", 
+            filepath.Dir(osFile.Name()) + "min_" + details.ImagePathMin,
+        )
 		err = mincmd.Run()
 		if err != nil {
 			fmt.Println(err)
 		}
-		details.ImagePathMin = "min_" + details.ImagePath
 
 		log.Println("---FILE UPLOAD COMPLETE---")
 
 		query := `INSERT INTO photos 
-        (name, location, date, imagepath, avaliable)
+        (name, location, date, imagepath, imagepathmin, avaliable)
         VALUES($1, $2, $3, $4, $5);`
 
-		results, err := h.DB.Exec(query, &details.Name, &details.Location, &details.Date, &details.ImagePath, true)
+		results, err := h.DB.Exec(query, &details.Name, &details.Location, &details.Date, &details.ImagePath, &details.ImagePathMin, true)
 		if err != nil {
 			log.Println("Failed to Exectue Query: ", err)
 		}
 
 		log.Println(results.RowsAffected())
-		http.Redirect(w, r, "/admin", 302)
 	})
 
 }

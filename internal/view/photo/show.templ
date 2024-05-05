@@ -27,15 +27,10 @@ templ PhotoCard(photos []types.Photo) {
 }
 
 templ MainPhoto(photo types.Photo){
-    <style type="text/css">
-    img {
-        background: url({ os.Getenv("PHOTO_DIR") + photo.ImagePathMin })
-    }
-    </style>
     <div class="transition delay-150 duration-300 ease-in-out grid grid-cols-5 gap-4">
         <img src="/spinner.gif" class="htmx-indicator" id="main-indicator" /> 
         <img
-            class="col-span-3 max-h-full"
+            class={"col-span-3 max-h-full", min(photo)}
             src={ os.Getenv("PHOTO_DIR") + photo.ImagePath } 
             alt={ photo.Name }
         />
@@ -46,5 +41,9 @@ templ MainPhoto(photo types.Photo){
             <p>Desc: This is a test description.  I will implment the data base thing later but for now this will do</p>
         </div>
     </div>
+}
+
+css min(min_path types.Photo){
+    background-image: { "url(" + min_path.ImagePathMin + ")"};
 }
 
