@@ -75,7 +75,7 @@ func (h AdminHandler) AdminAddPhoto() http.HandlerFunc {
 		//image magick
 		mincmd := exec.Command("sudo", "magick", 
             osFile.Name(), "-resize", "500x500", 
-            filepath.Dir(osFile.Name()) + "min_" + details.ImagePathMin,
+            filepath.Dir(osFile.Name()) + details.ImagePathMin,
         )
 		err = mincmd.Run()
 		if err != nil {
@@ -86,7 +86,7 @@ func (h AdminHandler) AdminAddPhoto() http.HandlerFunc {
 
 		query := `INSERT INTO photos 
         (name, location, date, imagepath, imagepathmin, avaliable)
-        VALUES($1, $2, $3, $4, $5);`
+        VALUES($1, $2, $3, $4, $5, $6);`
 
 		results, err := h.DB.Exec(query, &details.Name, &details.Location, &details.Date, &details.ImagePath, &details.ImagePathMin, true)
 		if err != nil {
