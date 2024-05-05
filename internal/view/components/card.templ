@@ -12,6 +12,7 @@ templ PhotoContainer() {
     @layout.Base() {
         <div class="flex-col">
             <div id="main-photo" class="mx-[10%] h-fit mt-24 mb-16">
+                <img src="/spinner.gif" class="htmx-indicator" id="main-indicator" /> 
             </div>
             <div id="photo-container" class="flex gap-x-5 justify-center align-middle">
                 { children... }

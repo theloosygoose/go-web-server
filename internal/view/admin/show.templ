@@ -8,7 +8,7 @@ templ Show() {
 @layout.Base() {
 <h1>This is the Admin View</h1>
 <div>
-    <form enctype="multipart/form-data" method="POST" action="/addphoto">
+    <form enctype="multipart/form-data" hx-post="/addphoto">
         <label for="name-input">
             Name
             <input type="text" name="name" id="name-input" />
@@ -21,7 +21,10 @@ templ Show() {
             Image File
             <input type="file" name="imageFile" id="imagefile-input" />
         </label>
-        <button type="submit">Upload</button>
+        <button type="submit">
+            Upload
+            <img src="/spinner.gif" class="htmx-indicator"/>
+        </button>
     </form>
 </div>
 }

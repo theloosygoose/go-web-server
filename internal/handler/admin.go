@@ -7,12 +7,12 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"os/exec"
 	"path/filepath"
-    "os/exec"
 
+	"github.com/containers/podman/v5/pkg/ctime"
 	"github.com/theloosygoose/goserver/internal/types"
 	"github.com/theloosygoose/goserver/internal/view/admin"
-    "github.com/containers/podman/v5/pkg/ctime"
 )
 
 type AdminHandler struct {
@@ -22,61 +22,65 @@ type AdminHandler struct {
 func (h AdminHandler) AdminAddPhoto() http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
-        r.ParseMultipartForm(20)
+		r.ParseMultipartForm(20)
 
 		details := types.Photo{
-			Name:      r.FormValue("name"),
-			Location:  r.FormValue("location"),
+			Name:     r.FormValue("name"),
+			Location: r.FormValue("location"),
 		}
 
-        file, fileHeader, err := r.FormFile("imageFile")
-        if err != nil {
-            log.Println(err)
-            return
-        }
-        defer file.Close()
-        log.Println("---UPLOADING PHOTO---")
-        log.Printf("Name:: %v\n", fileHeader.Filename)
-        log.Printf("Size:: %v\n", fileHeader.Size)
+		file, fileHeader, err := r.FormFile("imageFile")
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		defer file.Close()
+		log.Println("---UPLOADING PHOTO---")
+		log.Printf("Name:: %v\n", fileHeader.Filename)
+		log.Printf("Size:: %v\n", fileHeader.Size)
 
-        contentType := fileHeader.Header["Content-Type"][0]
-        log.Printf("Content-Type:: %v\n", contentType)
+		contentType := fileHeader.Header["Content-Type"][0]
+		log.Printf("Content-Type:: %v\n", contentType)
 
-        var osFile *os.File
+		var osFile *os.File
 
-        if contentType == "image/jpeg"{
-            osFile, err = os.CreateTemp("/mnt/usb/images/", "*.jpg")
-        } else {
-            osFile, err = os.CreateTemp("/mnt/usb/etc/", "")
-        }
-        log.Println("Error In Content-Type", err)
-        defer osFile.Close()
+		if contentType == "image/jpeg" {
+			osFile, err = os.CreateTemp("/mnt/usb/images/", "*.jpg")
+		} else {
+			osFile, err = os.CreateTemp("/mnt/usb/etc/", "")
+		}
+		if err != nil {
+			log.Println("Error In Content-Type", err)
+		}
+		defer osFile.Close()
 
-        // SAVE FILE
-        fileBytes, err := io.ReadAll(file)
-        if err != nil {
-            fmt.Println(err)
-        }
-        osFile.Write(fileBytes)
-        defer osFile.Close()
+		// SAVE FILE
+		fileBytes, err := io.ReadAll(file)
+		if err != nil {
+			fmt.Println(err)
+		}
+		osFile.Write(fileBytes)
+		defer osFile.Close()
 
-        details.ImagePath = filepath.Base(osFile.Name())
+		details.ImagePath = filepath.Base(osFile.Name())
 
-        s, err := osFile.Stat()
-        if err != nil{
-            fmt.Println(err)
-        }
-        year, month, day := ctime.Created(s).Local().Date()
-        details.Date = fmt.Sprintf("%v %v, %v", year, month, day)
+		s, err := osFile.Stat()
+		if err != nil {
+			fmt.Println(err)
+		}
+		year, month, day := ctime.Created(s).Local().Date()
+		details.Date = fmt.Sprintf("%v %v, %v", year, month, day)
 
-        //image magick
-        mincmd := exec.Command("magick", osFile.Name(), "-resize", "500x500", "min_" + osFile.Name())
-        err = mincmd.Run()
-        if err != nil {
-            fmt.Println(err)
-        }
+		//image magick
+		mincmd := exec.Command("magick", osFile.Name(), "-resize", "500x500", "min_"+osFile.Name())
 
-        log.Println("---FILE UPLOAD COMPLETE---")
+		err = mincmd.Run()
+		if err != nil {
+			fmt.Println(err)
+		}
+		details.ImagePathMin = "min_" + details.ImagePath
+
+		log.Println("---FILE UPLOAD COMPLETE---")
 
 		query := `INSERT INTO photos 
         (name, location, date, imagepath, avaliable)
@@ -88,6 +92,7 @@ func (h AdminHandler) AdminAddPhoto() http.HandlerFunc {
 		}
 
 		log.Println(results.RowsAffected())
+		http.Redirect(w, r, "/admin", 302)
 	})
 
 }
