@@ -452,7 +452,6 @@ html {
 
 .blur-load{
   background-size: cover;
-  background-position: center;
   background-repeat: no-repeat;
   position: relative;
   filter: blur(7px);
@@ -462,21 +461,21 @@ html {
   content: "";
   position: absolute;
   inset: 0;
-  animation: pulse 2.5s infinite;
-  opacity: 0.1;
+  animation: pulse 3.5s infinite;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 @keyframes pulse {
   0%{
-    opacity: 0;
+    background-color: rgba(255, 255, 255, 0.0);
   }
 
   50%{
-    opacity: 0.1;
+    background-color: rgba(255, 255, 255, 0.3);
   }
 
   100%{
-    opacity: 0;
+    background-color: rgba(255, 255, 255, 0.0);
   }
 }
 
@@ -496,7 +495,7 @@ html {
 
 .blur-load > img {
   opacity: 0;
-  transition: opacity 200ms ease-in-out;
+  transition: opacity 400ms ease-in-out;
 }
 
 *, ::before, ::after {
@@ -653,10 +652,6 @@ html {
   grid-column: span 2 / span 2;
 }
 
-.col-span-3 {
-  grid-column: span 3 / span 3;
-}
-
 .mx-\[10\%\] {
   margin-left: 10%;
   margin-right: 10%;
@@ -683,24 +678,22 @@ html {
   display: grid;
 }
 
-.h-80 {
-  height: 20rem;
-}
-
-.h-96 {
-  height: 24rem;
+.h-fit {
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .h-full {
   height: 100%;
 }
 
-.max-h-full {
-  max-height: 100%;
+.min-h-\[50dvh\] {
+  min-height: 50dvh;
 }
 
-.w-80 {
-  width: 20rem;
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .grid-cols-5 {
@@ -741,9 +734,19 @@ html {
   stroke: #998d70;
 }
 
+.object-contain {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.object-center {
+  -o-object-position: center;
+     object-position: center;
 }
 
 .px-6 {

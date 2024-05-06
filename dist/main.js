@@ -1,19 +1,26 @@
-const blurImg = document.querySelectorAll(".blur-load")
-console.log(blurImg)
+HandleBlur()
+htmx.on("htmx:load", function(){
+    HandleBlur()
+});
 
-blurImg.forEach(div => {
-    const img = div.querySelector("img")
+function HandleBlur(){
+    let blurImg = document.querySelectorAll(".blur-load")
 
-    function loaded() {
-        div.classList.add("loaded")
-    }
+    blurImg.forEach(div => {
+        const img = div.querySelector("img")
 
-    if (img.complete){
-        loaded()
-    } else{
-        img.addEventListener("load", loaded)
-    }
-})
+        function loaded() {
+            div.classList.add("loaded")
+        }
+
+        if (img.complete){
+            loaded()
+        } else{
+            img.addEventListener("load", loaded)
+        }
+    })
+}
+
 
 
 

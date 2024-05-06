@@ -10,9 +10,9 @@ import (
 templ PhotoCard(photos []types.Photo) {
 	@components.PhotoContainer() {
 		for _, photo := range photos {
-                <div class={"blur-load z-0 w-80 h-80", min(photo)}>
+                <div class={"blur-load z-0 w-fit h-fit", min(photo)}>
                     <img 
-                    class="z-20 object-cover" 
+                    class="z-20 object-center object-cover h-max-50 w-max-50" 
                     loading="lazy"
                     src={ os.Getenv("PHOTO_DIR") + photo.ImagePath } 
                     alt={ photo.Name }
@@ -28,9 +28,9 @@ templ PhotoCard(photos []types.Photo) {
 
 templ MainPhoto(photo types.Photo){
     <div class="grid grid-cols-5 gap-4">
-        <div class={"blur-load", min(photo)}>
+        <div id="main-image-photo" class={"blur-load col-span-2", min(photo)}>
             <img
-                class={ "col-span-3 max-h-full"}
+                class={"object-contain"}
                 src={ os.Getenv("PHOTO_DIR") + photo.ImagePath } 
                 alt={ photo.Name }
             />
