@@ -10,9 +10,9 @@ import (
 templ PhotoCard(photos []types.Photo) {
 	@components.PhotoContainer() {
 		for _, photo := range photos {
-                <div class={"blur-load z-0 w-80", min(photo)}>
+                <div class={"blur-load z-0 w-80 h-80", min(photo)}>
                     <img 
-                    class="z-20 object-center object-cover" 
+                    class="z-20 object-cover" 
                     loading="lazy"
                     src={ os.Getenv("PHOTO_DIR") + photo.ImagePath } 
                     alt={ photo.Name }
@@ -20,7 +20,6 @@ templ PhotoCard(photos []types.Photo) {
                     hx-target="#main-photo"
                     hx-swap="innerHTML"
                     hx-get={ fmt.Sprintf("/photodata/%d", photo.ID) }
-                    hx-indicator="#main-indicator"
                     />
                 </div>
 		}
@@ -29,13 +28,13 @@ templ PhotoCard(photos []types.Photo) {
 
 templ MainPhoto(photo types.Photo){
     <div class="grid grid-cols-5 gap-4">
-        <div class={"", min(photo)}>
+        <div class={"blur-load", min(photo)}>
             <img
                 class={ "col-span-3 max-h-full"}
                 src={ os.Getenv("PHOTO_DIR") + photo.ImagePath } 
                 alt={ photo.Name }
             />
-            </div>
+        </div>
         <div class="container flex-col h-full col-span-2">
             <p>Name: { photo.Name }</p>
             <p>Location: { photo.Location }</p>

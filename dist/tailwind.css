@@ -454,12 +454,14 @@ html {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  position: relative;
+  filter: blur(7px);
 }
 
 .blur-load::before{
   content: "";
   position: absolute;
-  inset:0;
+  inset: 0;
   animation: pulse 2.5s infinite;
   opacity: 0.1;
 }
@@ -478,13 +480,23 @@ html {
   }
 }
 
+.blur-load.loaded{
+  filter: none;
+}
+
 .blur-load.loaded::before{
   content: none;
   animation: none;
+  filter: none;
 }
 
 .blur-load.loaded > img {
   opacity: 1;
+}
+
+.blur-load > img {
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
 }
 
 *, ::before, ::after {
@@ -671,6 +683,10 @@ html {
   display: grid;
 }
 
+.h-80 {
+  height: 20rem;
+}
+
 .h-96 {
   height: 24rem;
 }
@@ -728,11 +744,6 @@ html {
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
-}
-
-.object-center {
-  -o-object-position: center;
-     object-position: center;
 }
 
 .px-6 {

@@ -9,15 +9,19 @@
     html {
         font-family: "Inconsolata", monospace;
     }
+
     .blur-load{
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+        position: relative;
+        filter: blur(7px);
     }
+
     .blur-load::before{
         content: "";
         position: absolute;
-        inset:0;
+        inset: 0;
         animation: pulse 2.5s infinite;
         opacity: 0.1;
     }
@@ -34,16 +38,21 @@
         }
     }
 
+    .blur-load.loaded{
+        filter: none;
+    }
+
     .blur-load.loaded::before{
         content: none;
         animation: none;
+        filter: none;
     }
 
     .blur-load.loaded > img {
         opacity: 1;
     }
 
-    .blue-load > img {
+    .blur-load > img {
         opacity: 0;
         transition: opacity 200ms ease-in-out;
     }
