@@ -44,14 +44,17 @@ func (h PhotoHandler) HandlerMainPhotoShow() http.HandlerFunc {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
         id := r.PathValue("id") 
-        query := `SELECT id, name, location, date, imagepath, i_height, i_width, description
+        query := `SELECT id, name, location, date, description
+        imagepath, i_height, i_width 
         FROM photos 
         WHERE id = $1;`
 
         results := h.DB.QueryRow(query, id)
 
         var p types.Photo
-        err := results.Scan(&p.ID, &p.Name, &p.Location, &p.Date, &p.Image.FileName , &p.Image.Height, &p.Image.Width, &p.Description)
+        err := results.Scan(
+            &p.ID, &p.Name, &p.Location, &p.Date, &p.Description,
+            &p.Image.FileName , &p.Image.Height, &p.Image.Width)
 
         if err != nil {
             log.Println("Main Photo not Found",  err)

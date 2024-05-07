@@ -11,6 +11,6 @@ type Photo struct {
 
 type ImageData struct {
 	FileName string
-	Height   int
-	Width    int
+	Height   string
+	Width    string
 }

@@ -10,6 +10,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
 
 	"github.com/containers/podman/v5/pkg/ctime"
 	"github.com/theloosygoose/goserver/internal/types"
@@ -40,10 +41,10 @@ func (h AdminHandler) AdminAddPhoto() http.HandlerFunc {
 		log.Println("---FILE UPLOAD COMPLETE---")
 
 		query := `INSERT INTO photos 
-        (name, location, date, imagepath)
-        VALUES($1, $2, $3, $4);`
+        (name, location, date, imagepath, i_height, i_width)
+        VALUES($1, $2, $3, $4, $5, $6);`
 
-		results, err := h.DB.Exec(query, &details.Name, &details.Location, &details.Date, &details.Image.FileName)
+		results, err := h.DB.Exec(query, &details.Name, &details.Location, &details.Date, &details.Image.FileName, &details.Image.Height, &details.Image.Width)
 		if err != nil {
 			log.Println("Failed to Exectue Query: ", err)
 		}
@@ -108,6 +109,10 @@ func ImageProcess(file multipart.File, header *multipart.FileHeader, i *types.Ph
             return err
         }
         fmt.Println(size)
+        xy := string(size[:])
+        xy_str := strings.Split(xy, "x")
+        i.Image.Height = xy_str[0]
+        i.Image.Height = xy_str[1]
 
 
         fmt.Println("---RUNNING SMALL MAGICK---")
