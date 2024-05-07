@@ -27,6 +27,7 @@ func (h AdminHandler) AdminAddPhoto() http.HandlerFunc {
 		details := types.Photo{
 			Name:     r.FormValue("name"),
 			Location: r.FormValue("location"),
+            Description: r.FormValue("description"),
 		}
 
 		file, fileHeader, err := r.FormFile("imageFile")
