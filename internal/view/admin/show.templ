@@ -7,24 +7,33 @@ import (
 templ Show() {
 @layout.Base() {
 <h1>This is the Admin View</h1>
-<div>
-    <form id="form" hx-encoding="multipart/form-data" hx-post="/addphoto">
+<div class="container mx-auto">
+    <form 
+    class="flex-col justify-center align-center"
+    id="form" hx-encoding="multipart/form-data" hx-post="/addphoto">
         <label for="name-input">
-            Name
+            Name:
             <input type="text" name="name" id="name-input" />
         </label>
         <label for="location-input">
-            Location
+            Location:
             <input type="text" name="location" id="location-input" />
         </label>
+        <label for="description-input">
+            Description:
+            <input type="text" name="description" id="description-input"/>
+        </label>
         <label for="imagefile-input">
-            Image File
+            Image File:
             <input type="file" name="imageFile" id="imagefile-input" />
         </label>
-        <button type="submit">
+        <button 
+        class="p-6"
+        type="submit">
             Upload
-            <img src="dist/spinner.svg" class="stroke-primary fill-primary htmx-indicator" />
+            <img src="dist/spinner.svg" class="bg-primary stroke-primary fill-primary htmx-indicator" />
         </button>
+
         <progress id="progress" value="0" max="100"></progress>
     </form>
 </div>

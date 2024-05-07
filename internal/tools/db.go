@@ -57,7 +57,7 @@ func CreateTable(db *sql.DB) {
 	}
 
 	if !exists {
-		results, err := db.Query("CREATE TABLE photos (id SERIAL PRIMARY KEY, name VARCHAR(100) NOT NULL, location VARCHAR(100) NOT NULL, date VARCHAR(100), imagepath VARCHAR(100) NOT NULL, avaliable BOOL);")
+		results, err := db.Query("CREATE TABLE photos (id SERIAL PRIMARY KEY, name VARCHAR(100) NOT NULL, location VARCHAR(100) NOT NULL, date VARCHAR(100), imagepath VARCHAR(100) NOT NULL, description VARCHAR, i_height INT, i_width INT);")
 		if err != nil {
 			fmt.Println("failed to execute query", err)
 			return

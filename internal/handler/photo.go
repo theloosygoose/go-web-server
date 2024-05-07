@@ -15,7 +15,7 @@ type PhotoHandler struct {
 
 func (h PhotoHandler) HandlerPhotoShow() http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		query := `SELECT id, name, location, date, imagepath, imagepathmin FROM photos;`
+		query := `SELECT id, date, imagepath, i_height, i_width FROM photos;`
 
 		results, err := h.DB.Query(query)
 		if err != nil {
@@ -27,7 +27,7 @@ func (h PhotoHandler) HandlerPhotoShow() http.HandlerFunc {
 		for results.Next() {
 			var photo types.Photo
 
-			err = results.Scan(&photo.ID, &photo.Name, &photo.Location, &photo.Date, &photo.ImagePath, &photo.ImagePathMin)
+			err = results.Scan(&photo.ID, &photo.Location, &photo.Date, &photo.Image.FileName, &photo.Image.Height, &photo.Image.Width)
 
 			if err != nil {
 				log.Println("Failed to Scan", err)
@@ -40,18 +40,19 @@ func (h PhotoHandler) HandlerPhotoShow() http.HandlerFunc {
 	})
 }
 
-func (h PhotoHandler) HandlerMainPhotoShow() http.HandlerFunc{
+func (h PhotoHandler) HandlerMainPhotoShow() http.HandlerFunc {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
         id := r.PathValue("id") 
-        query := `SELECT id, name, location, date, imagepath, imagepathmin
+        query := `SELECT id, name, location, date, imagepath, i_height, i_width
         FROM photos 
         WHERE id = $1;`
 
         results := h.DB.QueryRow(query, id)
 
         var p types.Photo
-        err := results.Scan(&p.ID, &p.Name, &p.Location, &p.Date, &p.ImagePath, &p.ImagePathMin)
+        err := results.Scan(&p.ID, &p.Name, &p.Location, &p.Date, &p.Image.FileName , &p.Image.Height, &p.Image.Width)
+
         if err != nil {
             log.Println("Main Photo not Found",  err)
         }
