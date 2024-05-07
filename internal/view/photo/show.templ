@@ -22,6 +22,7 @@ templ PhotoCard(photos []types.Photo) {
                     hx-target="#main-photo"
                     hx-swap="innerHTML"
                     hx-get={ fmt.Sprintf("/photodata/%d", photo.ID) }
+                    width="200"
                     />
                 </div>
 		}
@@ -47,7 +48,7 @@ templ MainPhoto(photo types.Photo){
 }
 
 css min(photo *types.Photo){
-    background-image: { "url(\"" + templ.URL(os.Getenv("PHOTO_DIR") + "/min_" + photo.Image.FileName ) + "\")"};
+    background-image: { "url(\"" + templ.URL(os.Getenv("PHOTO_DIR") + "min_" + photo.Image.FileName ) + "\")"};
 }
 
 func orientation(image types.ImageData) string {

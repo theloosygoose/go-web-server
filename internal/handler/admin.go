@@ -111,7 +111,12 @@ func ImageProcess(file multipart.File, header *multipart.FileHeader, i *types.Ph
             return err
         }
         fmt.Println(size)
-        xy := string(size[:])
+        xy := strings.TrimFunc(string(size[:]), func(r rune) bool {
+            if r == '\'' || r == ' ' {
+                return true
+            }
+            return false
+        })
         xy_str := strings.Split(xy, "x")
         i.Image.Width = xy_str[0]
         i.Image.Height = xy_str[1]
@@ -121,7 +126,7 @@ func ImageProcess(file multipart.File, header *multipart.FileHeader, i *types.Ph
 		mincmd := exec.Command("sudo", "magick",
 			osFile.Name(), "-resize", "50x50",
 			filepath.Dir(osFile.Name()) + "/min_"+ i.Image.FileName)
-        magickCommand(mincmd)
+        go magickCommand(mincmd)
 
         defer osFile.Close()
 
@@ -130,7 +135,7 @@ func ImageProcess(file multipart.File, header *multipart.FileHeader, i *types.Ph
 			osFile.Name(), "-resize", "50%",
 			filepath.Dir(osFile.Name()) + "/med_"+ i.Image.FileName)
 
-        magickCommand(medcmd)
+        go magickCommand(medcmd)
 
         defer osFile.Close()
 
