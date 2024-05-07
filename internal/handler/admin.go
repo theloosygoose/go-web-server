@@ -41,10 +41,12 @@ func (h AdminHandler) AdminAddPhoto() http.HandlerFunc {
 		log.Println("---FILE UPLOAD COMPLETE---")
 
 		query := `INSERT INTO photos 
-        (name, location, date, imagepath, i_height, i_width)
-        VALUES($1, $2, $3, $4, $5, $6);`
+        (name, location, date, description, imagepath, i_height, i_width)
+        VALUES($1, $2, $3, $4, $5, $6, $7);`
 
-		results, err := h.DB.Exec(query, &details.Name, &details.Location, &details.Date, &details.Image.FileName, &details.Image.Height, &details.Image.Width)
+		results, err := h.DB.Exec(query, 
+            &details.Name, &details.Location, &details.Date, &details.Description,
+            &details.Image.FileName, &details.Image.Height, &details.Image.Width)
 		if err != nil {
 			log.Println("Failed to Exectue Query: ", err)
 		}
@@ -101,7 +103,7 @@ func ImageProcess(file multipart.File, header *multipart.FileHeader, i *types.Ph
         //MAGICK EXECUTION
 		i.Image.FileName = filepath.Base(osFile.Name())
         sizecmd := exec.Command("identify", "-format", 
-            "'%[fx:w] x %[fx:h] pixels'",
+            "'%[fx:w]x%[fx:h]'",
             osFile.Name())
 
         size, err := sizecmd.Output()
@@ -111,7 +113,7 @@ func ImageProcess(file multipart.File, header *multipart.FileHeader, i *types.Ph
         fmt.Println(size)
         xy := string(size[:])
         xy_str := strings.Split(xy, "x")
-        i.Image.Height = xy_str[0]
+        i.Image.Width = xy_str[0]
         i.Image.Height = xy_str[1]
 
 
