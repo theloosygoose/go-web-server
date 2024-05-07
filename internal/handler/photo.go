@@ -27,7 +27,7 @@ func (h PhotoHandler) HandlerPhotoShow() http.HandlerFunc {
 		for results.Next() {
 			var photo types.Photo
 
-			err = results.Scan(&photo.ID, &photo.Location, &photo.Date, &photo.Image.FileName, &photo.Image.Height, &photo.Image.Width)
+			err = results.Scan(&photo.ID, &photo.Date, &photo.Image.FileName, &photo.Image.Height, &photo.Image.Width)
 
 			if err != nil {
 				log.Println("Failed to Scan", err)
