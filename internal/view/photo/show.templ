@@ -22,8 +22,6 @@ templ PhotoCard(photos []types.Photo) {
                     hx-target="#main-photo"
                     hx-swap="innerHTML"
                     hx-get={ fmt.Sprintf("/photodata/%d", photo.ID) }
-                    height={ photo.Image.Height }
-                    width={ photo.Image.Width }
                     />
                 </div>
 		}
