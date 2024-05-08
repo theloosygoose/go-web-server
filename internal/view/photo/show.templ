@@ -22,6 +22,7 @@ templ PhotoCard(photos []types.Photo) {
                     hx-target="#main-photo"
                     hx-swap="innerHTML"
                     hx-get={ fmt.Sprintf("/photodata/%d", photo.ID) }
+                    preload="mouseover" preload-images="true"
                     />
                 </div>
 		}

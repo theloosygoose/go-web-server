@@ -8,11 +8,12 @@ templ Base() {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/preload.js"></script>
     <script src="dist/main.js" defer></script>
     <link rel="stylesheet" href="/dist/tailwind.css"/>
     <title>Don Photography</title>
 </head>
-<body class="font-mono bg-background text-text">
+<body class="font-mono bg-background text-text" hx-ext="preload">
     <h1 class="md:ml-3 md:mt-3 mx-auto text-xl md:text-6xl font-bold text-balance text-center md:text-left">Don Photography</h1>
     <div class="container mx-auto px-6 md:px-16">
         { children... }
