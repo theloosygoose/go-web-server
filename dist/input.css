@@ -12,6 +12,7 @@
 
     .blur-load{
         background-size: cover;
+        background-position: center;
         background-repeat: no-repeat;
         position: relative;
         filter: blur(7px);
@@ -21,20 +22,23 @@
         content: "";
         position: absolute;
         inset: 0;
-        animation: pulse 3.5s infinite;
+        animation: pulse 2.5s infinite;
         background-color: rgba(255, 255, 255, 0.1);
+        scale: 100;
     }
 
     @keyframes pulse {
         0%{
             background-color: rgba(255, 255, 255, 0.0);
+            scale: 100;
         }
         50%{
-
             background-color: rgba(255, 255, 255, 0.3);
+            scale: 105;
         }
         100%{
             background-color: rgba(255, 255, 255, 0.0);
+            scale: 100;
         }
     }
 
@@ -54,7 +58,7 @@
 
     .blur-load > img {
         opacity: 0;
-        transition: opacity 400ms ease-in-out;
+        transition: opacity 500ms cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
 
