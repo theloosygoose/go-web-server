@@ -37,7 +37,7 @@ templ MainPhoto(photo types.Photo){
                 alt={ photo.Name }
             />
         </div>
-        <div class="container flex-col h-full col-span-2">
+        <div class="container flex-col h-full col-span-2 *:font-semibold *:text-lg px-12">
             <p>Name: { photo.Name }</p>
             <p>Location: { photo.Location }</p>
             <p>Date: { photo.Date }</p>
@@ -67,5 +67,5 @@ func orientation(image types.ImageData) string {
         return "col-span-full" 
     }
 
-    return "col-span-2" 
+    return "col-span-3" 
 }

@@ -6,33 +6,52 @@ import (
 
 templ Show() {
 @layout.Base() {
-<h1>This is the Admin View</h1>
-<div class="container mx-auto">
+<div class="container w-full">
     <form 
-    class="flex-col justify-center align-center"
+    class="grid grid-cols-2 gap-6 align-top mt-12 *:block"
     id="form" hx-encoding="multipart/form-data" hx-post="/addphoto">
-        <label for="name-input">
-            Name:
-            <input type="text" name="name" id="name-input" />
+        <label 
+        class="col-start-1"
+        for="name-input">
+            <span>Name</span>
+            <input 
+            class="w-full border-0 border-b-2 border-accent focus:ring-0"
+            type="text" name="name" id="name-input" />
         </label>
-        <label for="location-input">
-            Location:
-            <input type="text" name="location" id="location-input" />
+        <label 
+        class="col-start-1"
+        for="location-input">
+            <span>Location</span>
+            <input 
+            class="w-full block border-0 border-b-2 border-accent focus:ring-0"
+            type="text" name="location" id="location-input" />
         </label>
-        <label for="description-input">
-            Description:
-            <textarea cols="40" rows="5" name="description" id="description-input">Insert a Description</textarea>
+        <label 
+        class="col-start-1"
+        for="description-input">
+            <span>Description</span>
+            <textarea 
+            class="w-full block border-0 border-b-2 border-accent focus:ring-0"
+            rows="5" name="description" id="description-input"></textarea>
         </label>
-        <label for="imagefile-input">
-            Image File:
-            <input type="file" name="imageFile" id="imagefile-input" />
+        <label 
+        class="col-start-2 row-start-1 row-span-2"
+        for="imagefile-input">
+            <span>Image</span>
+            <input 
+            class="w-full block border-0 border-accent focus:ring-0
+            file:focus:ring-0 file:border-0
+            file:px-5 file:py-2 file:rounded-sm file:bg-accent file:text-center"
+            type="file" name="imageFile" id="imagefile-input" />
         </label>
         <button 
-        class="p-6"
+        class="w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-accent
+        focus:ring-0
+        text-center transition-all duration-150 hover:scale-105"
         type="submit">
-            Upload
-            <img src="dist/spinner.svg" class="bg-primary stroke-primary fill-primary htmx-indicator" />
+        Upload
         </button>
+        <img src="dist/spinner.svg" class="text-accent fill-primary htmx-indicator" />
 
         <progress id="progress" value="0" max="100"></progress>
     </form>
