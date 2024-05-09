@@ -40,6 +40,9 @@
             scale: 1.0;
         }
     }
+    .blur-load.loaded {
+        background-image: none;
+    }
 
     .blur-load.loaded::before{
         content: none;

@@ -12,7 +12,7 @@ import (
 templ PhotoCard(photos []types.Photo) {
 	@components.PhotoContainer() {
 		for _, photo := range photos {
-                <div class={"blur-load z-0 hover:z-10 w-fit h-fit hover:scale-110 ease-in-out duration-200", min(&photo)}>
+                <div class={"blur-load z-0 hover:z-10 w-fit h-fit hover:scale-105 ease-in-out duration-200", min(&photo)}>
                     <img 
                     class="z-20 object-center object-cover max-w-52 max-h-52" 
                     loading="lazy"
@@ -30,15 +30,18 @@ templ PhotoCard(photos []types.Photo) {
 }
 
 templ MainPhoto(photo types.Photo){
-    <div class="grid grid-cols-5 gap-4 transition-opacity delay-150 ease-in-out">
-        <div id="main-image-photo" class={"blur-load", orientation(photo.Image), min(&photo)}>
+    <div class={ "h-full group/mimage hover:scale-90 transition ease-in-out" + orientation(photo.Image) }>
+        <div id="main-image-photo" class={"z-10 blur-load h-full", orientation(photo.Image), min(&photo)}>
             <img
-                class={"object-center object-contain h-full"}
+                class={"object-center object-contain"}
                 src={ os.Getenv("PHOTO_DIR") + photo.Image.FileName } 
                 alt={ photo.Name }
             />
         </div>
-        <div class="container flex-col h-full col-span-2 *:font-semibold *:text-lg px-12">
+        <div class="absolute bottom-0 left-0 z-20 
+        opacity-0 group-hover/mimage:opacity-80 transition-opacity ease-in-out duration-200
+        bg-accent flex-col h-fit *:text-md px-12 py-6"
+        >
             <p>Name: { photo.Name }</p>
             <p>Location: { photo.Location }</p>
             <p>Date: { photo.Date }</p>
@@ -65,8 +68,8 @@ func orientation(image types.ImageData) string {
     }
 
     if w > h {
-        return "col-span-full" 
+        return "flex-col" 
     }
 
-    return "col-span-3" 
+    return "flex" 
 }
