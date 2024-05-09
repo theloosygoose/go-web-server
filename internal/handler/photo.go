@@ -63,3 +63,26 @@ func (h PhotoHandler) HandlerMainPhotoShow() http.HandlerFunc {
         render(w, r, photo.MainPhoto(p))
     })
 }
+
+func (h PhotoHandler) HandlerRandomPhotoShow() http.HandlerFunc {
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        query := `
+            SELECT id, name, location, date, description, imagepath, i_height, i_width
+            FROM photos
+            ORDER BY random()
+            LIMIT 1;
+            `
+
+        results := h.DB.QueryRow(query)
+        
+        var p types.Photo
+        err := results.Scan(
+            &p.ID, &p.Name, &p.Location, &p.Date, &p.Description,
+            &p.Image.FileName , &p.Image.Height, &p.Image.Width)
+        if err != nil {
+            log.Println("Could not Get Random Photo", err)
+        }
+
+        render(w, r, photo.MainPhoto(p))
+    })
+}
