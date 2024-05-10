@@ -30,18 +30,20 @@ templ PhotoCard(photos []types.Photo) {
 }
 
 templ MainPhoto(photo types.Photo){
-    <div class={ "h-full group/mimage hover:scale-90 transition ease-in-out" + orientation(photo.Image) }>
+    <div class={ "h-full group/mimage hover:shadow-lg active:shadow-lg transition duration-500" + orientation(photo.Image) }>
         <div id="main-image-photo" class={"z-10 blur-load h-full", orientation(photo.Image), min(&photo)}>
             <img
-                class={"object-center object-contain"}
+                class="object-center object-contain mx-auto"
                 src={ os.Getenv("PHOTO_DIR") + photo.Image.FileName } 
                 alt={ photo.Name }
             />
         </div>
-        <div class="absolute bottom-0 left-0 z-20 
-        opacity-0 group-hover/mimage:opacity-80 transition-opacity ease-in-out duration-200
-        bg-accent flex-col h-fit *:text-md px-12 py-6"
-        >
+        <div class="absolute bottom-0 left-0 z-20 align-middle 
+        opacity-0 
+        transition ease-in-out duration-200
+        group-active/mimage:opacity-90 
+        group-hover/mimage:opacity-90
+        bg-primary flex-col h-fit *:text-md px-12 py-6 w-full">
             <p>Name: { photo.Name }</p>
             <p>Location: { photo.Location }</p>
             <p>Date: { photo.Date }</p>

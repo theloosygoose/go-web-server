@@ -31,7 +31,7 @@ func PhotoContainer() templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex-col\"><div id=\"main-photo\" class=\"relative mx-[10%] mt-24 mb-16 h-1/2\"></div><div id=\"photo-container\" class=\"flex h-fit gap-x-5 justify-center\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex-col\"><div id=\"main-photo\" class=\"relative mx-[10%] min-h-52 mt-24 mb-16 h-1/2\"></div><div id=\"photo-container\" class=\"flex h-fit gap-x-5 justify-center\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
