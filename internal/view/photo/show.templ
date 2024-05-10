@@ -37,7 +37,7 @@ templ MainPhoto(photo types.Photo){
         <div id="main-image-photo" class={"z-10 blur-load h-full", orientation(photo.Image), min(&photo)}>
             <img
                 class="object-center object-contain"
-                src={ os.Getenv("PHOTO_DIR") + photo.Image.FileName } 
+                src={ os.Getenv("PHOTO_DIR") + "med_"+ photo.Image.FileName } 
                 alt={ photo.Name }
             />
         </div>

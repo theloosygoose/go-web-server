@@ -21,30 +21,22 @@
         content: "";
         position: absolute;
         inset: 0;
-        animation: pulse 2.5s infinite;
+        animation: pulse 1.5s infinite;
         background-color: rgba(255, 255, 255, 0.1);
-        scale: 1.0;
     }
 
     @keyframes pulse {
         0% {
             background-color: rgba(255, 255, 255, 0.0);
-            scale: 1.0;
         }
 
         50% {
             background-color: rgba(255, 255, 255, 0.3);
-            scale: 1.2;
         }
 
         100% {
             background-color: rgba(255, 255, 255, 0.0);
-            scale: 1.0;
         }
-    }
-
-    .blur-load.loaded {
-        background-image: none;
     }
 
     .blur-load.loaded::before {

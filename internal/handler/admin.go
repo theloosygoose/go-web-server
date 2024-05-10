@@ -195,7 +195,7 @@ func ImageProcess(file multipart.File, header *multipart.FileHeader, i *types.Ph
 
         fmt.Println("---RUNNING MED MAGICK---")
 		medcmd := exec.Command("sudo", "magick",
-			osFile.Name(), "-resize", "50%",
+			osFile.Name(), "-resize", "25%",
 			filepath.Dir(osFile.Name()) + "/med_"+ i.Image.FileName)
 
         go magickCommand(medcmd)
