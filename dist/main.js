@@ -19,4 +19,13 @@ function HandleBlur(){
             img.addEventListener("load", loaded)
         }
     })
-}
+};
+
+
+var loadFile = function(event) {
+    var output = document.getElementById('preview-image');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload =function () {
+        URL.revokeObjectURL(output.src)
+    }
+};
