@@ -15,7 +15,8 @@ templ Show() {
         for="name-input">
             <span>Name</span>
             <input 
-            class="w-full border-0 border-b-2 border-accent focus:ring-0"
+            class="w-full border-0 border-b-2 border-accent focus:ring-0
+            invalid:border-pink-500 invalid:text-pink-600"
             type="text" name="name" id="name-input" required/>
         </label>
         <label 
@@ -37,34 +38,37 @@ templ Show() {
         <label 
         class="col-start-2 row-start-1 row-span-2"
         for="imagefile-input">
-            <span>Image</span>
             <input 
             class="w-full block border-0 border-accent focus:ring-0
+            file:transition-colors file:duration-150
             file:focus:ring-0 file:border-0
-            file:px-5 file:py-2 file:rounded-sm file:bg-accent file:text-center"
-            type="file" name="imageFile" id="imagefile-input" required/>
+            file:hover:cursor-pointer
+            file:hover:bg-slate-700
+            file:px-5 file:py-2 file:rounded-sm 
+            file:bg-slate-500 file:text-center
+            file:text-white
+            file:hover:invalid:bg-pink-700
+            file:invalid:border-pink-500 file:invalid:bg-pink-600"
+            type="file" name="imageFile" id="imagefile-input" value="Image" required/>
         </label>
         <button 
-        class="w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-accent
-        focus:ring-0
-        text-center transition-all duration-150 hover:scale-105
+        class="w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-slate-500
+        relative focus:ring-0 text-center 
+        transition-colors duration-150
+        text-white
+        hover:bg-slate-700
         inline-flex items-center"
         type="submit">
         Upload
-        <svg class="htmx-indicator" 
-        class="motion-reduce:hidden animate-spin ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+        <svg  
+        class="htmx-indicator relative right-0 bottom-6
+        animate-spin 
+        ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 12 12">
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
         </button>
-
-        <progress id="progress" value="0" max="100"></progress>
     </form>
 </div>
-<script type="text/javascript">
-    htmx.on('#form', "htmx:xhr:progress", function (evt) {
-        htmx.find('#progress').setAttribute('value', evt.detail.loaded / evt.detail.total * 100)
-    })
-</script>
 }
 }
