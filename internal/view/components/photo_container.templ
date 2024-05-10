@@ -2,7 +2,7 @@ package components
 
 templ PhotoContainer() {
     <div class="flex-col">
-        <div id="main-photo" class="relative mx-[10%] min-h-52 mt-24 mb-16 h-1/2">
+        <div id="main-photo" class="md:mx-[10%] min-h-52 mt-24 mb-16 h-fit">
         </div>
         @Gallery(){
             { children... }
@@ -11,7 +11,7 @@ templ PhotoContainer() {
 }
 
 templ Gallery(){
-    <div id="photo-container" class="flex flex-wrap h-fit gap-5 justify-center">
+    <div id="photo-container" class="flex flex-wrap h-fit gap-2 md:gap-3 justify-center">
         { children... }
     </div>
 }
