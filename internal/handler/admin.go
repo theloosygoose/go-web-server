@@ -184,36 +184,36 @@ func ImageProcess(file multipart.File, header *multipart.FileHeader, i *types.Ph
         i.Image.Width = xy_str[0]
         i.Image.Height = xy_str[1]
 
+        var cmds []*exec.Cmd
 
-        fmt.Println("---RUNNING SMALL MAGICK---")
+
+        fmt.Println("---RUNNING MAGICK---")
 		mincmd := exec.Command("sudo", "magick",
 			osFile.Name(), "-resize", "50x50",
 			filepath.Dir(osFile.Name()) + "/min_"+ i.Image.FileName)
-        go magickCommand(mincmd)
 
-        fmt.Println("---RUNNING SMALL MAGICK---")
 		smcmd := exec.Command("sudo", "magick",
 			osFile.Name(), "-resize", "1000000@\\>",
 			filepath.Dir(osFile.Name()) + "/sm_"+ i.Image.FileName)
-        go magickCommand(smcmd)
 
-        defer osFile.Close()
-
-        fmt.Println("---RUNNING MED MAGICK---")
 		medcmd := exec.Command("sudo", "magick",
-			osFile.Name(), "-resize", "2000000@\\>",
+			osFile.Name(), "-resize", "1500000@\\>",
 			filepath.Dir(osFile.Name()) + "/med_"+ i.Image.FileName)
 
-        go magickCommand(medcmd)
+        cmds = append(cmds, mincmd, smcmd, medcmd)
+        go magickCommand(cmds)
 
         defer osFile.Close()
 
         return nil 
 }
 
-func magickCommand(cmd *exec.Cmd) {
-    err := cmd.Run()
-    if err != nil {
-        fmt.Println(err)
+func magickCommand(cmds []*exec.Cmd) {
+    for i := range cmds{
+        err := cmds[i].Run()
+        if err != nil {
+            fmt.Println(err)
+        }
+
     }
 }

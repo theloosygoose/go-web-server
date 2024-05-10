@@ -18,7 +18,7 @@ templ PhotoCard(photos []types.Photo) {
                     <img 
                     class="z-20 object-center object-cover max-w-32 max-h-32 md:max-w-52 md:max-h-52" 
                     loading="lazy"
-                    src={ os.Getenv("PHOTO_DIR") + "med_" + photo.Image.FileName } 
+                    src={ os.Getenv("PHOTO_DIR") + "sm_" + photo.Image.FileName } 
                 alt={ photo.Name }
                 hx-trigger="click"
                 hx-target="#main-photo"
