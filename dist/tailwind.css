@@ -1017,12 +1017,20 @@ html {
   animation: spin 1s linear infinite;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .flex-col {
   flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
 }
 
 .items-center {
@@ -1037,13 +1045,12 @@ html {
   justify-content: space-between;
 }
 
-.gap-6 {
-  gap: 1.5rem;
+.gap-5 {
+  gap: 1.25rem;
 }
 
-.gap-x-5 {
-  -moz-column-gap: 1.25rem;
-       column-gap: 1.25rem;
+.gap-6 {
+  gap: 1.5rem;
 }
 
 .justify-self-center {
@@ -1364,12 +1371,12 @@ html {
 }
 
 @media (min-width: 768px) {
-  .md\:ml-3 {
-    margin-left: 0.75rem;
+  .md\:ml-8 {
+    margin-left: 2rem;
   }
 
-  .md\:mt-3 {
-    margin-top: 0.75rem;
+  .md\:mt-8 {
+    margin-top: 2rem;
   }
 
   .md\:px-16 {

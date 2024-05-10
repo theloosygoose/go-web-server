@@ -46,7 +46,7 @@ func PhotoCard(photos []types.Photo) templ.Component {
 					defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 				}
 				for _, photo := range photos {
-					var templ_7745c5c3_Var4 = []any{"blur-load z-0 hover:z-10 w-fit h-fit hover:scale-105 ease-in-out duration-200", min(&photo)}
+					var templ_7745c5c3_Var4 = []any{"blur-load z-0 cursor-pointer hover:z-10 w-fit h-fit hover:scale-105 ease-in-out duration-200", min(&photo)}
 					templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var4...)
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
