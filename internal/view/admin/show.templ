@@ -61,6 +61,9 @@ templ Show() {
             file:invalid:border-pink-500 file:invalid:bg-pink-600"
             type="file" name="imageFile" id="imagefile-input" accept="image/*" onchange="loadFile(event)" required/>
         </label>
+        <div class="col-start-2 row-start-2 row-span-2">
+            <img class="max-h-56 mx-auto" id="preview-image" height="300px"/>
+        </div>
         <button 
         class="w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-slate-500
         relative focus:ring-0 text-center 
@@ -80,9 +83,6 @@ templ Show() {
         </button>
     </form>
 
-    <div class="w-full flex justify-center">
-        <img class="max-h-56" id="preview-image" height="300px"/>
-    </div>
     <div id="response-status"></div>
 </div>
 <button 
