@@ -25,6 +25,8 @@ func NewServer(db *sql.DB) *http.ServeMux {
     r.HandleFunc("GET /admin", aHandler.HandlerAdminShow())
     r.HandleFunc("GET /photodata/{id}", pHandler.HandlerMainPhotoShow())
     r.HandleFunc("GET /photodata/random", pHandler.HandlerRandomPhotoShow())
+    r.HandleFunc("GET /photodata/delete", aHandler.HandlerAdminDeleteShow())
+    r.HandleFunc("DELETE /photodata/delete/{id}", aHandler.HandlerAdminDeletePhoto())
 
 	return r
 }

@@ -63,6 +63,59 @@ func (h AdminHandler) HandlerAdminShow() http.HandlerFunc {
 	})
 }
 
+func (h AdminHandler) HandlerAdminDeletePhoto() http.HandlerFunc {
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        id := r.PathValue("id") 
+
+        query := `DELETE FROM photos WHERE id = $1 RETURNING imagepath;`
+
+        var p string
+
+        results := h.DB.QueryRow(query, id)
+        err := results.Scan(&p)
+        if err != nil {
+            log.Println("Unable to Delete Photo",  err)
+        }
+
+        cmd := exec.Command("sudo", "rm", "-rf", fmt.Sprintf("*%v", p))
+        cmd.Dir = "/mnt/usb/images"
+
+        err = cmd.Run()
+        if err != nil {
+            log.Println("UNABLE TO DELETE ROW")
+            log.Println(err)
+        }
+
+    })
+}
+
+func (h AdminHandler) HandlerAdminDeleteShow() http.HandlerFunc {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		query := `SELECT id, date, imagepath, i_height, i_width FROM photos;`
+
+		results, err := h.DB.Query(query)
+		if err != nil {
+			log.Println("Failed to Exectue Query: ", err)
+		}
+
+		var photos []types.Photo
+
+		for results.Next() {
+			var photo types.Photo
+
+			err = results.Scan(&photo.ID, &photo.Date, &photo.Image.FileName, &photo.Image.Height, &photo.Image.Width)
+
+			if err != nil {
+				log.Println("Failed to Scan", err)
+			}
+
+			photos = append(photos, photo)
+		}
+
+		render(w, r, admin.Delete(photos))
+	})
+}
+
 func ImageProcess(file multipart.File, header *multipart.FileHeader, i *types.Photo) error {
 		contentType := header.Header["Content-Type"][0]
 		log.Printf("Content-Type:: %v\n", contentType)

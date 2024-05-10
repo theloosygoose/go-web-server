@@ -1,7 +1,12 @@
 package admin
 
 import (
-"github.com/theloosygoose/goserver/internal/view/layout"
+    "fmt"
+	"os"
+	"github.com/theloosygoose/goserver/internal/types"
+
+    "github.com/theloosygoose/goserver/internal/view/layout"
+	"github.com/theloosygoose/goserver/internal/view/components"
 )
 
 templ Show() {
@@ -70,5 +75,49 @@ templ Show() {
         </button>
     </form>
 </div>
+<button 
+    class="w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-slate-500
+        my-16
+        relative focus:ring-0 text-center 
+        transition-colors duration-150
+        justify-self-center
+        text-white
+        hover:bg-slate-700
+        inline-flex items-center"
+    hx-get="/photodata/delete"
+    hx-swap="innerHTML"
+    hx-target="#delete-items"
+    hx-trigger="click"> Delete Photos </button>
+
+<div id="delete-items"></div>
+
 }
+}
+
+templ Delete(photos []types.Photo) {
+	@components.Gallery() {
+		for _, photo := range photos {
+                <div 
+                class={"group hover:cursor-pointer relative blur-load z-0 hover:z-10 w-fit h-fit hover:scale-105 ease-in-out duration-200"}
+                hx-trigger="click"
+                hx-delete={ fmt.Sprintf("/photodata/%d", photo.ID) }
+                hx-confirm="Are you sure you want to delete this photo?"
+                >
+                    <img 
+                    class="z-20 object-center object-cover max-w-44 max-h-44 
+                    group-hover:blur-sm
+                    transition-all duration-300" 
+                    loading="lazy"
+                    src={ os.Getenv("PHOTO_DIR") + "med_" + photo.Image.FileName } 
+                    alt={ photo.Name }
+                    />
+                    <div
+                        class="absolute inset-0 bottom-0 left-0
+                            w-full h-full text-white text-center font-bold text-lg
+                            opacity-0 group-hover:opacity-50 bg-red-700 
+                            transition-all duration-300 ease-in-out">
+                    </div>
+                </div>
+		}
+	}
 }

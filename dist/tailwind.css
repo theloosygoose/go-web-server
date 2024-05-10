@@ -846,6 +846,10 @@ html {
   position: relative;
 }
 
+.inset-0 {
+  inset: 0px;
+}
+
 .bottom-0 {
   bottom: 0px;
 }
@@ -898,6 +902,11 @@ html {
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
+}
+
+.my-16 {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
 }
 
 .mb-16 {
@@ -953,6 +962,10 @@ html {
   height: 100%;
 }
 
+.max-h-44 {
+  max-height: 11rem;
+}
+
 .max-h-52 {
   max-height: 13rem;
 }
@@ -972,6 +985,10 @@ html {
 
 .w-full {
   width: 100%;
+}
+
+.max-w-44 {
+  max-width: 11rem;
 }
 
 .max-w-52 {
@@ -1013,6 +1030,10 @@ html {
        column-gap: 1.25rem;
 }
 
+.justify-self-center {
+  justify-self: center;
+}
+
 .text-balance {
   text-wrap: balance;
 }
@@ -1042,6 +1063,11 @@ html {
 .bg-primary {
   --tw-bg-opacity: 1;
   background-color: rgb(153 141 112 / var(--tw-bg-opacity));
+}
+
+.bg-red-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(185 28 28 / var(--tw-bg-opacity));
 }
 
 .bg-slate-500 {
@@ -1105,6 +1131,11 @@ html {
   font-family: Inconsolata, monospace;
 }
 
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
@@ -1144,6 +1175,12 @@ html {
   transition-duration: 150ms;
 }
 
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
 .transition-colors {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1156,6 +1193,10 @@ html {
 
 .duration-200 {
   transition-duration: 200ms;
+}
+
+.duration-300 {
+  transition-duration: 300ms;
 }
 
 .duration-500 {
@@ -1242,6 +1283,10 @@ html {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.hover\:cursor-pointer:hover {
+  cursor: pointer;
+}
+
 .hover\:bg-slate-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(51 65 85 / var(--tw-bg-opacity));
@@ -1287,6 +1332,15 @@ html {
 
 .group\/mimage:hover .group-hover\/mimage\:opacity-90 {
   opacity: 0.9;
+}
+
+.group:hover .group-hover\:opacity-50 {
+  opacity: 0.5;
+}
+
+.group:hover .group-hover\:blur-sm {
+  --tw-blur: blur(4px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 .group\/mimage:active .group-active\/mimage\:opacity-90 {
