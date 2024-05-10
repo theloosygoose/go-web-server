@@ -47,10 +47,10 @@ templ MainPhoto(photo types.Photo){
         group-active/mimage:opacity-90 
         group-hover/mimage:opacity-90
         bg-primary flex-col h-fit *:text-md px-12 py-6 w-full">
-            <p>Name: { photo.Name }</p>
-            <p>Location: { photo.Location }</p>
-            <p>Date: { photo.Date }</p>
-            <p>Description: { photo.Description }</p>
+            <p>{ photo.Name }</p>
+            <p>{ photo.Location }</p>
+            <p>{ photo.Date }</p>
+            <p class="text-sm">{ photo.Description }</p>
         </div>
     </div>
 }
