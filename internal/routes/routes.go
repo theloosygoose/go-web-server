@@ -21,7 +21,7 @@ func NewServer(db *sql.DB) *http.ServeMux {
     r.Handle("/dist/", http.StripPrefix("/dist/", fs))
 
 	r.HandleFunc("/", pHandler.HandlerPhotoShow())
-    r.HandleFunc("POST /addphoto", aHandler.AdminAddPhoto())
+    r.HandleFunc("PUT /addphoto", aHandler.AdminAddPhoto())
     r.HandleFunc("GET /admin", aHandler.HandlerAdminShow())
     r.HandleFunc("GET /photodata/{id}", pHandler.HandlerMainPhotoShow())
     r.HandleFunc("GET /photodata/random", pHandler.HandlerRandomPhotoShow())

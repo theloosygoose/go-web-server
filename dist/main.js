@@ -29,3 +29,8 @@ var loadFile = function(event) {
         URL.revokeObjectURL(output.src)
     }
 };
+
+document.body.addEventListener('htmx:afterSwap', function(e){
+    const form = document.querySelector('#form');
+    form.reset();
+})

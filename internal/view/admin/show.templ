@@ -14,7 +14,12 @@ templ Show() {
 <div class="container w-full">
     <form 
     class="grid grid-cols-2 gap-6 align-top mt-12 *:block"
-    id="form" hx-encoding="multipart/form-data" hx-post="/addphoto">
+    id="form" 
+    hx-encoding="multipart/form-data" 
+    hx-target="#response-status" 
+    hx-swap="innerHTML"
+    hx-put="/addphoto" 
+    hx-on::after-request="this.reset()">
         <label 
         class="col-start-1"
         for="name-input">
@@ -56,11 +61,6 @@ templ Show() {
             file:invalid:border-pink-500 file:invalid:bg-pink-600"
             type="file" name="imageFile" id="imagefile-input" accept="image/*" onchange="loadFile(event)" required/>
         </label>
-        <div
-        class="col-start-2 row-start-2 row-span-3">
-            <img id="preview-image" height="500"/>
-        </div>
-
         <button 
         class="w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-slate-500
         relative focus:ring-0 text-center 
@@ -79,6 +79,11 @@ templ Show() {
         </svg>
         </button>
     </form>
+
+    <div class="w-full flex justify-center">
+        <img class="max-h-56" id="preview-image" height="300px"/>
+    </div>
+    <div id="response-status"></div>
 </div>
 <button 
     class="w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-slate-500

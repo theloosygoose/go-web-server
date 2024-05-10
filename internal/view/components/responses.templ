@@ -1,0 +1,9 @@
+package components 
+
+import	"github.com/theloosygoose/goserver/internal/types"
+
+templ ReponseShow(res types.Response) {
+    <div class="flex justify-between">
+    <h2>{ string(res.Message) }</h2>
+    </div>
+}

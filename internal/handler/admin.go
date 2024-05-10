@@ -15,6 +15,7 @@ import (
 	"github.com/containers/podman/v5/pkg/ctime"
 	"github.com/theloosygoose/goserver/internal/types"
 	"github.com/theloosygoose/goserver/internal/view/admin"
+	"github.com/theloosygoose/goserver/internal/view/components"
 )
 
 type AdminHandler struct {
@@ -24,6 +25,8 @@ type AdminHandler struct {
 func (h AdminHandler) AdminAddPhoto() http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		r.ParseMultipartForm(20)
+
+        var response types.Response
 
 		details := types.Photo{
 			Name:     r.FormValue("name"),
@@ -49,9 +52,16 @@ func (h AdminHandler) AdminAddPhoto() http.HandlerFunc {
             &details.Image.FileName, &details.Image.Height, &details.Image.Width)
 		if err != nil {
 			log.Println("Failed to Exectue Query: ", err)
-		}
+            response.Message = "Failed to Execute Query"
+            response.Code = http.StatusInternalServerError
+		} else {
+            response.Message = "Successful"
+            response.Code = http.StatusOK
+        }
 
 		log.Println(results.RowsAffected())
+
+        render(w, r, components.ReponseShow(response))
 	})
 
 }
