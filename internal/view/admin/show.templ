@@ -100,7 +100,7 @@ templ Delete(photos []types.Photo) {
                 <div 
                 class={"group hover:cursor-pointer relative blur-load z-0 hover:z-10 w-fit h-fit hover:scale-105 ease-in-out duration-200"}
                 hx-trigger="click"
-                hx-delete={ fmt.Sprintf("/photodata/%d", photo.ID) }
+                hx-delete={ fmt.Sprintf("/photodata/delete/%d", photo.ID) }
                 hx-confirm="Are you sure you want to delete this photo?"
                 >
                     <img 
