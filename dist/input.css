@@ -50,7 +50,7 @@
 
     .blur-load>img {
         opacity: 0;
-        transition: opacity 500ms cubic-bezier(0.165, 0.84, 0.44, 1);
+        transition: opacity 1000ms cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
     .my-indicator {

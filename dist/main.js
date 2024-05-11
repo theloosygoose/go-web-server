@@ -1,5 +1,5 @@
 HandleBlur()
-htmx.on("htmx:load", function(){
+htmx.on("htmx:afterSettle", function(){
     HandleBlur()
 });
 
