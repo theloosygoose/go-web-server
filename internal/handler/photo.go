@@ -15,9 +15,12 @@ type PhotoHandler struct {
 
 func (h PhotoHandler) HandlerPhotoShow() http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		query := `SELECT id, date, imagepath, i_height, i_width FROM photos;`
+		query, err := h.DB.Prepare(`SELECT id, date, imagepath, i_height, i_width FROM photos;`)
+        if err != nil {
+            log.Println("Query not able to prepare ALL Photo Query")
+        }
 
-		results, err := h.DB.Query(query)
+		results, err := query.Query()
 		if err != nil {
 			log.Println("Failed to Exectue Query: ", err)
 		}
@@ -47,7 +50,7 @@ func (h PhotoHandler) HandlerMainPhotoShow() http.HandlerFunc {
         query := `SELECT id, name, location, date, description,
         imagepath, i_height, i_width
         FROM photos 
-        WHERE id = $1;`
+        WHERE id = ?;`
 
         results := h.DB.QueryRow(query, id)
 

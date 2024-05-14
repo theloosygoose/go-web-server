@@ -45,7 +45,7 @@ func (h AdminHandler) AdminAddPhoto() http.HandlerFunc {
 
 		query := `INSERT INTO photos 
         (name, location, date, description, imagepath, i_height, i_width)
-        VALUES($1, $2, $3, $4, $5, $6, $7);`
+        VALUES(?, ?, ?, ?, ?, ?, ?);`
 
 		results, err := h.DB.Exec(query, 
             &details.Name, &details.Location, &details.Date, &details.Description,
@@ -77,7 +77,7 @@ func (h AdminHandler) HandlerAdminDeletePhoto() http.HandlerFunc {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
         id := r.PathValue("id") 
 
-        query := `DELETE FROM photos WHERE id = $1 RETURNING imagepath;`
+        query := `DELETE FROM photos WHERE id = ? RETURNING imagepath;`
 
         var p string
 

@@ -17,6 +17,7 @@ func NewDB(sqldb *sql.DB) PGdb {
 
 func Connect() *sql.DB {
     connInfo := os.Getenv("DB_CONNINFO")
+    log.Println(connInfo)
 
 	db, err := sql.Open("sqlite3", connInfo)
 	if err != nil {
@@ -32,7 +33,7 @@ func CloseConnection(db *sql.DB) {
 }
 
 func CreateTable(db *sql.DB) {
-    results, err := db.Query("CREATE TABLE IF NOT EXISTS photos (id SERIAL PRIMARY KEY, name VARCHAR(100) NOT NULL, location VARCHAR(100) NOT NULL, date VARCHAR(100), imagepath VARCHAR(100) NOT NULL, description TEXT, i_height VARCHAR(10), i_width VARCHAR(10));")
+    results, err := db.Exec("CREATE TABLE IF NOT EXISTS photos (id SERIAL PRIMARY KEY, name VARCHAR(100) NOT NULL, location VARCHAR(100) NOT NULL, date VARCHAR(100), imagepath VARCHAR(100) NOT NULL, description TEXT, i_height VARCHAR(10), i_width VARCHAR(10));")
     if err != nil {
         fmt.Println("failed to execute query", err)
         return
