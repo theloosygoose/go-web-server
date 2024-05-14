@@ -11,9 +11,9 @@ import (
 
 templ Show() {
 @layout.Base() {
-<div class="container w-full">
+<div class="container w-full px-4">
     <form 
-    class="grid grid-cols-2 gap-6 align-top mt-12 *:block"
+    class="grid grid-cols-1 md:grid-cols-2 gap-6 align-top mt-12 *:block"
     id="form" 
     hx-encoding="multipart/form-data" 
     hx-target="#response-status" 
@@ -46,7 +46,7 @@ templ Show() {
             rows="5" name="description" id="description-input"></textarea>
         </label>
         <label 
-        class="col-start-2 row-start-1 row-span-1"
+        class="md:col-start-2 md:row-start-1 md:row-span-1"
         for="imagefile-input">
             <input 
             class="w-full block border-0 border-accent focus:ring-0
@@ -61,7 +61,7 @@ templ Show() {
             file:invalid:border-red-500 file:invalid:bg-red-600"
             type="file" name="imageFile" id="imagefile-input" accept="image/*" onchange="loadFile(event)" required/>
         </label>
-        <div class="col-start-2 row-start-2 row-span-2">
+        <div class="md:col-start-2 md:row-start-2 md:row-span-2">
             <img class="max-h-56 mx-auto" id="preview-image" height="300px"/>
         </div>
         <button 
