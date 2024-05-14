@@ -23,7 +23,7 @@ func PhotoContainer() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex-col\"><div id=\"main-photo\" class=\"md:mx-[10%] min-h-52 mt-24 mb-16 md:h-[75dvh]\"></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col\"><div id=\"main-photo\" class=\"h-fit my-16 min-h-[50svh] md:min-h-[65svh] \"></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -70,7 +70,7 @@ func Gallery() templ.Component {
 			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"photo-container\" class=\"flex flex-wrap h-fit gap-2 md:gap-3 justify-center\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"photo-container\" class=\"outline outline-gray-800 outline-offset-4 rounded-sm p-6\n    flex flex-wrap h-fit gap-2 md:gap-3 justify-center\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

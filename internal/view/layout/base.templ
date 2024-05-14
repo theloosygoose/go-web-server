@@ -13,21 +13,25 @@ templ Base() {
     <link rel="stylesheet" href="/dist/tailwind.css"/>
     <title>Don Photography</title>
 </head>
-<body class="font-mono bg-background text-text" 
+<body class="font-mono bg-black text-white" 
     hx-trigger="load"
     hx-get="/photodata/random"
     hx-target="#main-photo"
     hx-swap="innerHTML"
     hx-ext="preload">
-    <h1 class="md:ml-8 md:mt-8 mx-auto text-xl md:text-6xl font-bold text-balance text-center md:text-left">Don Photography</h1>
-    <div class="flex justify-between gap-x-7 py-12">
-        <a href="/">Home</a>
+    <a href="/">
+        <h1 class="md:ml-8 underline underline-offset-2 
+        md:mt-8 mx-auto text-xl md:text-6xl font-bold 
+        text-balance text-center md:text-left
+        tracker-wide">Don Photography</h1> 
+    </a>
+    <div class="flex justify-end gap-x-7 py-12">
         <a href="/admin">Add Photos</a>
     </div>
     <div class="container mx-auto px-1 md:px-16">
         { children... }
     </div>
-    <footer class="h-28 bg-slate-500 text-white mt-12">This is the fotter</footer>
+    <footer class="h-28 bg-gray-900 mt-12 bottom-0 p-12">Made by Gusti Rama Henry</footer>
 </body>
 </html>
 }
