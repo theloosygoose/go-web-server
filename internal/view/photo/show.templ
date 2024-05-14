@@ -34,12 +34,13 @@ templ PhotoCard(photos []types.Photo) {
 
 templ MainPhoto(photo types.Photo){
     <div class={ "select-none md:w-auto group/mimage flex justify-center align-middle" + orientation(photo.Image) }>
-        <div id="main-image-photo" class={"flex justify-center align-middle z-10 blur-load", orientation(photo.Image), min(&photo)}>
-            <div class="relative">
+        <div id="main-image-photo" class={"flex justify-center align-middle z-10", orientation(photo.Image)}>
+            <div class={"relative blur-load", min(&photo)}>
                 <img
                     class="object-center object-contain w-auto max-h-[80svh]"
                     src={ os.Getenv("PHOTO_DIR") + "med_"+ photo.Image.FileName } 
                     alt={ photo.Name }
+                    loading="eager"
                 />
                 <div class="absolute bottom-0 left-0 z-20 
                 opacity-0 

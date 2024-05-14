@@ -646,7 +646,7 @@ html {
 }
 
 .blur-load {
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
@@ -892,6 +892,11 @@ html {
 
 .row-start-2 {
   grid-row-start: 2;
+}
+
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .mx-auto {
