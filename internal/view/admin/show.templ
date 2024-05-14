@@ -25,7 +25,7 @@ templ Show() {
         for="name-input">
             <span>Name</span>
             <input 
-            class="w-full border-0 border-b-2 border-accent focus:ring-0
+            class="w-full border-0 border-b-2 border-accent focus:ring-0 focus:border-b-4 bg-gray-800 rounded-md
             invalid:border-red-500 invalid:text-red-600"
             type="text" name="name" id="name-input" required/>
         </label>
@@ -34,7 +34,7 @@ templ Show() {
         for="location-input">
             <span>Location</span>
             <input 
-            class="w-full block border-0 border-b-2 border-accent focus:ring-0"
+            class="w-full block border-0 border-b-2 border-accent focus:ring-0 focus:border-b-4 bg-gray-800 rounded-md"
             type="text" name="location" id="location-input" />
         </label>
         <label 
@@ -42,7 +42,7 @@ templ Show() {
         for="description-input">
             <span>Description</span>
             <textarea 
-            class="w-full block border-0 border-b-2 border-accent focus:ring-0"
+            class="w-full block border-0 border-b-2 border-accent focus:ring-0 focus:border-b-4 bg-gray-800 rounded-md"
             rows="5" name="description" id="description-input"></textarea>
         </label>
         <label 
@@ -70,20 +70,19 @@ templ Show() {
         transition-colors duration-150
         text-white
         hover:bg-gray-900
-        inline-flex items-center"
+        inline-flex items-center
+        "
         type="submit">
         Upload
-        <svg  
-        class="htmx-indicator relative right-0 bottom-6
-        animate-spin 
-        ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 12 12">
-          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-        </svg>
+            <span class="htmx-indicator absolute -top-1 -right-1 flex h-3 w-3">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-accent"></span>
+            </span>
         </button>
     </form>
 
     <div id="response-status"></div>
+
 </div>
 <button 
     class="w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800
