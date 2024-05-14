@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	_ "github.com/lib/pq"
+    _ "github.com/mattn/go-sqlite3"
 )
 
 type PGdb struct {*sql.DB}
@@ -16,31 +16,14 @@ func NewDB(sqldb *sql.DB) PGdb {
 }
 
 func Connect() *sql.DB {
-    var (
-        host = os.Getenv("DB_HOST")
-        port = os.Getenv("DB_PORT")
-        user = os.Getenv("DB_USER")
-        password = os.Getenv("DB_PASS")
-        dbname = os.Getenv("DB_NAME")
-    )
+    connInfo := os.Getenv("DB_CONNINFO")
 
-
-	connInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
-		host, port, user, password, dbname)
-    log.Println(connInfo)
-
-	db, err := sql.Open("postgres", connInfo)
+	db, err := sql.Open("sqlite3", connInfo)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	err = db.Ping()
-	if err != nil {
-		log.Panicln(err)
-	}
-
 	fmt.Println("Successfully Connected to db!")
-
 	return db
 }
 
@@ -57,7 +40,7 @@ func CreateTable(db *sql.DB) {
 	}
 
 	if !exists {
-		results, err := db.Query("CREATE TABLE photos (id SERIAL PRIMARY KEY, name VARCHAR(100) NOT NULL, location VARCHAR(100) NOT NULL, date VARCHAR(100), imagepath VARCHAR(100) NOT NULL, description VARCHAR, i_height VARCHAR(10), i_width VARCHAR(10));")
+		results, err := db.Query("CREATE TABLE photos (id SERIAL PRIMARY KEY, name VARCHAR(100) NOT NULL, location VARCHAR(100) NOT NULL, date VARCHAR(100), imagepath VARCHAR(100) NOT NULL, description TEXT, i_height VARCHAR(10), i_width VARCHAR(10));")
 		if err != nil {
 			fmt.Println("failed to execute query", err)
 			return
