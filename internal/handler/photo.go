@@ -18,6 +18,7 @@ func (h PhotoHandler) HandlerPhotoShow() http.HandlerFunc {
 		query, err := h.DB.Prepare(`SELECT id, date, imagepath, i_height, i_width FROM photos;`)
         if err != nil {
             log.Println("Query not able to prepare ALL Photo Query")
+            log.Println(err)
         }
 
 		results, err := query.Query()
