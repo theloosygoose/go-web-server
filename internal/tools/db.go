@@ -33,7 +33,7 @@ func CloseConnection(db *sql.DB) {
 }
 
 func CreateTable(db *sql.DB) {
-    results, err := db.Exec("CREATE TABLE IF NOT EXISTS photos (id SERIAL PRIMARY KEY, name VARCHAR(100) NOT NULL, location VARCHAR(100) NOT NULL, date VARCHAR(100), imagepath VARCHAR(100) NOT NULL, description TEXT, i_height VARCHAR(10), i_width VARCHAR(10));")
+    results, err := db.Exec("CREATE TABLE IF NOT EXISTS photos (id SERIAL PRIMARY KEY AUTOINCREMENT NOT NULL, name VARCHAR(100) NOT NULL, location VARCHAR(100) NOT NULL, date VARCHAR(100), imagepath VARCHAR(100) NOT NULL, description TEXT, i_height VARCHAR(10), i_width VARCHAR(10));")
     if err != nil {
         fmt.Println("failed to execute query", err)
         return
