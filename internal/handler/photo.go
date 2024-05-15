@@ -24,6 +24,7 @@ func (h PhotoHandler) HandlerPhotoShow() http.HandlerFunc {
 		if err != nil {
 			log.Println("Failed to Exectue Query: ", err)
 		}
+        log.Println(results)
 
 		var photos []types.Photo
 
