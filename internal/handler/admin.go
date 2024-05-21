@@ -40,6 +40,7 @@ func (h AdminHandler) AdminAddPhoto() http.HandlerFunc {
 			return
 		}
 
+		render(w, r, components.ReponseShow(response))
 		ImageProcess(file, fileHeader, &details)
 		log.Println("---FILE UPLOAD COMPLETE---")
 
@@ -61,7 +62,6 @@ func (h AdminHandler) AdminAddPhoto() http.HandlerFunc {
 
 		log.Println(results.RowsAffected())
 
-		render(w, r, components.ReponseShow(response))
 	})
 
 }
