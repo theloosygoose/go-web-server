@@ -36,6 +36,8 @@ templ MainPhoto(photo types.Photo){
     <div class={ "select-none md:w-auto group/mimage flex justify-center align-middle" + orientation(photo.Image) }>
         <div id="main-image-photo" class={"flex justify-center align-middle z-10", orientation(photo.Image)}>
             <div class={"relative blur-load", min(&photo)}>
+            <picture>
+            </picture>
                 <img
                     class="object-center object-contain w-auto max-h-[80svh]"
                     src={ os.Getenv("PHOTO_DIR") + "min_"+ photo.Image.FileName } 
@@ -43,6 +45,7 @@ templ MainPhoto(photo types.Photo){
                         os.Getenv("PHOTO_DIR") + "min_" + photo.Image.FileName + " 2000w" + "," +
                         os.Getenv("PHOTO_DIR") + "med_" + photo.Image.FileName + " 2500w"
                     }
+                    sizes="(max-width:1500px) 2000px, 25000px"
                     alt={ photo.Name }
                     loading="eager"
                 />

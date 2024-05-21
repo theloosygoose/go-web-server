@@ -191,14 +191,18 @@ func ImageProcess(file multipart.File, header *multipart.FileHeader, i *types.Ph
 		filepath.Dir(osFile.Name())+"/min_"+i.Image.FileName)
 
 	smcmd := exec.Command("sudo", "magick",
-		osFile.Name(), "-resize", "250000@\\>",
+		osFile.Name(), "-resize", "150000@\\>",
 		filepath.Dir(osFile.Name())+"/sm_"+i.Image.FileName)
 
 	medcmd := exec.Command("sudo", "magick",
 		osFile.Name(), "-resize", "1000000@\\>",
 		filepath.Dir(osFile.Name())+"/med_"+i.Image.FileName)
 
-	cmds = append(cmds, mincmd, smcmd, medcmd)
+	lgcmd := exec.Command("sudo", "magick",
+		osFile.Name(), "-resize", "2000000@\\>",
+		filepath.Dir(osFile.Name())+"/lg_"+i.Image.FileName)
+
+	cmds = append(cmds, mincmd, smcmd, medcmd, lgcmd)
 	go magickCommand(cmds)
 
 	defer osFile.Close()
