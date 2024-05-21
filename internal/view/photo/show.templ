@@ -38,7 +38,11 @@ templ MainPhoto(photo types.Photo){
             <div class={"relative blur-load", min(&photo)}>
                 <img
                     class="object-center object-contain w-auto max-h-[80svh]"
-                    src={ os.Getenv("PHOTO_DIR") + "med_"+ photo.Image.FileName } 
+                    src={ os.Getenv("PHOTO_DIR") + "min_"+ photo.Image.FileName } 
+                    srcset={ 
+                        os.Getenv("PHOTO_DIR") + "min_" + photo.Image.FileName + "2000w" + "," +
+                        os.Getenv("PHOTO_DIR") + "med_" + photo.Image.FileName + "2500w"
+                    }
                     alt={ photo.Name }
                     loading="eager"
                 />
