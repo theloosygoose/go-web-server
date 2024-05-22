@@ -1,28 +1,60 @@
 package components
 
-import "github.com/theloosygoose/goserver/internal/types"
+import (
+	"strconv"
+
+    "github.com/theloosygoose/goserver/internal/types"
+)
 
 templ CollectionRemove(){
 
 }
 
 templ CollectionAdd(){
+    <div id="add-collection">
+        <button 
+            class=""
+            hx-get="/collection/form"
+            hx-trigger="click"
+            hx-swap="beforeend"
+            hx-target="#add-collection"
+        >New Collection +
+        </button>
+    </div>
+}
+
+templ CollectionForm(){
+    <form hx-put="/collection">
+    <input type="text" name="collection-name" id="collection-name"/>
+    <button type="submit">Add</button>
+    </form>
 }
 
 templ CollectionTable(collections []types.Collection){
-    <table class="table-auto">
+    <table 
+        class="table-auto">
         <thead>
             <tr>Name</tr>
-            <tr>Photos</tr>
+            <tr>Size</tr>
             <tr>Delete</tr>
         </thead>
         <tbody>
         for _, collection := range collections {
             <tr>
                 <td>{ collection.Name }</td>
-                <td>{ collection.Photos.size() }</td>
+                <td>{ strconv.Itoa(len(collection.Photos)) }</td>
+                <td>@collectionDeleteButton(collection.ID){}</td>
             </tr>
         }
         </tbody>
     </table>
+}
+
+templ collectionDeleteButton(id int){
+    <button
+        class=""
+        hx-delete={"collections/" + strconv.Itoa(id)}
+    >
+        X
+    </button>
 }

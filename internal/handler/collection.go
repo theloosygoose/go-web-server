@@ -35,7 +35,6 @@ func (h CollectionHandler) CreateCollection() http.HandlerFunc {
 func (h CollectionHandler) NewCollectionForm() http.HandlerFunc {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
-        render(w, r, admin.ShowTagCreate)
     })
 }
 

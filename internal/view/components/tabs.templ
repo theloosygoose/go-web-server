@@ -1,0 +1,36 @@
+package components
+
+import "github.com/theloosygoose/goserver/internal/types"
+
+import(
+)
+
+templ AdminTabs(){
+    <div 
+    class="tab-list" 
+    id="tab-list" 
+    role="tablist"
+    >
+        <button hx-get="/collections" 
+        hx-trigger="click"
+        hx-swap="innerHTML"
+        hx-target="#tab-content"
+        role="tab" aria-controls="tab-content">Collections</button>
+        <button hx-get="/photos/delete" 
+        hx-trigger="click"
+        hx-swap="innerHTML"
+        hx-target="#tab-content"
+        role="tab" aria-controls="tab-content">Remove Photos</button>
+    </div>
+    <div id="tab-content" role="tabpanel">
+    </div>
+}
+
+templ EditPhotosTab(){
+
+}
+
+templ ViewCollectionsTab(collections []types.Collection){
+    @CollectionAdd(){}
+    @CollectionTable(collections){}
+}

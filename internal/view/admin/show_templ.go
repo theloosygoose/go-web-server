@@ -19,7 +19,7 @@ import (
 	"github.com/theloosygoose/goserver/internal/view/layout"
 )
 
-func Show(tags []types.Tag) templ.Component {
+func Show(collections []types.Collection) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -42,15 +42,15 @@ func Show(tags []types.Tag) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			for _, tag := range tags {
+			for _, collection := range collections {
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<label for=\"\"></label> <input list=\"tags-options\" name=\"tags\"> <option value=\"")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var3 string
-				templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(tag.Name)
+				templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(collection.Name)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 71, Col: 40}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 71, Col: 47}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 				if templ_7745c5c3_Err != nil {
@@ -61,9 +61,9 @@ func Show(tags []types.Tag) templ.Component {
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var4 string
-				templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(tag.ID)
+				templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(collection.ID)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 71, Col: 54}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 71, Col: 68}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 				if templ_7745c5c3_Err != nil {
@@ -74,7 +74,7 @@ func Show(tags []types.Tag) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800\n        relative focus:ring-0 text-center \n        transition-colors duration-150\n        text-white\n        hover:bg-gray-900\n        inline-flex items-center\n        \" type=\"submit\">Upload <span class=\"htmx-indicator absolute -top-1 -right-1 flex h-3 w-3\"><span class=\"animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75\"></span> <span class=\"relative inline-flex rounded-full h-3 w-3 bg-accent\"></span></span></button></form><div id=\"response-status\"></div></div><button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800\n        my-16\n        relative focus:ring-0 text-center \n        transition-colors duration-150\n        justify-self-center\n        text-white\n        hover:bg-gray-900\n        inline-flex items-center\" hx-get=\"/photodata/delete\" hx-swap=\"innerHTML\" hx-target=\"#delete-items\" hx-trigger=\"click\">Delete Photos </button> <button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800\n        my-16\n        relative focus:ring-0 text-center \n        transition-colors duration-150\n        justify-self-center\n        text-white\n        hover:bg-gray-900\n        inline-flex items-center\" hx-get=\"/tags/add\" hx-swap=\"innerHTML\" hx-target=\"#delete-items\" hx-trigger=\"click\">Delete Photos </button><div id=\"delete-items\"></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800\n        relative focus:ring-0 text-center \n        transition-colors duration-150\n        text-white\n        hover:bg-gray-900\n        inline-flex items-center\n        \" type=\"submit\">Upload <span class=\"htmx-indicator absolute -top-1 -right-1 flex h-3 w-3\"><span class=\"animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75\"></span> <span class=\"relative inline-flex rounded-full h-3 w-3 bg-accent\"></span></span></button></form><div id=\"response-status\"></div></div><button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800\n        my-16\n        relative focus:ring-0 text-center \n        transition-colors duration-150\n        justify-self-center\n        text-white\n        hover:bg-gray-900\n        inline-flex items-center\" hx-get=\"/photodata/delete\" hx-swap=\"innerHTML\" hx-target=\"#delete-items\" hx-trigger=\"click\">Delete Photos </button> <button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800\n        my-16\n        relative focus:ring-0 text-center \n        transition-colors duration-150\n        justify-self-center\n        text-white\n        hover:bg-gray-900\n        inline-flex items-center\" hx-get=\"/tags/add\" hx-swap=\"innerHTML\" hx-target=\"#list-tags\" hx-trigger=\"click\">Add New Tags </button><div id=\"list-tags\"></div><div id=\"delete-items\"></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -139,7 +139,7 @@ func Delete(photos []types.Photo) templ.Component {
 				var templ_7745c5c3_Var9 string
 				templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("photodata/%d", photo.ID))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 133, Col: 65}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 134, Col: 65}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 				if templ_7745c5c3_Err != nil {
@@ -152,7 +152,7 @@ func Delete(photos []types.Photo) templ.Component {
 				var templ_7745c5c3_Var10 string
 				templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(os.Getenv("PHOTO_DIR") + "med_" + photo.Image.FileName)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 143, Col: 80}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 144, Col: 80}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 				if templ_7745c5c3_Err != nil {
@@ -165,7 +165,7 @@ func Delete(photos []types.Photo) templ.Component {
 				var templ_7745c5c3_Var11 string
 				templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(photo.Name)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 144, Col: 36}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 145, Col: 36}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 				if templ_7745c5c3_Err != nil {
@@ -185,50 +185,6 @@ func Delete(photos []types.Photo) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		if !templ_7745c5c3_IsBuffer {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
-		}
-		return templ_7745c5c3_Err
-	})
-}
-
-func ShowTagCreate(tags []types.Tag) templ.Component {
-	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
-		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
-		if !templ_7745c5c3_IsBuffer {
-			templ_7745c5c3_Buffer = templ.GetBuffer()
-			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
-		}
-		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var12 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var12 == nil {
-			templ_7745c5c3_Var12 = templ.NopComponent
-		}
-		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form class=\"*\" id=\"form\" hx-target=\"#response-status\" hx-swap=\"innerHTML\" hx-put=\"/addtag\" hx-on::after-request=\"this.reset()\"></form>")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		if !templ_7745c5c3_IsBuffer {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
-		}
-		return templ_7745c5c3_Err
-	})
-}
-
-func ShowTagsList(tags []types.Tag) templ.Component {
-	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
-		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
-		if !templ_7745c5c3_IsBuffer {
-			templ_7745c5c3_Buffer = templ.GetBuffer()
-			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
-		}
-		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var13 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var13 == nil {
-			templ_7745c5c3_Var13 = templ.NopComponent
-		}
-		ctx = templ.ClearChildren(ctx)
 		if !templ_7745c5c3_IsBuffer {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
 		}

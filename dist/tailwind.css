@@ -905,6 +905,10 @@ html {
   display: inline-flex;
 }
 
+.table {
+  display: table;
+}
+
 .grid {
   display: grid;
 }
@@ -973,6 +977,10 @@ html {
 
 .max-w-44 {
   max-width: 11rem;
+}
+
+.table-auto {
+  table-layout: auto;
 }
 
 @keyframes ping {
