@@ -74,7 +74,7 @@ func Show(collections []types.Collection) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800\n        relative focus:ring-0 text-center \n        transition-colors duration-150\n        text-white\n        hover:bg-gray-900\n        inline-flex items-center\n        \" type=\"submit\">Upload <span class=\"htmx-indicator absolute -top-1 -right-1 flex h-3 w-3\"><span class=\"animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75\"></span> <span class=\"relative inline-flex rounded-full h-3 w-3 bg-accent\"></span></span></button></form><div id=\"response-status\"></div></div><button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800\n        my-16\n        relative focus:ring-0 text-center \n        transition-colors duration-150\n        justify-self-center\n        text-white\n        hover:bg-gray-900\n        inline-flex items-center\" hx-get=\"/photodata/delete\" hx-swap=\"innerHTML\" hx-target=\"#delete-items\" hx-trigger=\"click\">Delete Photos </button> <button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800\n        my-16\n        relative focus:ring-0 text-center \n        transition-colors duration-150\n        justify-self-center\n        text-white\n        hover:bg-gray-900\n        inline-flex items-center\" hx-get=\"/tags/add\" hx-swap=\"innerHTML\" hx-target=\"#list-tags\" hx-trigger=\"click\">Add New Tags </button><div id=\"list-tags\"></div><div id=\"delete-items\"></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800\n        relative focus:ring-0 text-center \n        transition-colors duration-150\n        text-white\n        hover:bg-gray-900\n        inline-flex items-center\n        \" type=\"submit\">Upload <span class=\"htmx-indicator absolute -top-1 -right-1 flex h-3 w-3\"><span class=\"animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75\"></span> <span class=\"relative inline-flex rounded-full h-3 w-3 bg-accent\"></span></span></button></form><div id=\"response-status\"></div></div><button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800\n        my-16\n        relative focus:ring-0 text-center \n        transition-colors duration-150\n        justify-self-center\n        text-white\n        hover:bg-gray-900\n        inline-flex items-center\" hx-get=\"/photodata/delete\" hx-swap=\"innerHTML\" hx-target=\"#delete-items\" hx-trigger=\"click\">Delete Photos </button><div id=\"collections-table\"></div><div id=\"delete-items\"></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -139,7 +139,7 @@ func Delete(photos []types.Photo) templ.Component {
 				var templ_7745c5c3_Var9 string
 				templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("photodata/%d", photo.ID))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 134, Col: 65}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 121, Col: 65}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 				if templ_7745c5c3_Err != nil {
@@ -152,7 +152,7 @@ func Delete(photos []types.Photo) templ.Component {
 				var templ_7745c5c3_Var10 string
 				templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(os.Getenv("PHOTO_DIR") + "med_" + photo.Image.FileName)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 144, Col: 80}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 131, Col: 80}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 				if templ_7745c5c3_Err != nil {
@@ -165,7 +165,7 @@ func Delete(photos []types.Photo) templ.Component {
 				var templ_7745c5c3_Var11 string
 				templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(photo.Name)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 145, Col: 36}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 132, Col: 36}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 				if templ_7745c5c3_Err != nil {

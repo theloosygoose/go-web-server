@@ -14,6 +14,7 @@ func NewServer(db *sql.DB) *http.ServeMux {
 
     pHandler := handler.PhotoHandler{DB: db}
     aHandler := handler.AdminHandler{DB: db}
+    cHandler := handler.CollectionHandler{DB: db}
 
     dist := os.Getenv("STATIC_DIR")
     log.Println(dist)
@@ -29,6 +30,14 @@ func NewServer(db *sql.DB) *http.ServeMux {
 
     r.HandleFunc("GET /photodata/delete", aHandler.PhotoRemoveGalleryShow())
     r.HandleFunc("DELETE /photodata/{id}", aHandler.DeletePhoto())
+
+
+    r.HandleFunc("GET /collections", cHandler.ShowCollectionsTable())
+    r.HandleFunc("POST /collections", cHandler.CreateCollection())
+    r.HandleFunc("GET /collections/form", cHandler.NewCollectionForm())
+
+    r.HandleFunc("GET /collections/{id}", cHandler.SingleCollection())
+    r.HandleFunc("DELETE /collections/{id}", cHandler.DeleteCollection())
 
 	return r
 }
