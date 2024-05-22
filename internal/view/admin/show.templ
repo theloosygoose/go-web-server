@@ -9,7 +9,7 @@ import (
 	"github.com/theloosygoose/goserver/internal/view/components"
 )
 
-templ Show() {
+templ Show(collections []types.Collections) {
 @layout.Base() {
 <div class="container w-full px-4">
     <form 
@@ -64,6 +64,13 @@ templ Show() {
         <div class="md:col-start-2 md:row-start-2 md:row-span-2">
             <img class="max-h-56 mx-auto" id="preview-image" height="300px"/>
         </div>
+        <div class="flex flex-wrap">
+            for _, collection := range collections{
+                <label for=""></label>
+                <input list="tags-options" name="tags"/>
+                <option value={ collection.Name } id={ collection.ID }/>
+            }
+        </div>
         <button 
         class="w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800
         relative focus:ring-0 text-center 
@@ -98,6 +105,21 @@ templ Show() {
     hx-target="#delete-items"
     hx-trigger="click"> Delete Photos </button>
 
+<button 
+    class="w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800
+        my-16
+        relative focus:ring-0 text-center 
+        transition-colors duration-150
+        justify-self-center
+        text-white
+        hover:bg-gray-900
+        inline-flex items-center"
+    hx-get="/tags/add"
+    hx-swap="innerHTML"
+    hx-target="#list-tags"
+    hx-trigger="click"> Add New Tags </button>
+<div id="list-tags">
+</div>
 <div id="delete-items"></div>
 
 }
