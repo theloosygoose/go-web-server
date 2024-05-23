@@ -45,7 +45,7 @@ templ GalleryTabs(collections []tools.Collection){
     for _, collection := range collections{
         <button 
             class="p-2"
-            hx-get={ "/collections/" + string(collection.ID) }
+            hx-get={ "/collections/" + fmt.Sprint(collection.ID) }
             hx-trigger="click"
             hx-swap="innerHTML"
             hx-target="#gallery"
@@ -56,7 +56,7 @@ templ GalleryTabs(collections []tools.Collection){
 
 templ GalleryItems(photos []tools.GetAllPhotosRow){
     for _, photo := range photos {
-        <div class={"blur-load z-0 cursor-pointer hover:z-10 w-fit h-fit hover:scale-105 ease-in-out duration-200", p.LazyImage(photo.Name)}>
+        <div class={"blur-load z-0 cursor-pointer hover:z-10 w-fit h-fit hover:scale-105 ease-in-out duration-200", LazyImageStyle(photo.Name)}>
             <img 
             class="z-20 object-center object-cover max-w-32 max-h-32 md:max-w-52 md:max-h-52" 
             loading="lazy"
