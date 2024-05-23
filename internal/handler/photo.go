@@ -1,93 +1,60 @@
 package handler
 
 import (
+	"context"
 	"database/sql"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/theloosygoose/goserver/internal/types"
 	"github.com/theloosygoose/goserver/internal/view/photo"
+	"github.com/theloosygoose/goserver/tools"
 )
 
 type PhotoHandler struct {
-	DB *sql.DB
+	Ctx context.Context 
+    Queries *tools.Queries
 }
 
-func (h PhotoHandler) HandlerPhotoShow() http.HandlerFunc {
+func (h PhotoHandler) HandlerPhotoShowAll() http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		query, err := h.DB.Prepare(`SELECT id, date, imagepath, i_height, i_width FROM photos;`)
+
+        results, err := h.Queries.GetAllPhotos(h.Ctx)
+
         if err != nil {
-            log.Println("Query not able to prepare ALL Photo Query")
-            log.Println(err)
+            log.Println("Error Running GetAllPhotos Query: ", err)
+            w.WriteHeader(http.StatusInternalServerError)
+            return
         }
 
-		results, err := query.Query()
-		if err != nil {
-			log.Println("Failed to Exectue Query: ", err)
-		}
-        log.Println(results)
-
-		var photos []types.Photo
-
-		for results.Next() {
-			var photo types.Photo
-
-			err = results.Scan(&photo.ID, &photo.Date, &photo.Image.FileName, &photo.Image.Height, &photo.Image.Width)
-
-			if err != nil {
-				log.Println("Failed to Scan", err)
-			}
-
-			photos = append(photos, photo)
-		}
-
-		render(w, r, photo.PhotoCard(photos))
+		render(w, r, photo.PhotoCard(results))
 	})
 }
 
 func (h PhotoHandler) HandlerMainPhotoShow() http.HandlerFunc {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
-        id := r.PathValue("id") 
-        query := `SELECT id, name, location, date, description,
-        imagepath, i_height, i_width
-        FROM photos 
-        WHERE id = ?;`
-
-        results := h.DB.QueryRow(query, id)
-
-        var p types.Photo
-        err := results.Scan(
-            &p.ID, &p.Name, &p.Location, &p.Date, &p.Description,
-            &p.Image.FileName , &p.Image.Height, &p.Image.Width)
-
+        id, err := strconv.Atoi(r.PathValue("id"))
         if err != nil {
-            log.Println("Main Photo not Found",  err)
+            log.Println("Could not parse Path Params as Int", err)
+            http.Redirect(w, r, "/", http.StatusPermanentRedirect)
+            return
         }
+        results, err := h.Queries.GetPhotoById(h.Ctx, int64(id))
 
-        render(w, r, photo.MainPhoto(p))
+        render(w, r, photo.MainPhoto(results))
     })
 }
 
 func (h PhotoHandler) HandlerRandomPhotoShow() http.HandlerFunc {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-        query := `
-            SELECT id, name, location, date, description, imagepath, i_height, i_width
-            FROM photos
-            ORDER BY random()
-            LIMIT 1;
-            `
 
-        results := h.DB.QueryRow(query)
-        
-        var p types.Photo
-        err := results.Scan(
-            &p.ID, &p.Name, &p.Location, &p.Date, &p.Description,
-            &p.Image.FileName , &p.Image.Height, &p.Image.Width)
+        res, err := h.Queries.GetRandomPhoto(h.Ctx)
         if err != nil {
-            log.Println("Could not Get Random Photo", err)
+            log.Println("Could not Get Random Photo from DB", err)
         }
 
-        render(w, r, photo.MainPhoto(p))
+        render(w, r, photo.MainPhoto(res))
     })
 }

@@ -9,6 +9,7 @@ build:
 	@go build -o ./bin/main ./cmd/goserver/main.go
 
 generate:
+	@sqlc generate
 	@npx tailwindcss -i ./dist/input.css -o ./dist/tailwind.css
 	@templ generate
 

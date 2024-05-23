@@ -1,30 +1,34 @@
 package main
 
 import (
+	"context"
 	"log"
 	"net/http"
+	"os"
+
+	"database/sql"
 
 	"github.com/joho/godotenv"
 
 	"github.com/theloosygoose/goserver/internal/routes"
-	db "github.com/theloosygoose/goserver/internal/tools"
+	"github.com/theloosygoose/goserver/tools"
 )
 
 func main() {
+    ctx := context.Background()
+
     err := godotenv.Load(".env")
     if err != nil {
         log.Println("Loaded Env File")
     }
+    db, err := sql.Open("sqlite3", os.Getenv("DB_CONNINFO"))
+    queries := tools.New(db)
 
-    DB := db.Connect()
-    db.CreateTable(DB)
-
-	r := routes.NewServer(DB)
+	r := routes.NewServer(ctx, queries)
 
 	nerr := http.ListenAndServe(":8080", r)
 	if nerr != nil {
 		log.Fatal(nerr)
 	}
 
-    db.CloseConnection(DB)
 }

@@ -1,20 +1,25 @@
 package routes
 
 import (
-	"database/sql"
+	"context"
 	"log"
 	"net/http"
 	"os"
 
 	"github.com/theloosygoose/goserver/internal/handler"
+	"github.com/theloosygoose/goserver/tools"
 )
 
-func NewServer(db *sql.DB) *http.ServeMux {
+func NewServer(
+    ctx context.Context, 
+    queries *tools.Queries,
+) *http.ServeMux {
 	r := http.NewServeMux()
 
-    pHandler := handler.PhotoHandler{DB: db}
-    aHandler := handler.AdminHandler{DB: db}
-    cHandler := handler.CollectionHandler{DB: db}
+    aHandler,
+    pHandler,
+    cHandler := handler.CreateHandlers(ctx, queries)
+
 
     dist := os.Getenv("STATIC_DIR")
     log.Println(dist)

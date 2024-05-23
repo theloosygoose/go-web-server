@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"database/sql"
+	"context"
 	"fmt"
 	"log"
 	"net/http"
@@ -10,10 +10,12 @@ import (
 	"github.com/theloosygoose/goserver/internal/types"
 	"github.com/theloosygoose/goserver/internal/view/admin"
 	"github.com/theloosygoose/goserver/internal/view/components"
+	"github.com/theloosygoose/goserver/tools"
 )
 
 type AdminHandler struct {
-	DB *sql.DB
+	Ctx context.Context 
+    Queries *tools.Queries
 }
 
 func (h AdminHandler) CreatePhoto() http.HandlerFunc {
@@ -62,7 +64,7 @@ func (h AdminHandler) CreatePhoto() http.HandlerFunc {
 
 func (h AdminHandler) HandlerAdminShow() http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-        query := `SELECT * FROM tags;`
+        query := `SELECT * FROM collections;`
         var collections []types.Collection
 
         results, err := h.DB.Query(query)

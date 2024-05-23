@@ -7,10 +7,11 @@ import (
     "fmt"
 	"os"
     "strconv"
+	"github.com/theloosygoose/goserver/tools"
 )
 
 
-templ PhotoCard(photos []types.Photo) {
+templ PhotoCard(photos []tools.GetAllPhotosRow) {
     @layout.Base(){
         @components.PhotoContainer() {
             for _, photo := range photos {
@@ -19,7 +20,7 @@ templ PhotoCard(photos []types.Photo) {
                     class="z-20 object-center object-cover max-w-32 max-h-32 md:max-w-52 md:max-h-52" 
                     loading="lazy"
                     src={ os.Getenv("PHOTO_DIR") + "sm_" + photo.Image.FileName } 
-                alt={ photo.Name }
+                alt={ photo.T }
                 hx-trigger="click"
                 hx-target="#main-photo"
                 hx-swap="innerHTML"

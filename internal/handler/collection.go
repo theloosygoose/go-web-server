@@ -1,17 +1,19 @@
 package handler
 
 import (
-    "net/http"
-    "database/sql"
+	"context"
+	"net/http"
 
 	"log"
 
 	"github.com/theloosygoose/goserver/internal/types"
 	"github.com/theloosygoose/goserver/internal/view/components"
+	"github.com/theloosygoose/goserver/tools"
 )
 
 type CollectionHandler struct {
-	DB *sql.DB
+    Ctx context.Context
+    Queries *tools.Queries
 }
 
 func (h CollectionHandler) CreateCollection() http.HandlerFunc {
