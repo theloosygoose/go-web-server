@@ -13,12 +13,11 @@ import "strings"
 
 import (
 	"fmt"
-	"github.com/theloosygoose/goserver/internal/types"
+	"os"
+
 	"github.com/theloosygoose/goserver/internal/view/components"
 	"github.com/theloosygoose/goserver/internal/view/layout"
 	"github.com/theloosygoose/goserver/tools"
-	"os"
-	"strconv"
 )
 
 func PhotoCard(photos []tools.GetAllPhotosRow) templ.Component {
@@ -47,7 +46,7 @@ func PhotoCard(photos []tools.GetAllPhotosRow) templ.Component {
 					defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 				}
 				for _, photo := range photos {
-					var templ_7745c5c3_Var4 = []any{"blur-load z-0 cursor-pointer hover:z-10 w-fit h-fit hover:scale-105 ease-in-out duration-200", min(&photo)}
+					var templ_7745c5c3_Var4 = []any{"blur-load z-0 cursor-pointer hover:z-10 w-fit h-fit hover:scale-105 ease-in-out duration-200", min(photo.Name)}
 					templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var4...)
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
@@ -70,9 +69,9 @@ func PhotoCard(photos []tools.GetAllPhotosRow) templ.Component {
 						return templ_7745c5c3_Err
 					}
 					var templ_7745c5c3_Var6 string
-					templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(os.Getenv("PHOTO_DIR") + "sm_" + photo.Image.FileName)
+					templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(os.Getenv("PHOTO_DIR") + "sm_" + photo.Imagepath)
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 22, Col: 79}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 21, Col: 74}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 					if templ_7745c5c3_Err != nil {
@@ -83,9 +82,9 @@ func PhotoCard(photos []tools.GetAllPhotosRow) templ.Component {
 						return templ_7745c5c3_Err
 					}
 					var templ_7745c5c3_Var7 string
-					templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(photo.T)
+					templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(photo.Name)
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 23, Col: 29}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 22, Col: 32}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 					if templ_7745c5c3_Err != nil {
@@ -98,7 +97,7 @@ func PhotoCard(photos []tools.GetAllPhotosRow) templ.Component {
 					var templ_7745c5c3_Var8 string
 					templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("/photodata/%d", photo.ID))
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 27, Col: 63}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 26, Col: 63}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 					if templ_7745c5c3_Err != nil {
@@ -134,7 +133,7 @@ func PhotoCard(photos []tools.GetAllPhotosRow) templ.Component {
 	})
 }
 
-func MainPhoto(photo types.Photo) templ.Component {
+func MainPhoto(photo tools.GetPhotoByIdRow) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -147,7 +146,7 @@ func MainPhoto(photo types.Photo) templ.Component {
 			templ_7745c5c3_Var9 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		var templ_7745c5c3_Var10 = []any{"select-none md:w-auto group/mimage flex justify-center align-middle" + orientation(photo.Image)}
+		var templ_7745c5c3_Var10 = []any{"select-none md:w-auto group/mimage flex justify-center align-middle"}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var10...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -169,7 +168,7 @@ func MainPhoto(photo types.Photo) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var12 = []any{"flex justify-center align-middle z-10", orientation(photo.Image)}
+		var templ_7745c5c3_Var12 = []any{"flex justify-center align-middle z-10"}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var12...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -191,7 +190,7 @@ func MainPhoto(photo types.Photo) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var14 = []any{"relative blur-load", min(&photo)}
+		var templ_7745c5c3_Var14 = []any{"relative blur-load", min(photo.Name)}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var14...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -214,9 +213,9 @@ func MainPhoto(photo types.Photo) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var16 string
-		templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.JoinStringErrs(os.Getenv("PHOTO_DIR") + "min_" + photo.Image.FileName)
+		templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.JoinStringErrs(os.Getenv("PHOTO_DIR") + "min_" + photo.Imagepath)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 44, Col: 79}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 43, Col: 74}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var16))
 		if templ_7745c5c3_Err != nil {
@@ -228,10 +227,10 @@ func MainPhoto(photo types.Photo) templ.Component {
 		}
 		var templ_7745c5c3_Var17 string
 		templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.JoinStringErrs(
-			os.Getenv("PHOTO_DIR") + "min_" + photo.Image.FileName + " 2000w" + "," +
-				os.Getenv("PHOTO_DIR") + "med_" + photo.Image.FileName + " 2500w")
+			os.Getenv("PHOTO_DIR") + "min_" + photo.Imagepath + " 2000w" + "," +
+				os.Getenv("PHOTO_DIR") + "med_" + photo.Imagepath + " 2500w")
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 47, Col: 89}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 46, Col: 84}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var17))
 		if templ_7745c5c3_Err != nil {
@@ -244,7 +243,7 @@ func MainPhoto(photo types.Photo) templ.Component {
 		var templ_7745c5c3_Var18 string
 		templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.JoinStringErrs(photo.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 50, Col: 36}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 49, Col: 36}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var18))
 		if templ_7745c5c3_Err != nil {
@@ -257,7 +256,7 @@ func MainPhoto(photo types.Photo) templ.Component {
 		var templ_7745c5c3_Var19 string
 		templ_7745c5c3_Var19, templ_7745c5c3_Err = templ.JoinStringErrs(photo.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 63, Col: 35}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 62, Col: 35}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var19))
 		if templ_7745c5c3_Err != nil {
@@ -270,7 +269,7 @@ func MainPhoto(photo types.Photo) templ.Component {
 		var templ_7745c5c3_Var20 string
 		templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.JoinStringErrs(photo.Location)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 64, Col: 39}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 63, Col: 39}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var20))
 		if templ_7745c5c3_Err != nil {
@@ -281,9 +280,9 @@ func MainPhoto(photo types.Photo) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var21 string
-		templ_7745c5c3_Var21, templ_7745c5c3_Err = templ.JoinStringErrs(photo.Date)
+		templ_7745c5c3_Var21, templ_7745c5c3_Err = templ.JoinStringErrs(photo.Date.String)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 65, Col: 35}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 64, Col: 42}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var21))
 		if templ_7745c5c3_Err != nil {
@@ -294,9 +293,9 @@ func MainPhoto(photo types.Photo) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var22 string
-		templ_7745c5c3_Var22, templ_7745c5c3_Err = templ.JoinStringErrs(photo.Description)
+		templ_7745c5c3_Var22, templ_7745c5c3_Err = templ.JoinStringErrs(photo.Description.String)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 66, Col: 58}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 65, Col: 65}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var22))
 		if templ_7745c5c3_Err != nil {
@@ -313,32 +312,12 @@ func MainPhoto(photo types.Photo) templ.Component {
 	})
 }
 
-func min(photo *types.Photo) templ.CSSClass {
+func min(imagepath string) templ.CSSClass {
 	var templ_7745c5c3_CSSBuilder strings.Builder
-	templ_7745c5c3_CSSBuilder.WriteString(string(templ.SanitizeCSS(`background-image`, "url(\""+templ.URL(os.Getenv("PHOTO_DIR")+"min_"+photo.Image.FileName)+"\")")))
+	templ_7745c5c3_CSSBuilder.WriteString(string(templ.SanitizeCSS(`background-image`, "url(\""+templ.URL(os.Getenv("PHOTO_DIR")+"min_"+imagepath)+"\")")))
 	templ_7745c5c3_CSSID := templ.CSSID(`min`, templ_7745c5c3_CSSBuilder.String())
 	return templ.ComponentCSSClass{
 		ID:    templ_7745c5c3_CSSID,
 		Class: templ.SafeCSS(`.` + templ_7745c5c3_CSSID + `{` + templ_7745c5c3_CSSBuilder.String() + `}`),
 	}
-}
-
-func orientation(image types.ImageData) string {
-	h, err := strconv.Atoi(image.Height)
-	if err != nil {
-		fmt.Println(err)
-		h = 0
-	}
-
-	w, err := strconv.Atoi(image.Width)
-	if err != nil {
-		fmt.Println(err)
-		w = 0
-	}
-
-	if w > h {
-		return "flex-col"
-	}
-
-	return "flex"
 }

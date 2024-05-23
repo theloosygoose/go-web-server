@@ -1,20 +1,22 @@
 package handler
 
 import (
+	"database/sql"
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+	"os"
+	"os/exec"
+
 	"github.com/a-h/templ"
-    "net/http"
-    "log"
-    "os"
-    "os/exec"
-    "io"
-    "fmt"
 
 	"mime/multipart"
 	"path/filepath"
 	"strings"
 
-	"github.com/theloosygoose/goserver/internal/types"
 	"github.com/containers/podman/v5/pkg/ctime"
+	"github.com/theloosygoose/goserver/tools"
 )
 
 func render(w http.ResponseWriter, r *http.Request , component templ.Component) error {
@@ -22,7 +24,7 @@ func render(w http.ResponseWriter, r *http.Request , component templ.Component) 
     return component.Render(r.Context(), w)
 }
 
-func imageProcess(file multipart.File, header *multipart.FileHeader, i *types.Photo) error {
+func imageProcess(file multipart.File, header *multipart.FileHeader, i *tools.CreatePhotoParams) error {
 	contentType := header.Header["Content-Type"][0]
 	log.Printf("Content-Type:: %v\n", contentType)
 
@@ -56,10 +58,10 @@ func imageProcess(file multipart.File, header *multipart.FileHeader, i *types.Ph
 
 	// Get File Date
 	year, month, day := ctime.Created(s).Local().Date()
-	i.Date = fmt.Sprintf("%v %v, %v", year, month, day)
+    i.Date = sql.NullString{String: fmt.Sprintf("%v %v, %v", year, month, day), Valid: true}
 
 	//MAGICK EXECUTION
-	i.Image.FileName = filepath.Base(osFile.Name())
+	i.Imagepath = filepath.Base(osFile.Name())
 	sizecmd := exec.Command("identify", "-format",
 		"'%[fx:w]x%[fx:h]'",
 		osFile.Name())
@@ -76,27 +78,27 @@ func imageProcess(file multipart.File, header *multipart.FileHeader, i *types.Ph
 		return false
 	})
 	xy_str := strings.Split(xy, "x")
-	i.Image.Width = xy_str[0]
-	i.Image.Height = xy_str[1]
+    i.IWidth = sql.NullString{ String: xy_str[0], Valid: true}
+    i.IHeight = sql.NullString{ String: xy_str[1], Valid: true}
 
 	var cmds []*exec.Cmd
 
 	fmt.Println("---RUNNING MAGICK---")
 	mincmd := exec.Command("sudo", "magick",
 		osFile.Name(), "-resize", "50x50",
-		filepath.Dir(osFile.Name())+"/min_"+i.Image.FileName)
+		filepath.Dir(osFile.Name())+"/min_"+i.Imagepath)
 
 	smcmd := exec.Command("sudo", "magick",
 		osFile.Name(), "-resize", "150000@\\>",
-		filepath.Dir(osFile.Name())+"/sm_"+i.Image.FileName)
+		filepath.Dir(osFile.Name())+"/sm_"+i.Imagepath)
 
 	medcmd := exec.Command("sudo", "magick",
 		osFile.Name(), "-resize", "1000000@\\>",
-		filepath.Dir(osFile.Name())+"/med_"+i.Image.FileName)
+		filepath.Dir(osFile.Name())+"/med_"+i.Imagepath)
 
 	lgcmd := exec.Command("sudo", "magick",
 		osFile.Name(), "-resize", "2000000@\\>",
-		filepath.Dir(osFile.Name())+"/lg_"+i.Image.FileName)
+		filepath.Dir(osFile.Name())+"/lg_"+i.Imagepath)
 
 	cmds = append(cmds, mincmd, smcmd, medcmd, lgcmd)
 	go magickCommand(cmds)

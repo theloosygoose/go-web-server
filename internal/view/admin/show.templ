@@ -3,13 +3,13 @@ package admin
 import (
     "fmt"
 	"os"
-	"github.com/theloosygoose/goserver/internal/types"
 
     "github.com/theloosygoose/goserver/internal/view/layout"
 	"github.com/theloosygoose/goserver/internal/view/components"
+	"github.com/theloosygoose/goserver/tools"
 )
 
-templ Show(collections []types.Collection) {
+templ Show(collections []tools.Collection) {
 @layout.Base() {
 <div class="container w-full px-4">
     <form 
@@ -68,7 +68,7 @@ templ Show(collections []types.Collection) {
             for _, collection := range collections{
                 <label for=""></label>
                 <input list="tags-options" name="tags"/>
-                <option value={ collection.Name } id={ collection.ID }/>
+                <option value={ collection.Name } id={ string(int(collection.ID)) }/>
             }
         </div>
         <button 
@@ -112,7 +112,7 @@ templ Show(collections []types.Collection) {
 }
 }
 
-templ Delete(photos []types.Photo) {
+templ Delete(photos []tools.GetAllPhotosRow) {
 	@components.Gallery() {
 		for _, photo := range photos {
                 <div 
@@ -128,7 +128,7 @@ templ Delete(photos []types.Photo) {
                     group-hover:blur-sm
                     transition-all duration-300" 
                     loading="lazy"
-                    src={ os.Getenv("PHOTO_DIR") + "med_" + photo.Image.FileName } 
+                    src={ os.Getenv("PHOTO_DIR") + "min_" + photo.Imagepath} 
                     alt={ photo.Name }
                     />
                     <div

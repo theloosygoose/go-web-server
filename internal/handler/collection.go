@@ -1,26 +1,24 @@
 package handler
 
 import (
-	"context"
 	"net/http"
 
 	"log"
 
-	"github.com/theloosygoose/goserver/internal/types"
 	"github.com/theloosygoose/goserver/internal/view/components"
 	"github.com/theloosygoose/goserver/tools"
 )
 
 type CollectionHandler struct {
-    Ctx context.Context
     Queries *tools.Queries
 }
 
 func (h CollectionHandler) CreateCollection() http.HandlerFunc {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-        query := `INSERT INTO collections (name) VALUES(?);`
 
-        _, err := h.DB.Exec(query, r.FormValue("collection-name"))
+        new_name := r.FormValue("collection-name")
+
+        err := h.Queries.CreateCollection(r.Context(), new_name)
         if err != nil {
             log.Println("Error Creating Collection", err)
             w.WriteHeader(http.StatusInternalServerError)
@@ -32,6 +30,7 @@ func (h CollectionHandler) CreateCollection() http.HandlerFunc {
 
 func (h CollectionHandler) NewCollectionForm() http.HandlerFunc {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+
         render(w, r, components.CollectionForm())
     })
 }
@@ -44,52 +43,29 @@ func (h CollectionHandler) DeleteCollection() http.HandlerFunc {
 
 func (h CollectionHandler) ShowCollectionsTable() http.HandlerFunc {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-        query := `SELECT * FROM collections;`
-        res, err := h.DB.Query(query)
+
+        res, err := h.Queries.GetAllCollections(r.Context())
         if err != nil {
             log.Println("Error Getting Collections from database")
             w.WriteHeader(http.StatusInternalServerError)
             return
         }
 
-        var collections []types.Collection
-		for res.Next() {
-			var c types.Collection
-
-			err = res.Scan(&c.ID, &c.Name, &c.Photos)
-			if err != nil {
-				log.Println("Failed to Scan", err)
-			}
-
-			collections = append(collections, c)
-		}
-
-        render(w, r, components.CollectionTable(collections))
+        render(w, r, components.CollectionTable(res))
     })
 }
 
 func (h CollectionHandler) SingleCollection() http.HandlerFunc {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-        query := `SELECT img. FROM collections AS collec INNER JOIN;`
-        res, err := h.DB.Query(query)
+
+        res, err := h.Queries.GetCollectionPhotos(r.Context())
         if err != nil {
             log.Println("Error Getting Collections from database")
             w.WriteHeader(http.StatusInternalServerError)
             return
         }
+        //Add A Render
+        log.Println(res)
 
-        var collections []types.Collection
-		for res.Next() {
-			var c types.Collection
-
-			err = res.Scan(&c.ID, &c.Name, &c.Photos)
-			if err != nil {
-				log.Println("Failed to Scan", err)
-			}
-
-			collections = append(collections, c)
-		}
-
-        render(w, r, components.CollectionTable(collections))
     })
 }

@@ -1,8 +1,6 @@
 package routes
 
 import (
-	"context"
-	"log"
 	"net/http"
 	"os"
 
@@ -11,24 +9,23 @@ import (
 )
 
 func NewServer(
-    ctx context.Context, 
     queries *tools.Queries,
+
 ) *http.ServeMux {
 	r := http.NewServeMux()
 
     aHandler,
     pHandler,
-    cHandler := handler.CreateHandlers(ctx, queries)
-
+    cHandler := handler.CreateHandlers(queries)
 
     dist := os.Getenv("STATIC_DIR")
-    log.Println(dist)
     fs := http.FileServer(http.Dir(dist))
     r.Handle("/dist/", http.StripPrefix("/dist/", fs))
 
-	r.HandleFunc("/", pHandler.HandlerPhotoShow())
-    r.HandleFunc("GET /photodata/{id}", pHandler.HandlerMainPhotoShow())
-    r.HandleFunc("GET /photodata/random", pHandler.HandlerRandomPhotoShow())
+	r.HandleFunc("/", pHandler.ShowAllPhotos())
+
+    r.HandleFunc("GET /photodata/{id}", pHandler.ShowMainPhoto())
+    r.HandleFunc("GET /photodata/random", pHandler.RandomPhotoShow())
 
     r.HandleFunc("PUT /addphoto", aHandler.CreatePhoto())
     r.HandleFunc("GET /admin", aHandler.HandlerAdminShow())

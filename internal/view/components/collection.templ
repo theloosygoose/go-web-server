@@ -3,7 +3,7 @@ package components
 import (
 	"strconv"
 
-    "github.com/theloosygoose/goserver/internal/types"
+	"github.com/theloosygoose/goserver/tools"
 )
 
 templ CollectionAdd(){
@@ -26,19 +26,17 @@ templ CollectionForm(){
     </form>
 }
 
-templ CollectionTable(collections []types.Collection){
+templ CollectionTable(collections []tools.Collection){
     <table 
         class="table-auto">
         <thead>
             <tr>Name</tr>
-            <tr>Size</tr>
             <tr>Delete</tr>
         </thead>
         <tbody>
         for _, collection := range collections {
             <tr>
                 <td>{ collection.Name }</td>
-                <td>{ strconv.Itoa(len(collection.Photos)) }</td>
                 <td>@collectionDeleteButton(collection.ID){}</td>
             </tr>
         }
@@ -46,10 +44,10 @@ templ CollectionTable(collections []types.Collection){
     </table>
 }
 
-templ collectionDeleteButton(id int){
+templ collectionDeleteButton(id int64){
     <button
         class=""
-        hx-delete={"collections/" + strconv.Itoa(id)}
+        hx-delete={"collections/" + strconv.Itoa(int(id))}
     >
         X
     </button>
