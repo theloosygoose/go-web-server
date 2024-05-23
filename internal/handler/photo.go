@@ -13,18 +13,23 @@ type PhotoHandler struct {
     Queries *tools.Queries
 }
 
-func (h PhotoHandler) ShowAllPhotos() http.HandlerFunc {
+func (h PhotoHandler) MainPage() http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
-        res, err := h.Queries.GetAllPhotos(r.Context())
-
+        res_p, err := h.Queries.GetAllPhotos(r.Context())
         if err != nil {
             log.Println("Error Running GetAllPhotos Query: ", err)
             w.WriteHeader(http.StatusInternalServerError)
             return
         }
+        res_c, err := h.Queries.GetAllCollections(r.Context())
+        if err != nil{
+            log.Println("Error Running GetAllCollections Query: ", err)
+            w.WriteHeader(http.StatusInternalServerError)
+            return
+        }
 
-		render(w, r, photo.PhotoCard(res))
+		render(w, r, photo.Index(res_p, res_c))
 	})
 }
 

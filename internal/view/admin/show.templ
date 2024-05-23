@@ -64,11 +64,9 @@ templ Show(collections []tools.Collection) {
         <div class="md:col-start-2 md:row-start-2 md:row-span-2">
             <img class="max-h-56 mx-auto" id="preview-image" height="300px"/>
         </div>
-        <div class="flex flex-wrap">
+        <div class="flex flex-wrap text-white">
             for _, collection := range collections{
-                <label for=""></label>
-                <input list="tags-options" name="tags"/>
-                <option value={ collection.Name } id={ string(int(collection.ID)) }/>
+                @components.FormCollectionCheckboxes(collection.Name, fmt.Sprint(collection.ID)){}
             }
         </div>
         <button 
@@ -102,13 +100,23 @@ templ Show(collections []tools.Collection) {
         inline-flex items-center"
     hx-get="/photodata/delete"
     hx-swap="innerHTML"
-    hx-target="#delete-items"
+    hx-target="#view-res"
     hx-trigger="click"> Delete Photos </button>
+<button 
+    class="w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800
+        my-16
+        relative focus:ring-0 text-center 
+        transition-colors duration-150
+        justify-self-center
+        text-white
+        hover:bg-gray-900
+        inline-flex items-center"
+    hx-get="/collections"
+    hx-swap="innerHTML"
+    hx-target="#view-res"
+    hx-trigger="click"> View Collections </button>
 
-
-<div id="collections-table">
-</div>
-<div id="delete-items"></div>
+<div id="view-res"></div>
 }
 }
 

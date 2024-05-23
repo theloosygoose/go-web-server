@@ -22,21 +22,21 @@ func NewServer(
     fs := http.FileServer(http.Dir(dist))
     r.Handle("/dist/", http.StripPrefix("/dist/", fs))
 
-	r.HandleFunc("/", pHandler.ShowAllPhotos())
+	r.HandleFunc("/", pHandler.MainPage())
+    r.HandleFunc("GET /photodata", cHandler.AllPhotosAllCollections())
 
     r.HandleFunc("GET /photodata/{id}", pHandler.ShowMainPhoto())
     r.HandleFunc("GET /photodata/random", pHandler.RandomPhotoShow())
 
     r.HandleFunc("PUT /addphoto", aHandler.CreatePhoto())
-    r.HandleFunc("GET /admin", aHandler.HandlerAdminShow())
+    r.HandleFunc("GET /admin", aHandler.AdminShow())
 
     r.HandleFunc("GET /photodata/delete", aHandler.PhotoRemoveGalleryShow())
     r.HandleFunc("DELETE /photodata/{id}", aHandler.DeletePhoto())
 
 
     r.HandleFunc("GET /collections", cHandler.ShowCollectionsTable())
-    r.HandleFunc("POST /collections", cHandler.CreateCollection())
-    r.HandleFunc("GET /collections/form", cHandler.NewCollectionForm())
+    r.HandleFunc("PUT /collections", cHandler.CreateCollection())
 
     r.HandleFunc("GET /collections/{id}", cHandler.SingleCollection())
     r.HandleFunc("DELETE /collections/{id}", cHandler.DeleteCollection())

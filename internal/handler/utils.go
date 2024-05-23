@@ -117,3 +117,18 @@ func magickCommand(cmds []*exec.Cmd) {
 
 	}
 }
+
+func checkBoxHandler(r *http.Request, collections[]tools.Collection)[]int64{
+    var checked []int64
+
+    for _, v := range collections {
+        log.Println(fmt.Sprint(strings.ToLower(strings.TrimSpace(v.Name)), v.ID))
+        if r.FormValue(fmt.Sprint(v.Name, v.ID)) == "on"{
+            log.Println("Checked", v.Name)
+
+            checked = append(checked, v.ID)
+        }
+    }
+
+    return checked 
+}

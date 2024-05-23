@@ -10,13 +10,15 @@ import (
 	"database/sql"
 )
 
-const createCollection = `-- name: CreateCollection :exec
-INSERT INTO collections (name) VALUES (?)
+const createCollection = `-- name: CreateCollection :one
+INSERT INTO collections (name) VALUES (?) RETURNING id, name
 `
 
-func (q *Queries) CreateCollection(ctx context.Context, name string) error {
-	_, err := q.db.ExecContext(ctx, createCollection, name)
-	return err
+func (q *Queries) CreateCollection(ctx context.Context, name string) (Collection, error) {
+	row := q.db.QueryRowContext(ctx, createCollection, name)
+	var i Collection
+	err := row.Scan(&i.ID, &i.Name)
+	return i, err
 }
 
 const createPhoto = `-- name: CreatePhoto :one
@@ -100,7 +102,12 @@ func (q *Queries) GetAllCollections(ctx context.Context) ([]Collection, error) {
 }
 
 const getAllPhotos = `-- name: GetAllPhotos :many
-SELECT id, name, date, imagepath, i_height, i_width FROM photos
+SELECT img.id, img.name, img.date, img.imagepath, img.i_height, img.i_width, collec.name, collec.id
+    FROM photos AS img 
+INNER JOIN image_collections AS link ON
+    link.photo_id = img.id
+INNER JOIN collections AS collec ON
+    link.collection_id = collec.id
 `
 
 type GetAllPhotosRow struct {
@@ -110,6 +117,8 @@ type GetAllPhotosRow struct {
 	Imagepath string
 	IHeight   sql.NullString
 	IWidth    sql.NullString
+	Name_2    string
+	ID_2      int64
 }
 
 func (q *Queries) GetAllPhotos(ctx context.Context) ([]GetAllPhotosRow, error) {
@@ -128,6 +137,8 @@ func (q *Queries) GetAllPhotos(ctx context.Context) ([]GetAllPhotosRow, error) {
 			&i.Imagepath,
 			&i.IHeight,
 			&i.IWidth,
+			&i.Name_2,
+			&i.ID_2,
 		); err != nil {
 			return nil, err
 		}
@@ -143,37 +154,32 @@ func (q *Queries) GetAllPhotos(ctx context.Context) ([]GetAllPhotosRow, error) {
 }
 
 const getCollectionPhotos = `-- name: GetCollectionPhotos :many
-SELECT img.id, img.name, img.location, img.date, img.imagepath
+SELECT img.id, img.name, img.date, img.imagepath, img.i_height, img.i_width, collec.name, collec.id
     FROM photos AS img
 INNER JOIN image_collections AS link ON
     link.photo_id = img.id
 INNER JOIN collections AS collec ON
-    link.collection_id = collec.id
+    link.collection_id = collec.id WHERE collec.id=?
 `
 
-type GetCollectionPhotosRow struct {
-	ID        int64
-	Name      string
-	Location  string
-	Date      sql.NullString
-	Imagepath string
-}
-
-func (q *Queries) GetCollectionPhotos(ctx context.Context) ([]GetCollectionPhotosRow, error) {
-	rows, err := q.db.QueryContext(ctx, getCollectionPhotos)
+func (q *Queries) GetCollectionPhotos(ctx context.Context, id int64) ([]GetAllPhotosRow, error) {
+	rows, err := q.db.QueryContext(ctx, getCollectionPhotos, id)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []GetCollectionPhotosRow
+	var items []GetAllPhotosRow
 	for rows.Next() {
-		var i GetCollectionPhotosRow
+		var i GetAllPhotosRow 
 		if err := rows.Scan(
 			&i.ID,
 			&i.Name,
-			&i.Location,
 			&i.Date,
 			&i.Imagepath,
+			&i.IHeight,
+			&i.IWidth,
+			&i.Name_2,
+			&i.ID_2,
 		); err != nil {
 			return nil, err
 		}
@@ -189,10 +195,13 @@ func (q *Queries) GetCollectionPhotos(ctx context.Context) ([]GetCollectionPhoto
 }
 
 const getPhotoById = `-- name: GetPhotoById :one
-SELECT id, name, location, date, description,
-imagepath, i_height, i_width
-FROM photos 
-WHERE id = ?
+SELECT img.id, img.name, img.location, img.date, img.description,
+img.imagepath, img.i_height, img.i_width, collec.name, collec.id
+    FROM photos AS img 
+INNER JOIN image_collections AS link ON
+    link.photo_id = img.id
+INNER JOIN collections AS collec ON
+    link.collection_id = collec.id WHERE img.id=?
 `
 
 type GetPhotoByIdRow struct {
@@ -204,6 +213,8 @@ type GetPhotoByIdRow struct {
 	Imagepath   string
 	IHeight     sql.NullString
 	IWidth      sql.NullString
+	Name_2      string
+	ID_2        int64
 }
 
 func (q *Queries) GetPhotoById(ctx context.Context, id int64) (GetPhotoByIdRow, error) {
@@ -218,6 +229,8 @@ func (q *Queries) GetPhotoById(ctx context.Context, id int64) (GetPhotoByIdRow, 
 		&i.Imagepath,
 		&i.IHeight,
 		&i.IWidth,
+		&i.Name_2,
+		&i.ID_2,
 	)
 	return i, err
 }
@@ -256,19 +269,19 @@ func (q *Queries) GetRandomPhoto(ctx context.Context) (GetRandomPhotoRow, error)
 	return i, err
 }
 
-const updateCollection = `-- name: UpdateCollection :exec
+const photoIntoCollection = `-- name: PhotoIntoCollection :exec
 INSERT INTO image_collections 
     (photo_id, collection_id) 
 VALUES (?,?)
 `
 
-type UpdateCollectionParams struct {
+type PhotoIntoCollectionParams struct {
 	PhotoID      int64
 	CollectionID int64
 }
 
-func (q *Queries) UpdateCollection(ctx context.Context, arg UpdateCollectionParams) error {
-	_, err := q.db.ExecContext(ctx, updateCollection, arg.PhotoID, arg.CollectionID)
+func (q *Queries) PhotoIntoCollection(ctx context.Context, arg PhotoIntoCollectionParams) error {
+	_, err := q.db.ExecContext(ctx, photoIntoCollection, arg.PhotoID, arg.CollectionID)
 	return err
 }
 

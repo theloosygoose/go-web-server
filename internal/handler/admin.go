@@ -20,8 +20,8 @@ type AdminHandler struct {
 
 func (h AdminHandler) CreatePhoto() http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		r.ParseMultipartForm(20)
 
+		r.ParseMultipartForm(20)
 		var response types.Response
 
 		p := tools.CreatePhotoParams{
@@ -36,23 +36,41 @@ func (h AdminHandler) CreatePhoto() http.HandlerFunc {
 			return
 		}
 		render(w, r, components.ReponseShow(response))
+
 		imageProcess(file, fileHeader, &p)
 		log.Println("---FILE UPLOAD COMPLETE---")
 
-        results, err := h.Queries.CreatePhoto(r.Context(), p)
+        id, err := h.Queries.CreatePhoto(r.Context(), p)
         if err != nil {
             log.Println("Could not add New Photo to Database: ", err)
             w.WriteHeader(http.StatusInternalServerError)
             return
-        } else {
-            log.Println("Added Row at: ", results)
+        } 
+        log.Println("Added Row at: ", id)
+
+        c, err := h.Queries.GetAllCollections(r.Context())
+        if err != nil {
+            log.Println("Could not get all collections", err)
+            return
+        }
+        sc := checkBoxHandler(r, c)
+
+        for _, checked := range sc {
+            n := tools.PhotoIntoCollectionParams{
+                PhotoID: id,
+                CollectionID: checked,
+            }
+            err = h.Queries.PhotoIntoCollection(r.Context(), n)
+            if err != nil {
+                log.Println("Error Adding Photo to Collection", err)
+            }
         }
 
 	})
 
 }
 
-func (h AdminHandler) HandlerAdminShow() http.HandlerFunc {
+func (h AdminHandler) AdminShow() http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
         results, err := h.Queries.GetAllCollections(r.Context())
         if err != nil {
