@@ -19,3 +19,9 @@ prod:
 	@templ generate
 	@go build -o ./bin/main ./cmd/goserver/main.go
 	@sudo service goweb restart
+
+migrate_up:
+	@migrate -path database/migrations/ -database "sqlite3:///mnt/usb/database/donphoto.db" up
+
+migrate_down:
+	@migrate -path database/migrations/ -database "sqlite3:///mnt/usb/database/donphoto.db" down 
