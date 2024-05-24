@@ -56,7 +56,7 @@ func (h PhotoHandler) RandomPhotoShow() http.HandlerFunc {
         if err != nil {
             log.Println("Could not Get Random Photo from DB", err)
         }
-        singlePhoto := tools.GetPhotoByIdRow{
+        singlePhoto := tools.Photo{
             ID: res.ID,
             Name: res.Name,
             Location: res.Location,

@@ -61,7 +61,7 @@ func FormwithValuesEmpty(collections []tools.Collection) FormValues {
     return f
 }
 
-func FormwithValues(collections []tools.Collection, m map[string]string, photo tools.GetPhotoByIdRow) FormValues {
+func FormwithValues(collections []tools.Collection, m map[string]string, photo tools.Photo) FormValues {
     e := CollectionChecked{}.FillValues(collections, m)
 
     f := FormValues{

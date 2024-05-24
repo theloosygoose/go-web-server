@@ -1,11 +1,5 @@
 -- name: GetPhotoById :one
-SELECT img.id, img.name, img.location, img.date, img.description,
-img.imagepath, img.i_height, img.i_width, collec.name, collec.id
-    FROM photos AS img 
-INNER JOIN image_collections AS link ON
-    link.photo_id = img.id
-INNER JOIN collections AS collec ON
-    link.collection_id = collec.id WHERE img.id=?;
+SELECT * FROM photos WHERE id = ? LIMIT 1;
 
 -- name: CreatePhoto :one
 INSERT INTO photos (name, location, date, description, imagepath, i_height, i_width)
@@ -25,16 +19,14 @@ WHERE id = ?
 RETURNING imagepath;
 
 -- name: GetRandomPhoto :one
-SELECT id, name, location, date, description, imagepath, i_height, i_width
-FROM photos
-ORDER BY random()
-LIMIT 1;
+SELECT * FROM photos
+ORDER BY random() LIMIT 1;
 
 -- name: UpdatePhoto :exec
 UPDATE photos
 SET name=?, location=?,
 date=?, description=?, imagepath=?, i_height=?, i_width=?
-WHERE id=?;
+WHERE id = ?;
 
 -- name: GetCollectionPhotos :many
 SELECT img.id, img.name, img.date, img.imagepath, img.i_height, img.i_width, collec.name, collec.id
@@ -65,4 +57,7 @@ VALUES (?,?);
 SELECT collec.name, collec.id 
     FROM collections AS collec
 INNER JOIN image_collections AS link ON
-    link.collection_id = collec_id.id WHERE link.photo_id=?
+    link.collection_id = collec_id.id WHERE link.photo_id=?;
+
+-- name: ClearPhotoCollections :exec
+DELETE FROM image_collections WHERE photo_id=?;

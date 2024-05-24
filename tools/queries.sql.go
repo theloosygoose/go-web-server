@@ -10,6 +10,15 @@ import (
 	"database/sql"
 )
 
+const clearPhotoCollections = `-- name: ClearPhotoCollections :exec
+DELETE FROM image_collections WHERE photo_id=?
+`
+
+func (q *Queries) ClearPhotoCollections(ctx context.Context, photoID int64) error {
+	_, err := q.db.ExecContext(ctx, clearPhotoCollections, photoID)
+	return err
+}
+
 const createCollection = `-- name: CreateCollection :one
 INSERT INTO collections (name) VALUES (?) RETURNING id, name
 `
@@ -206,74 +215,40 @@ func (q *Queries) GetCollectionPhotos(ctx context.Context, id int64) ([]GetColle
 }
 
 const getPhotoById = `-- name: GetPhotoById :one
-SELECT img.id, img.name, img.location, img.date, img.description,
-img.imagepath, img.i_height, img.i_width, collec.name, collec.id
-    FROM photos AS img 
-INNER JOIN image_collections AS link ON
-    link.photo_id = img.id
-INNER JOIN collections AS collec ON
-    link.collection_id = collec.id WHERE img.id=?
+SELECT id, name, location, date, imagepath, description, i_height, i_width FROM photos WHERE id = ? LIMIT 1
 `
 
-type GetPhotoByIdRow struct {
-	ID          int64
-	Name        string
-	Location    string
-	Date        sql.NullString
-	Description sql.NullString
-	Imagepath   string
-	IHeight     sql.NullString
-	IWidth      sql.NullString
-	Name_2      string
-	ID_2        int64
-}
-
-func (q *Queries) GetPhotoById(ctx context.Context, id int64) (GetPhotoByIdRow, error) {
+func (q *Queries) GetPhotoById(ctx context.Context, id int64) (Photo, error) {
 	row := q.db.QueryRowContext(ctx, getPhotoById, id)
-	var i GetPhotoByIdRow
+	var i Photo
 	err := row.Scan(
 		&i.ID,
 		&i.Name,
 		&i.Location,
 		&i.Date,
-		&i.Description,
 		&i.Imagepath,
+		&i.Description,
 		&i.IHeight,
 		&i.IWidth,
-		&i.Name_2,
-		&i.ID_2,
 	)
 	return i, err
 }
 
 const getRandomPhoto = `-- name: GetRandomPhoto :one
-SELECT id, name, location, date, description, imagepath, i_height, i_width
-FROM photos
-ORDER BY random()
-LIMIT 1
+SELECT id, name, location, date, imagepath, description, i_height, i_width FROM photos
+ORDER BY random() LIMIT 1
 `
 
-type GetRandomPhotoRow struct {
-	ID          int64
-	Name        string
-	Location    string
-	Date        sql.NullString
-	Description sql.NullString
-	Imagepath   string
-	IHeight     sql.NullString
-	IWidth      sql.NullString
-}
-
-func (q *Queries) GetRandomPhoto(ctx context.Context) (GetRandomPhotoRow, error) {
+func (q *Queries) GetRandomPhoto(ctx context.Context) (Photo, error) {
 	row := q.db.QueryRowContext(ctx, getRandomPhoto)
-	var i GetRandomPhotoRow
+	var i Photo
 	err := row.Scan(
 		&i.ID,
 		&i.Name,
 		&i.Location,
 		&i.Date,
-		&i.Description,
 		&i.Imagepath,
+		&i.Description,
 		&i.IHeight,
 		&i.IWidth,
 	)
@@ -335,7 +310,7 @@ const updatePhoto = `-- name: UpdatePhoto :exec
 UPDATE photos
 SET name=?, location=?,
 date=?, description=?, imagepath=?, i_height=?, i_width=?
-WHERE id=?
+WHERE id = ?
 `
 
 type UpdatePhotoParams struct {

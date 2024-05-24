@@ -38,6 +38,7 @@ func (h AdminHandler) CreatePhoto() http.HandlerFunc {
 		render(w, r, components.ReponseShow(response))
 
 		imageProcess(file, fileHeader, &p)
+
 		log.Println("---FILE UPLOAD COMPLETE---")
 
         id, err := h.Queries.CreatePhoto(r.Context(), p)
@@ -121,10 +122,30 @@ func (h AdminHandler) UpdatePhoto() http.HandlerFunc{
         id, err := strconv.Atoi(id_string)
         var res types.Response
 
-		p, err := h.Queries.GetPhotoById(r.Context(), params)
+		err = h.Queries.ClearPhotoCollections(r.Context(), int64(id))
 		if err != nil {
             log.Println("Unable to Delete Photo From DB: ", err)
 		}
+
+
+        c, err := h.Queries.GetAllCollections(r.Context())
+        if err != nil {
+            log.Println("Could not get all collections", err)
+            return
+        }
+
+        sc := checkBoxHandler(r, c)
+
+        for _, checked := range sc {
+            n := tools.PhotoIntoCollectionParams{
+                PhotoID: int64(id),
+                CollectionID: checked,
+            }
+            err = h.Queries.PhotoIntoCollection(r.Context(), n)
+            if err != nil {
+                log.Println("Error Adding Photo to Collection", err)
+            }
+        }
 
         params := tools.UpdatePhotoParams{
 			Name:        r.FormValue("name"),
