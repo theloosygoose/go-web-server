@@ -280,6 +280,41 @@ func (q *Queries) GetRandomPhoto(ctx context.Context) (GetRandomPhotoRow, error)
 	return i, err
 }
 
+const photoIDGetCollections = `-- name: PhotoIDGetCollections :many
+SELECT collec.name, collec.id 
+    FROM collections AS collec
+INNER JOIN image_collections AS link ON
+    link.collection_id = collec_id.id WHERE link.photo_id=?
+`
+
+type PhotoIDGetCollectionsRow struct {
+	Name string
+	ID   int64
+}
+
+func (q *Queries) PhotoIDGetCollections(ctx context.Context, photoID int64) ([]PhotoIDGetCollectionsRow, error) {
+	rows, err := q.db.QueryContext(ctx, photoIDGetCollections, photoID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []PhotoIDGetCollectionsRow
+	for rows.Next() {
+		var i PhotoIDGetCollectionsRow
+		if err := rows.Scan(&i.Name, &i.ID); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const photoIntoCollection = `-- name: PhotoIntoCollection :exec
 INSERT INTO image_collections 
     (photo_id, collection_id) 

@@ -6,16 +6,20 @@ import (
 	"github.com/theloosygoose/goserver/tools"
 )
 
-func CreateHandlers(queries *tools.Queries) (AdminHandler, PhotoHandler, CollectionHandler) {
-    aHandler := AdminHandler{
+func CreateHandlers(queries *tools.Queries) (AdminHandler, PhotoHandler, CollectionHandler, FormHandler) {
+    a := AdminHandler{
         queries,
     }
-    cHandler := CollectionHandler{
+    c := CollectionHandler{
         queries,
     }
-    pHandler := PhotoHandler{
+    p := PhotoHandler{
+        queries,
+    }
+    f := FormHandler{
         queries,
     }
     log.Println("Created Handlers")
-    return aHandler, pHandler, cHandler
+
+    return a,p,c,f
 }

@@ -114,3 +114,19 @@ func (h AdminHandler) PhotoRemoveGalleryShow() http.HandlerFunc {
 		render(w, r, admin.Delete(results))
 	})
 }
+
+func (h AdminHandler) UpdatePhoto() http.HandlerFunc{
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		id_string := r.PathValue("id")
+        id, err := strconv.Atoi(id_string)
+        var res types.Response
+
+		p, err := h.Queries.UpdatePhotoDescription(r.Context(), int64(id))
+		if err != nil {
+            log.Println("Unable to Delete Photo From DB: ", err)
+		}
+
+        render(w, r, components.ReponseShow(res))
+
+    })
+}

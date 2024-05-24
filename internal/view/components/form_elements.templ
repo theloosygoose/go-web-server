@@ -2,11 +2,31 @@ package components
 
 import (
     "fmt"
-    "github.com/theloosygoose/goserver/tools"
     "github.com/theloosygoose/goserver/internal/types"
 )
 
-templ FormCollectionCheckboxes(collections []types.CollectionChecked){
+templ NewForm(f types.FormValues){
+    @form(false){
+        @formName(f.Name)
+        @formLocation(f.Location)
+        @formDescription(f.Description)
+        @formCollectionCheckboxes(f.Collections)
+        @formImageInput()
+        @formImagePreview(f.ImagePath)
+    }
+}
+
+templ UpdateForm(f types.FormValues){
+    @form(true){
+        @formName(f.Name)
+        @formLocation(f.Location)
+        @formDescription(f.Description)
+        @formCollectionCheckboxes(f.Collections)
+        @formImagePreview(f.ImagePath)
+    }
+}
+
+templ formCollectionCheckboxes(collections []types.CollectionChecked){
     <div class="flex flex-wrap text-white">
         for _, collection := range collections {
             <div>
@@ -17,34 +37,57 @@ templ FormCollectionCheckboxes(collections []types.CollectionChecked){
     </div>
 }
 
-templ Form(){
+templ form(isUpdate bool){
     <form 
     class="grid grid-cols-1 md:grid-cols-2 gap-6 align-top mt-12 *:block"
     id="form" 
     hx-encoding="multipart/form-data" 
     hx-target="#response-status" 
     hx-swap="innerHTML"
-    hx-put="/addphoto" 
+    if isUpdate {
+        hx-put="/photodata" 
+    } else {
+        hx-update="/photodata"
+    }
     hx-on::after-request="this.reset()">
         { children... }
-    <button 
-    class="w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800
-    relative focus:ring-0 text-center 
-    transition-colors duration-150
-    text-white
-    hover:bg-gray-900
-    inline-flex items-center"
-    type="submit">
-    Upload
-        <span class="htmx-indicator absolute -top-1 -right-1 flex h-3 w-3">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-3 w-3 bg-accent"></span>
-        </span>
-    </button>
+
+    if isUpdate {
+        <button 
+        class="w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800
+        relative focus:ring-0 text-center 
+        transition-colors duration-150
+        text-white
+        hover:bg-gray-900
+        inline-flex items-center"
+        type="submit">
+        Update 
+            <span class="htmx-indicator absolute -top-1 -right-1 flex h-3 w-3">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-accent"></span>
+            </span>
+        </button>
+    } else {
+        <button 
+        class="w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800
+        relative focus:ring-0 text-center 
+        transition-colors duration-150
+        text-white
+        hover:bg-gray-900
+        inline-flex items-center"
+        type="submit">
+        Upload
+            <span class="htmx-indicator absolute -top-1 -right-1 flex h-3 w-3">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-accent"></span>
+            </span>
+        </button>
+
+    }
     </form>
 }
 
-templ FormName(value string){
+templ formName(value string){
         <label 
         class="col-start-1"
         for="name-input">
@@ -56,7 +99,7 @@ templ FormName(value string){
         </label>
 }
 
-templ FormLocation(value string){
+templ formLocation(value string){
     <label 
     class="col-start-1"
     for="location-input">
@@ -67,7 +110,7 @@ templ FormLocation(value string){
     </label>
 }
 
-templ FormDescription(value string){
+templ formDescription(value string){
     <label 
     class="col-start-1"
     for="description-input">
@@ -78,7 +121,7 @@ templ FormDescription(value string){
     </label>
 }
 
-templ FormImageInput(path string){
+templ formImageInput(){
     <label 
     class="md:col-start-2 md:row-start-1 md:row-span-1"
     for="imagefile-input">
@@ -97,7 +140,7 @@ templ FormImageInput(path string){
     </label>
 }
 
-templ FormImagePreview(value string){
+templ formImagePreview(value string){
     <div class="md:col-start-2 md:row-start-2 md:row-span-2">
         if value == ""{
             <img class="max-h-56 mx-auto" id="preview-image" height="300px"/>

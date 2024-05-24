@@ -30,7 +30,7 @@ FROM photos
 ORDER BY random()
 LIMIT 1;
 
--- name: UpdatePhotoDescription :exec
+-- name: UpdatePhoto :exec
 UPDATE photos
 SET name=?, location=?,
 date=?, description=?, imagepath=?, i_height=?, i_width=?
@@ -60,3 +60,9 @@ WHERE collection_id=?;
 INSERT INTO image_collections 
     (photo_id, collection_id) 
 VALUES (?,?);
+
+-- name: PhotoIDGetCollections :many
+SELECT collec.name, collec.id 
+    FROM collections AS collec
+INNER JOIN image_collections AS link ON
+    link.collection_id = collec_id.id WHERE link.photo_id=?

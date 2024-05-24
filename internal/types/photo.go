@@ -47,7 +47,7 @@ type FormValues struct{
     Collections []CollectionChecked
 }
 
-func EmptyForm(collections []tools.Collection) FormValues {
+func FormwithValuesEmpty(collections []tools.Collection) FormValues {
     e := CollectionChecked{}.FillOff(collections)
         
     f := FormValues{
@@ -58,5 +58,18 @@ func EmptyForm(collections []tools.Collection) FormValues {
         Collections: e, 
     }
 
+    return f
+}
+
+func FormwithValues(collections []tools.Collection, m map[string]string, photo tools.GetPhotoByIdRow) FormValues {
+    e := CollectionChecked{}.FillValues(collections, m)
+
+    f := FormValues{
+        Name: photo.Name,
+        Location: photo.Location,
+        Description: photo.Description.String,
+        ImagePath: photo.Imagepath,
+        Collections: e,
+    }
     return f
 }
