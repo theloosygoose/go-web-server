@@ -67,7 +67,6 @@ func (h FormHandler) UpdateForm() http.HandlerFunc {
         v := types.FormwithValues(res_c, m, res_p)
 
         render(w, r, components.UpdateForm(v ))
-
         
     })
 }

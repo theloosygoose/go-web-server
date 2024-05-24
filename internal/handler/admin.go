@@ -121,7 +121,19 @@ func (h AdminHandler) UpdatePhoto() http.HandlerFunc{
         id, err := strconv.Atoi(id_string)
         var res types.Response
 
-		p, err := h.Queries.UpdatePhotoDescription(r.Context(), int64(id))
+		p, err := h.Queries.GetPhotoById(r.Context(), params)
+		if err != nil {
+            log.Println("Unable to Delete Photo From DB: ", err)
+		}
+
+        params := tools.UpdatePhotoParams{
+			Name:        r.FormValue("name"),
+			Location:    r.FormValue("location"),
+            Description: sql.NullString{String: r.FormValue("description"), Valid: true},
+            ID: int64(id),
+        }
+
+		err = h.Queries.UpdatePhoto(r.Context(), params)
 		if err != nil {
             log.Println("Unable to Delete Photo From DB: ", err)
 		}
