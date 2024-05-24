@@ -83,7 +83,7 @@ func NewForm(f types.FormValues) templ.Component {
 			}
 			return templ_7745c5c3_Err
 		})
-		templ_7745c5c3_Err = form().Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = form(false).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -154,7 +154,7 @@ func UpdateForm(f types.FormValues) templ.Component {
 			}
 			return templ_7745c5c3_Err
 		})
-		templ_7745c5c3_Err = form().Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = form(true).Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -264,7 +264,7 @@ func formCollectionCheckboxes(collections []types.CollectionChecked) templ.Compo
 	})
 }
 
-func form() templ.Component {
+func form(isUpdate bool) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -277,7 +277,22 @@ func form() templ.Component {
 			templ_7745c5c3_Var11 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form class=\"grid grid-cols-1 md:grid-cols-2 gap-6 align-top mt-12 *:block\" id=\"form\" hx-encoding=\"multipart/form-data\" hx-target=\"#response-status\" hx-swap=\"innerHTML\" hx-put=\"/addphoto\" hx-on::after-request=\"this.reset()\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form class=\"grid grid-cols-1 md:grid-cols-2 gap-6 align-top mt-12 *:block\" id=\"form\" hx-encoding=\"multipart/form-data\" hx-target=\"#response-status\" hx-swap=\"innerHTML\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		if isUpdate {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" hx-put=\"/photodata\"")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		} else {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" hx-update=\"/photodata\"")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" hx-on::after-request=\"this.reset()\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -285,7 +300,18 @@ func form() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800\n    relative focus:ring-0 text-center \n    transition-colors duration-150\n    text-white\n    hover:bg-gray-900\n    inline-flex items-center\" type=\"submit\">Upload <span class=\"htmx-indicator absolute -top-1 -right-1 flex h-3 w-3\"><span class=\"animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75\"></span> <span class=\"relative inline-flex rounded-full h-3 w-3 bg-accent\"></span></span></button></form>")
+		if isUpdate {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800\n        relative focus:ring-0 text-center \n        transition-colors duration-150\n        text-white\n        hover:bg-gray-900\n        inline-flex items-center\" type=\"submit\">Update  <span class=\"htmx-indicator absolute -top-1 -right-1 flex h-3 w-3\"><span class=\"animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75\"></span> <span class=\"relative inline-flex rounded-full h-3 w-3 bg-accent\"></span></span></button>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		} else {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800\n        relative focus:ring-0 text-center \n        transition-colors duration-150\n        text-white\n        hover:bg-gray-900\n        inline-flex items-center\" type=\"submit\">Upload <span class=\"htmx-indicator absolute -top-1 -right-1 flex h-3 w-3\"><span class=\"animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75\"></span> <span class=\"relative inline-flex rounded-full h-3 w-3 bg-accent\"></span></span></button>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</form>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -316,7 +342,7 @@ func formName(value string) templ.Component {
 		var templ_7745c5c3_Var13 string
 		templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinStringErrs(value)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/components/form_elements.templ`, Line: 75, Col: 64}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/components/form_elements.templ`, Line: 98, Col: 64}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var13))
 		if templ_7745c5c3_Err != nil {
@@ -435,7 +461,7 @@ func formImagePreview(value string) templ.Component {
 			var templ_7745c5c3_Var18 string
 			templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.JoinStringErrs("images/min_" + value)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/components/form_elements.templ`, Line: 125, Col: 103}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/components/form_elements.templ`, Line: 148, Col: 103}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var18))
 			if templ_7745c5c3_Err != nil {

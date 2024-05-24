@@ -331,14 +331,14 @@ func (q *Queries) PhotoIntoCollection(ctx context.Context, arg PhotoIntoCollecti
 	return err
 }
 
-const updatePhotoDescription = `-- name: UpdatePhotoDescription :exec
+const updatePhoto = `-- name: UpdatePhoto :exec
 UPDATE photos
 SET name=?, location=?,
 date=?, description=?, imagepath=?, i_height=?, i_width=?
 WHERE id=?
 `
 
-type UpdatePhotoDescriptionParams struct {
+type UpdatePhotoParams struct {
 	Name        string
 	Location    string
 	Date        sql.NullString
@@ -349,8 +349,8 @@ type UpdatePhotoDescriptionParams struct {
 	ID          int64
 }
 
-func (q *Queries) UpdatePhotoDescription(ctx context.Context, arg UpdatePhotoDescriptionParams) error {
-	_, err := q.db.ExecContext(ctx, updatePhotoDescription,
+func (q *Queries) UpdatePhoto(ctx context.Context, arg UpdatePhotoParams) error {
+	_, err := q.db.ExecContext(ctx, updatePhoto,
 		arg.Name,
 		arg.Location,
 		arg.Date,
