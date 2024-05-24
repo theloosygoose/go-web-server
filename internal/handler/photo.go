@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	"github.com/theloosygoose/goserver/internal/view/photo"
+	"github.com/theloosygoose/goserver/internal/view/components"
 	"github.com/theloosygoose/goserver/tools"
 )
 
@@ -67,5 +68,18 @@ func (h PhotoHandler) RandomPhotoShow() http.HandlerFunc {
         }
 
         render(w, r, photo.MainPhoto(singlePhoto))
+    })
+}
+
+func (h PhotoHandler) AllPhotos() http.HandlerFunc {
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        res_p, err := h.Queries.GetAllPhotos(r.Context())
+        if err != nil {
+            log.Println("Error Running GetAllPhotos Query: ", err)
+            w.WriteHeader(http.StatusInternalServerError)
+            return
+        }
+
+        render(w, r, components.GalleryItems(res_p))
     })
 }

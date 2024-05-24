@@ -23,8 +23,8 @@ func NewServer(
     r.Handle("/dist/", http.StripPrefix("/dist/", fs))
 
 	r.HandleFunc("/", pHandler.MainPage())
-    r.HandleFunc("GET /photodata", cHandler.AllPhotosAllCollections())
 
+    r.HandleFunc("GET /photodata", pHandler.AllPhotos())
     r.HandleFunc("GET /photodata/{id}", pHandler.ShowMainPhoto())
     r.HandleFunc("GET /photodata/random", pHandler.RandomPhotoShow())
 
