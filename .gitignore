@@ -1,3 +1,4 @@
 ./.env
 .env
 node_modules
+database/donphoto.db
