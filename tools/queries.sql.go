@@ -162,15 +162,26 @@ INNER JOIN collections AS collec ON
     link.collection_id = collec.id WHERE collec.id=?
 `
 
-func (q *Queries) GetCollectionPhotos(ctx context.Context, id int64) ([]GetAllPhotosRow, error) {
+type GetCollectionPhotosRow struct {
+	ID        int64
+	Name      string
+	Date      sql.NullString
+	Imagepath string
+	IHeight   sql.NullString
+	IWidth    sql.NullString
+	Name_2    string
+	ID_2      int64
+}
+
+func (q *Queries) GetCollectionPhotos(ctx context.Context, id int64) ([]GetCollectionPhotosRow, error) {
 	rows, err := q.db.QueryContext(ctx, getCollectionPhotos, id)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []GetAllPhotosRow
+	var items []GetCollectionPhotosRow
 	for rows.Next() {
-		var i GetAllPhotosRow 
+		var i GetCollectionPhotosRow
 		if err := rows.Scan(
 			&i.ID,
 			&i.Name,
