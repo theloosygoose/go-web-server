@@ -84,7 +84,8 @@ func (h PhotoHandler) AllPhotos() http.HandlerFunc {
             w.WriteHeader(http.StatusInternalServerError)
             return
         }
+        log.Println("Loaded photos: ", len(res_p))
 
-        render(w, r, components.GalleryItems(res_p))
+        render(w, r, components.Gallery(res_p))
     })
 }

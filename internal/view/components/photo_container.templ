@@ -13,20 +13,18 @@ templ PhotoContainer(collections []tools.Collection, photos []tools.GetAllPhotos
         </div>
         @GalleryContainer(){
             @GalleryTabs(collections)
-            @Gallery(){
-                for _, photo := range photos {
-                    <p>{ photo.Name }</p>
-                    @GalleryItem(photo)
-                }
-            }
+            @Gallery(photos)
         }
     </div>
 }
 
-templ Gallery(){
+templ Gallery(photos []tools.GetAllPhotosRow){
     <div id="gallery" class="outline outline-gray-800 outline-offset-4 rounded-sm p-6
     flex flex-wrap h-fit gap-2 md:gap-3 justify-center mx-2">
-        { children... }
+        for _, photo := range photos {
+            <p>{ photo.Name }</p>
+            @GalleryItem(photo)
+        }
     </div>
 }
 
