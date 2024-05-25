@@ -11,7 +11,9 @@ import (
 
 templ Index(photos []tools.GetAllPhotosRow, collections []tools.Collection){
     @layout.Base(){
-        @components.MainGallery(collections, photos)
+        @components.PhotoContainer(collections, photos){
+
+        }
     }
 }
 

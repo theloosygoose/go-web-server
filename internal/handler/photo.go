@@ -69,6 +69,7 @@ func (h PhotoHandler) RandomPhotoShow() http.HandlerFunc {
             IHeight: res.IHeight,
             IWidth: res.IWidth,
         }
+
         log.Println("This is the RandomPhoto Loaded", singlePhoto)
 
         render(w, r, photo.MainPhoto(singlePhoto))
