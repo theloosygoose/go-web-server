@@ -11,7 +11,8 @@ templ PhotoContainer(collections []tools.Collection, photos []tools.GetAllPhotos
     <div class="flex flex-col">
         <div id="main-photo" class="h-fit my-16 min-h-[50svh] md:min-h-[65svh]">
         </div>
-        @MainGallery(collections, photos)
+        @MainGallery(collections, photos){
+        }
     </div>
 }
 
@@ -28,7 +29,8 @@ templ MainGallery(collections []tools.Collection, photos []tools.GetAllPhotosRow
         @GalleryTabs(collections)
         </div>
         @Gallery(){
-            @GalleryItems(photos)
+            @GalleryItems(photos){
+            }
         }
     </div>
 }
