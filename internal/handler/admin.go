@@ -35,7 +35,7 @@ func (h AdminHandler) CreatePhoto() http.HandlerFunc {
 			log.Println(err)
 			return
 		}
-		render(w, r, components.ReponseShow(response))
+
 
 		imageProcess(file, fileHeader, &p)
 
@@ -54,19 +54,25 @@ func (h AdminHandler) CreatePhoto() http.HandlerFunc {
             log.Println("Could not get all collections", err)
             return
         }
+        log.Println("Got Collections to add new Photos")
+
         sc := checkBoxHandler(r, c)
+        log.Println("Checked Array: ",sc)
 
         for _, checked := range sc {
             n := tools.PhotoIntoCollectionParams{
                 PhotoID: id,
                 CollectionID: checked,
             }
+            log.Println("INTO COLLECTION: ", id, " " ,checked)
+
             err = h.Queries.PhotoIntoCollection(r.Context(), n)
             if err != nil {
                 log.Println("Error Adding Photo to Collection", err)
             }
         }
 
+		render(w, r, components.ReponseShow(response))
 	})
 
 }

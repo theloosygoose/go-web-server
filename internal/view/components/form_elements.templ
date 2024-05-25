@@ -2,6 +2,8 @@ package components
 
 import (
     "fmt"
+    "strings"
+
     "github.com/theloosygoose/goserver/internal/types"
 )
 
@@ -30,7 +32,9 @@ templ formCollectionCheckboxes(collections []types.CollectionChecked){
     <div class="flex flex-wrap text-white">
         for _, collection := range collections {
             <div>
-                <input type="checkbox" id={ collection.Collection.Name + fmt.Sprint(collection.Collection.ID)} name={ collection.Collection.Name+ fmt.Sprint(collection.Collection.ID) } value={ collection.Value } />
+                <input type="checkbox" id={ collection.Collection.Name + fmt.Sprint(collection.Collection.ID)} 
+                name={ strings.ToLower(strings.TrimSpace(collection.Collection.Name) + fmt.Sprint(collection.Collection.ID)) } value={ collection.Value } />
+
                 <label for={ collection.Collection.Name + fmt.Sprint(collection.Collection.ID)}>{ collection.Collection.Name }</label>
             </div>
         }

@@ -44,9 +44,7 @@ DELETE FROM image_collections
 WHERE collection_id=?;
 
 -- name: PhotoIntoCollection :exec
-INSERT INTO image_collections 
-    (photo_id, collection_id) 
-VALUES (?,?);
+INSERT INTO image_collections (photo_id, collection_id) VALUES (?,?);
 
 -- name: PhotoIDGetCollections :many
 SELECT collec.name, collec.id 
