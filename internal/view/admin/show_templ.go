@@ -135,7 +135,7 @@ func Delete(photos []tools.GetAllPhotosRow) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-target=\"this\" hx-swap=\"delete\">Delete</div><div class=\"absolute inset-0 bottom-0 left-0\n                                w-full h-full text-white text-center font-bold text-lg\n                                bg-yellow-700\" hx-trigger=\"click\" hx-get=\"")
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-target=\"previous .group\" hx-swap=\"delete\">Delete</div><div class=\"absolute inset-0 bottom-0 left-0\n                                w-full h-full text-white text-center font-bold text-lg\n                                bg-yellow-700\" hx-trigger=\"click\" hx-get=\"")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}

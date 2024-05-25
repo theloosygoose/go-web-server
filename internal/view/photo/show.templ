@@ -15,7 +15,7 @@ templ Index(photos []tools.GetAllPhotosRow, collections []tools.Collection){
     }
 }
 
-templ MainPhoto(photo tools.Photo ){
+templ MainPhoto(photo tools.Photo){
     <div class={ "select-none md:w-auto group/mimage flex justify-center align-middle"}>
         <div id="main-image-photo" class={"flex justify-center align-middle z-10"}>
             <div class={"relative blur-load", components.LazyImageStyle(photo.Name)}>

@@ -6,7 +6,7 @@ import (
 )
 
 templ NewForm(f types.FormValues){
-    @form(false){
+    @form(false, fmt.Sprint(f.ID)){
         @formName(f.Name)
         @formLocation(f.Location)
         @formDescription(f.Description)
@@ -17,7 +17,7 @@ templ NewForm(f types.FormValues){
 }
 
 templ UpdateForm(f types.FormValues){
-    @form(true){
+    @form(true, fmt.Sprint(f.ID)){
         @formName(f.Name)
         @formLocation(f.Location)
         @formDescription(f.Description)
@@ -37,7 +37,7 @@ templ formCollectionCheckboxes(collections []types.CollectionChecked){
     </div>
 }
 
-templ form(isUpdate bool){
+templ form(isUpdate bool, value string){
     <form 
     class="grid grid-cols-1 md:grid-cols-2 gap-6 align-top mt-12 *:block"
     id="form" 
@@ -47,7 +47,7 @@ templ form(isUpdate bool){
     if isUpdate {
         hx-put="/photodata" 
     } else {
-        hx-update="/photodata"
+        hx-update={ "/photodata/" + value }
     }
     hx-on::after-request="this.reset()">
         { children... }
@@ -95,7 +95,7 @@ templ formName(value string){
             <input 
             class="w-full border-0 border-b-2 border-accent focus:ring-0 focus:border-b-4 bg-gray-800 rounded-md
             invalid:border-red-500 invalid:text-red-600"
-            type="text" name="name" id="name-input" value={value} required/>
+            type="text" name="name" id="name-input" value={ value } required/>
         </label>
 }
 
@@ -106,7 +106,7 @@ templ formLocation(value string){
         <span>Location</span>
         <input 
         class="w-full block border-0 border-b-2 border-accent focus:ring-0 focus:border-b-4 bg-gray-800 rounded-md"
-        type="text" name="location" id="location-input" />
+        type="text" name="location" id="location-input" value={ value } />
     </label>
 }
 
@@ -117,7 +117,7 @@ templ formDescription(value string){
         <span>Description</span>
         <textarea 
         class="w-full block border-0 border-b-2 border-accent focus:ring-0 focus:border-b-4 bg-gray-800 rounded-md"
-        rows="5" name="description" id="description-input"></textarea>
+        rows="5" name="description" id="description-input" value={ value }></textarea>
     </label>
 }
 

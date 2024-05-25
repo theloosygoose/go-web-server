@@ -31,7 +31,7 @@ func PhotoContainer(collections []tools.Collection, photos []tools.GetAllPhotosR
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col\"><div id=\"main-photo\" class=\"h-fit my-16 min-h-[50svh] md:min-h-[65svh] \"></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col\"><div id=\"main-photo\" class=\"h-fit my-16 min-h-[50svh] md:min-h-[65svh]\"></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

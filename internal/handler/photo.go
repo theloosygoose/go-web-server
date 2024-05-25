@@ -23,12 +23,14 @@ func (h PhotoHandler) MainPage() http.HandlerFunc {
             w.WriteHeader(http.StatusInternalServerError)
             return
         }
+        log.Println(res_p)
         res_c, err := h.Queries.GetAllCollections(r.Context())
         if err != nil{
             log.Println("Error Running GetAllCollections Query: ", err)
             w.WriteHeader(http.StatusInternalServerError)
             return
         }
+        log.Println(res_c)
 
 		render(w, r, photo.Index(res_p, res_c))
 	})
@@ -56,6 +58,7 @@ func (h PhotoHandler) RandomPhotoShow() http.HandlerFunc {
         if err != nil {
             log.Println("Could not Get Random Photo from DB", err)
         }
+
         singlePhoto := tools.Photo{
             ID: res.ID,
             Name: res.Name,
@@ -66,6 +69,7 @@ func (h PhotoHandler) RandomPhotoShow() http.HandlerFunc {
             IHeight: res.IHeight,
             IWidth: res.IWidth,
         }
+        log.Println("This is the RandomPhoto Loaded", singlePhoto)
 
         render(w, r, photo.MainPhoto(singlePhoto))
     })

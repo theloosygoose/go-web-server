@@ -40,6 +40,7 @@ func (ck CollectionChecked) FillValues(collections []tools.Collection, values ma
 }
 
 type FormValues struct{
+    ID string
     Name string
     Location string
     Description string
@@ -51,6 +52,7 @@ func FormwithValuesEmpty(collections []tools.Collection) FormValues {
     e := CollectionChecked{}.FillOff(collections)
         
     f := FormValues{
+        ID: "",
         Name: "",
         Location: "",
         Description: "",
@@ -65,6 +67,7 @@ func FormwithValues(collections []tools.Collection, m map[string]string, photo t
     e := CollectionChecked{}.FillValues(collections, m)
 
     f := FormValues{
+        ID: fmt.Sprint(photo.ID),
         Name: photo.Name,
         Location: photo.Location,
         Description: photo.Description.String,
