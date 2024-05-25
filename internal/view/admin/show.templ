@@ -48,7 +48,7 @@ templ Show() {
 }
 
 templ Delete(photos []tools.GetAllPhotosRow) {
-	@components.Gallery() {
+	@components.GalleryEmpty() {
 		for _, photo := range photos {
                 <div 
                 class={"group hover:cursor-pointer relative blur-load z-0 hover:z-10 w-fit h-fit hover:scale-105 ease-in-out duration-200"}

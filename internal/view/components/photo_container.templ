@@ -28,6 +28,12 @@ templ Gallery(photos []tools.GetAllPhotosRow){
     </div>
 }
 
+templ GalleryEmpty(){
+    <div id="gallery" class="outline outline-gray-800 outline-offset-4 rounded-sm p-6 flex flex-wrap h-fit gap-2 md:gap-3 justify-center mx-2">
+        { children... }
+    </div>
+}
+
 templ GalleryContainer(){
     <div class="h-full w-full">
         { children... }
