@@ -50,46 +50,6 @@ templ Show() {
 templ Delete(photos []tools.GetAllPhotosRow) {
 	@components.GalleryEmpty() {
 		for _, photo := range photos {
-                <div 
-                class={"group hover:cursor-pointer relative blur-load z-0 hover:z-10 w-fit h-fit hover:scale-105 ease-in-out duration-200"}
-                hx-confirm="Are you sure you want to delete this photo?"
-                >
-                    <img 
-                    class="z-20 object-center object-cover max-w-44 max-h-44 
-                    group-hover:blur-sm
-                    transition-all duration-300" 
-                    loading="lazy"
-                    src={ os.Getenv("PHOTO_DIR") + "min_" + photo.Imagepath} 
-                    alt={ photo.Name }
-                    />
-                    <div 
-                    class="absolute inset-0 bottom-0 left-0 
-                    flex justify-between align-center w-full
-                    group-hover:opacity-50 opacity-0
-                    transition-all duration-300 ease-in-out"
-                    id="options wrapper">
-                        <div
-                            class="absolute inset-0 bottom-0 left-0
-                                w-full h-full text-white text-center font-bold 
-                                text-lg bg-red-700"
-                            hx-trigger="click"
-                            hx-delete={ fmt.Sprintf("photodata/%d", photo.ID) }
-                            hx-target="previous .group"
-                            hx-swap="delete">
-                                Delete
-                        </div>
-                        <div
-                            class="absolute inset-0 bottom-0 left-0
-                                w-full h-full text-white text-center font-bold text-lg
-                                bg-yellow-700"
-                            hx-trigger="click"
-                            hx-get={ fmt.Sprintf("admin/form/%d", photo.ID) }
-                            hx-target="#form-container"
-                            hx-swap="innerHTML">
-                                Edit
-                        </div>
-                    </div>
-                </div>
 		}
 	}
 }

@@ -122,8 +122,9 @@ func checkBoxHandler(r *http.Request, collections[]tools.Collection)[]int64{
     var checked []int64
 
     for _, v := range collections {
-        log.Println(fmt.Sprint(strings.ToLower(strings.TrimSpace(v.Name)), v.ID))
-        if r.FormValue(fmt.Sprint(v.Name, v.ID)) == "on"{
+        t := fmt.Sprint(strings.ToLower(strings.TrimSpace(v.Name)), v.ID)
+        log.Println(r.FormValue(t))
+        if r.FormValue(t) == "on"{
             log.Println("Checked", v.Name)
 
             checked = append(checked, v.ID)
