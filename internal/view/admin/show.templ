@@ -74,7 +74,7 @@ templ Delete(photos []tools.GetAllPhotosRow) {
                                 text-lg bg-red-700"
                             hx-trigger="click"
                             hx-delete={ fmt.Sprintf("photodata/%d", photo.ID) }
-                            hx-target="this"
+                            hx-target="previous .group"
                             hx-swap="delete">
                                 Delete
                         </div>
