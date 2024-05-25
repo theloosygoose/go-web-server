@@ -44,7 +44,7 @@ func NewServer(
     r.HandleFunc("DELETE /collections/{id}", cHandler.DeleteCollection())
 
     r.HandleFunc("GET /admin/form/new", fHandler.NewForm())
-    r.HandleFunc("GET /admin/form/new", fHandler.UpdateForm())
+    r.HandleFunc("GET /admin/form/{id}", fHandler.UpdateForm())
 
 
 	return r

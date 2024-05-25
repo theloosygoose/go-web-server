@@ -73,12 +73,8 @@ func (h AdminHandler) CreatePhoto() http.HandlerFunc {
 
 func (h AdminHandler) AdminShow() http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-        results, err := h.Queries.GetAllCollections(r.Context())
-        if err != nil {
-            log.Println("Unable to get Collections")
-        }
 
-		render(w, r, admin.Show(results))
+		render(w, r, admin.Show())
 	})
 }
 
