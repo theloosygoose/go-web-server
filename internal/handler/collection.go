@@ -88,9 +88,10 @@ func (h CollectionHandler) SingleCollection() http.HandlerFunc {
             w.WriteHeader(http.StatusInternalServerError)
             return
         }
+        log.Println("Loaded photos: ", len(res))
 
         pr := collectionRowstoPhoto(res)
 
-        render(w, r, components.Gallery(pr))
+        render(w, r, components.GalleryItems(pr))
     })
 }

@@ -86,6 +86,6 @@ func (h PhotoHandler) AllPhotos() http.HandlerFunc {
         }
         log.Println("Loaded photos: ", len(res_p))
 
-        render(w, r, components.Gallery(res_p))
+        render(w, r, components.GalleryItems(res_p))
     })
 }

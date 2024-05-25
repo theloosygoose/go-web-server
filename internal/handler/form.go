@@ -33,6 +33,7 @@ func (h FormHandler) NewForm() http.HandlerFunc {
 func (h FormHandler) UpdateForm() http.HandlerFunc {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
         id_string := r.PathValue("id")
+
         id, err := strconv.Atoi(id_string)
         if err != nil {
             log.Println("Could not convert pathvalue to int: ", err)
