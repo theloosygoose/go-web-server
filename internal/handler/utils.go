@@ -132,3 +132,19 @@ func checkBoxHandler(r *http.Request, collections[]tools.Collection)[]int64{
 
     return checked 
 }
+
+func collectionRowstoPhoto( cp []tools.GetCollectionPhotosRow)[]tools.GetAllPhotosRow{
+    var ps []tools.GetAllPhotosRow
+
+    for _, ci := range cp{
+        p := tools.GetAllPhotosRow{
+            ID: ci.ID,
+            Name: ci.Name,
+            Imagepath: ci.Imagepath,
+            IHeight: ci.IHeight,
+            IWidth: ci.IWidth,
+        }
+        ps = append(ps, p)
+    }
+    return ps
+}

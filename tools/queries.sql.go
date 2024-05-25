@@ -111,12 +111,7 @@ func (q *Queries) GetAllCollections(ctx context.Context) ([]Collection, error) {
 }
 
 const getAllPhotos = `-- name: GetAllPhotos :many
-SELECT img.id, img.name, img.date, img.imagepath, img.i_height, img.i_width, collec.name, collec.id
-    FROM photos AS img 
-INNER JOIN image_collections AS link ON
-    link.photo_id = img.id
-INNER JOIN collections AS collec ON
-    link.collection_id = collec.id
+SELECT id, name, date, imagepath, i_height, i_width FROM photos
 `
 
 type GetAllPhotosRow struct {
@@ -126,8 +121,6 @@ type GetAllPhotosRow struct {
 	Imagepath string
 	IHeight   sql.NullString
 	IWidth    sql.NullString
-	Name_2    string
-	ID_2      int64
 }
 
 func (q *Queries) GetAllPhotos(ctx context.Context) ([]GetAllPhotosRow, error) {
@@ -146,8 +139,6 @@ func (q *Queries) GetAllPhotos(ctx context.Context) ([]GetAllPhotosRow, error) {
 			&i.Imagepath,
 			&i.IHeight,
 			&i.IWidth,
-			&i.Name_2,
-			&i.ID_2,
 		); err != nil {
 			return nil, err
 		}
@@ -171,15 +162,26 @@ INNER JOIN collections AS collec ON
     link.collection_id = collec.id WHERE collec.id=?
 `
 
-func (q *Queries) GetCollectionPhotos(ctx context.Context, id int64) ([]GetAllPhotosRow, error) {
+type GetCollectionPhotosRow struct {
+	ID        int64
+	Name      string
+	Date      sql.NullString
+	Imagepath string
+	IHeight   sql.NullString
+	IWidth    sql.NullString
+	Name_2    string
+	ID_2      int64
+}
+
+func (q *Queries) GetCollectionPhotos(ctx context.Context, id int64) ([]GetCollectionPhotosRow, error) {
 	rows, err := q.db.QueryContext(ctx, getCollectionPhotos, id)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []GetAllPhotosRow
+	var items []GetCollectionPhotosRow
 	for rows.Next() {
-		var i GetAllPhotosRow 
+		var i GetCollectionPhotosRow
 		if err := rows.Scan(
 			&i.ID,
 			&i.Name,

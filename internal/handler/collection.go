@@ -89,6 +89,8 @@ func (h CollectionHandler) SingleCollection() http.HandlerFunc {
             return
         }
 
-        render(w, r, components.Gallery(res))
+        pr := collectionRowstoPhoto(res)
+
+        render(w, r, components.Gallery(pr))
     })
 }

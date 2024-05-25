@@ -6,12 +6,7 @@ INSERT INTO photos (name, location, date, description, imagepath, i_height, i_wi
 VALUES(?, ?, ?, ?, ?, ?, ?) RETURNING id;
 
 -- name: GetAllPhotos :many
-SELECT img.id, img.name, img.date, img.imagepath, img.i_height, img.i_width, collec.name, collec.id
-    FROM photos AS img 
-INNER JOIN image_collections AS link ON
-    link.photo_id = img.id
-INNER JOIN collections AS collec ON
-    link.collection_id = collec.id;
+SELECT id, name, date, imagepath, i_height, i_width FROM photos;
 
 -- name: DeletePhoto :one
 DELETE FROM photos

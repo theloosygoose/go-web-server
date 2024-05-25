@@ -64,7 +64,7 @@ templ GalleryTabs(collections []tools.Collection){
 }
 
 templ GalleryItem(photo tools.GetAllPhotosRow){
-    <div class={"blur-load z-0 cursor-pointer hover:z-10 w-fit h-fit hover:scale-105 ease-in-out duration-200", LazyImageStyle(photo.Name)}>
+    <div class={"blur-load z-0 cursor-pointer hover:z-10 w-fit h-fit hover:scale-105 ease-in-out duration-200", LazyImageStyle(photo.Imagepath)}>
         <img 
         class="z-20 object-center object-cover max-w-32 max-h-32 md:max-w-52 md:max-h-52" 
         loading="lazy"
