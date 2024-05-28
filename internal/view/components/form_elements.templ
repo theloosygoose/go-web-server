@@ -33,8 +33,12 @@ templ formCollectionCheckboxes(collections []types.CollectionChecked){
         for _, collection := range collections {
             <div>
                 <input type="checkbox" 
-                id={ strings.ToLower(strings.TrimSpace(collection.Collection.Name) + fmt.Sprint(collection.Collection.ID)) } 
-                name={ strings.ToLower(strings.TrimSpace(collection.Collection.Name) + fmt.Sprint(collection.Collection.ID)) } value={ collection.Value } />
+                id={ fmt.Sprint(strings.ToLower(strings.TrimSpace(collection.Collection.Name)), collection.Collection.ID) }
+                name={ fmt.Sprint(strings.ToLower(strings.TrimSpace(collection.Collection.Name)), collection.Collection.ID) }
+                if collection.Value == "on"{
+                    checked
+                }
+                />
 
                 <label for={ collection.Collection.Name + fmt.Sprint(collection.Collection.ID)}>{ collection.Collection.Name }</label>
             </div>

@@ -247,10 +247,9 @@ func (q *Queries) GetRandomPhoto(ctx context.Context) (Photo, error) {
 }
 
 const photoIDGetCollections = `-- name: PhotoIDGetCollections :many
-SELECT collec.name, collec.id 
-    FROM collections AS collec
+SELECT name, id FROM collections
 INNER JOIN image_collections AS link ON
-    link.collection_id = collec_id.id WHERE link.photo_id=?
+    link.collection_id = collections.id WHERE link.photo_id=?
 `
 
 type PhotoIDGetCollectionsRow struct {
@@ -282,9 +281,7 @@ func (q *Queries) PhotoIDGetCollections(ctx context.Context, photoID int64) ([]P
 }
 
 const photoIntoCollection = `-- name: PhotoIntoCollection :exec
-INSERT INTO image_collections 
-    (photo_id, collection_id) 
-VALUES (?,?)
+INSERT INTO image_collections (photo_id, collection_id) VALUES (?,?)
 `
 
 type PhotoIntoCollectionParams struct {

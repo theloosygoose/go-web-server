@@ -113,8 +113,9 @@ func (h AdminHandler) PhotoRemoveGalleryShow() http.HandlerFunc {
 		if err != nil {
 			log.Println("Failed to Exectue Query: ", err)
 		}
+        ps := photoRowtoPhoto(results)
 
-		render(w, r, admin.Delete(results))
+		render(w, r, admin.PhotosTable(ps))
 	})
 }
 

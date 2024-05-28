@@ -1,11 +1,10 @@
 package admin
 
 import (
+    "os"
     "fmt"
-	"os"
 
     "github.com/theloosygoose/goserver/internal/view/layout"
-	"github.com/theloosygoose/goserver/internal/view/components"
 	"github.com/theloosygoose/goserver/tools"
 )
 
@@ -47,9 +46,51 @@ templ Show() {
 }
 }
 
-templ Delete(photos []tools.GetAllPhotosRow) {
-	@components.GalleryEmpty() {
-		for _, photo := range photos {
-		}
-	}
+templ PhotosTable(photos []tools.Photo){
+    <table class="table-fixed w-full">
+        <thead class="w-full">
+        <tr>
+            <th class="p-1 text-center">Name</th>
+            <th class="p-1 text-center">Image</th>
+            <th class="p-1 text-center">Options</th>
+        </tr>
+        </thead>
+        <tbody id="collection-table-body">
+        for _, p := range photos{
+            <tr class="even:bg-slate-900">
+                @rowName(p)
+                @rowPhoto(p)
+                @rowOptions(p)
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+templ rowName(p tools.Photo){
+    <td>{ p.Name }</td>
+}
+
+templ rowOptions(p tools.Photo){
+    <td class="p-1 flex justify-center gap-2">
+        <button 
+            class="w-fit h-fit px-5 py-2 rounded-sm col-start-1 relative focus:ring-0 text-center transition-colors duration-150 justify-self-center text-xs text-white bg-gray-800 hover:bg-red-800 p-2 inline-flex items-center"
+            hx-delete={ fmt.Sprint("/photodata/", p.ID)}
+            hx-confirm="Are you sure you want to delete this photo?"
+            hx-swap="delete"
+            hx-target="closest tr"
+            hx-trigger="click">Delete</button>
+        <button 
+            class="w-fit h-fit px-5 py-2 rounded-sm col-start-1 relative focus:ring-0 text-center transition-colors duration-150 justify-self-center text-xs text-white bg-gray-800 hover:bg-orange-800 p-2 inline-flex items-center"
+            hx-get={ fmt.Sprint("/admin/form/", p.ID) }
+            hx-swap="innerHTML"
+            hx-target="#form-container"
+            hx-trigger="click"> Options </button>
+    </td>
+}
+
+templ rowPhoto(p tools.Photo) {
+    <td class="p-1">
+        <img src={ os.Getenv("PHOTO_DIR") + "min_" + p.Imagepath } alt={ p.Name } height="400px"/>
+    </td>
 }

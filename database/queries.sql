@@ -49,7 +49,7 @@ INSERT INTO image_collections (photo_id, collection_id) VALUES (?,?);
 -- name: PhotoIDGetCollections :many
 SELECT name, id FROM collections
 INNER JOIN image_collections AS link ON
-    link.collection_id = collec_id.id WHERE link.photo_id=?;
+    link.collection_id = collections.id WHERE link.photo_id=?;
 
 -- name: ClearPhotoCollections :exec
 DELETE FROM image_collections WHERE photo_id=?;

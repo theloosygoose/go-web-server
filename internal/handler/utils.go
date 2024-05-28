@@ -149,3 +149,20 @@ func collectionRowstoPhoto( cp []tools.GetCollectionPhotosRow)[]tools.GetAllPhot
     }
     return ps
 }
+
+func photoRowtoPhoto( pr []tools.GetAllPhotosRow)[]tools.Photo{
+    var prs []tools.Photo
+
+    for _, ps := range pr {
+        p := tools.Photo{
+            ID: ps.ID,
+            Name: ps.Name,
+            Imagepath: ps.Imagepath,
+            IHeight: ps.IHeight,
+            IWidth: ps.IWidth,
+        }
+        prs = append(prs, p)
+    }
+    return prs
+
+}

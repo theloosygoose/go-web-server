@@ -53,21 +53,23 @@ func (h FormHandler) UpdateForm() http.HandlerFunc {
         if err != nil {
             log.Println("Could Not Get Photos Collections from DB PhotoIdGetCollections : ", err)
         }
-        var m map[string]string
+        m := make(map[string]string)
 
         for _, c := range res_c {
             r := c.Name + fmt.Sprint(c.ID)
             m[r] = "off"
         }
+        log.Println(m)
 
         for _, c := range res_pc {
             r := c.Name + fmt.Sprint(c.ID)
             m[r] = "on"
         }
+        log.Println(m)
 
         v := types.FormwithValues(res_c, m, res_p)
 
-        render(w, r, components.UpdateForm(v ))
+        render(w, r, components.UpdateForm(v))
         
     })
 }
