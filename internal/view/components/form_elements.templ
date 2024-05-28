@@ -54,7 +54,7 @@ templ form(isUpdate bool, value string){
     hx-target="#response-status" 
     hx-swap="innerHTML"
     if isUpdate {
-        hx-update={ "/photodata/" + value }
+        hx-put={ "/photodata/" + value }
     } else {
         hx-put="/photodata" 
     }

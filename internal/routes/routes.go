@@ -34,7 +34,7 @@ func NewServer(
 
     r.HandleFunc("GET /photodata/delete", aHandler.PhotoRemoveGalleryShow())
 
-    r.HandleFunc("UPDATE /photodata/{id}", aHandler.UpdatePhoto())
+    r.HandleFunc("PUT /photodata/{id}", aHandler.UpdatePhoto())
     r.HandleFunc("DELETE /photodata/{id}", aHandler.DeletePhoto())
 
     r.HandleFunc("GET /collections", cHandler.ShowCollectionsTable())
