@@ -72,7 +72,7 @@ templ rowName(p tools.Photo){
 }
 
 templ rowOptions(p tools.Photo){
-    <td class="p-1 flex justify-center gap-2">
+    <td class="p-1 flex justify-center gap-2 even:bg-slate-900">
         <button 
             class="w-fit h-fit px-5 py-2 rounded-sm col-start-1 relative focus:ring-0 text-center transition-colors duration-150 justify-self-center text-xs text-white bg-gray-800 hover:bg-red-800 p-2 inline-flex items-center"
             hx-delete={ fmt.Sprint("/photodata/", p.ID)}
