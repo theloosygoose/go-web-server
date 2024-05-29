@@ -57,7 +57,7 @@ templ PhotosTable(photos []tools.Photo){
         </thead>
         <tbody id="collection-table-body even:bg-slate-900">
         for _, p := range photos{
-            <tr>
+            <tr class="even: bg-slate-900">
                 @rowName(p)
                 @rowPhoto(p)
                 @rowOptions(p)
