@@ -1,6 +1,9 @@
 -- name: GetPhotoById :one
 SELECT * FROM photos WHERE id = ? LIMIT 1;
 
+-- name: GetPhotoPath :one
+SELECT imagepath FROM photos WHERE id = ? LIMIT 1;
+
 -- name: CreatePhoto :one
 INSERT INTO photos (name, location, date, description, imagepath, i_height, i_width)
 VALUES(?, ?, ?, ?, ?, ?, ?) RETURNING id;

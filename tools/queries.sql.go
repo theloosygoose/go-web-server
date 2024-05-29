@@ -225,6 +225,17 @@ func (q *Queries) GetPhotoById(ctx context.Context, id int64) (Photo, error) {
 	return i, err
 }
 
+const getPhotoPath = `-- name: GetPhotoPath :one
+SELECT imagepath FROM photos WHERE id = ? LIMIT 1
+`
+
+func (q *Queries) GetPhotoPath(ctx context.Context, id int64) (string, error) {
+	row := q.db.QueryRowContext(ctx, getPhotoPath, id)
+	var imagepath string
+	err := row.Scan(&imagepath)
+	return imagepath, err
+}
+
 const getRandomPhoto = `-- name: GetRandomPhoto :one
 SELECT id, name, location, date, imagepath, description, i_height, i_width FROM photos
 ORDER BY random() LIMIT 1

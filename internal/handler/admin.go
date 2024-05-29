@@ -130,6 +130,12 @@ func (h AdminHandler) UpdatePhoto() http.HandlerFunc{
             log.Println("Unable to Delete Photo From DB: ", err)
 		}
 
+        path, err := h.Queries.GetPhotoPath(r.Context(), int64(id))
+        if err != nil {
+            log.Println("Could not get photo path: ", err)
+            return
+        }
+
 
         c, err := h.Queries.GetAllCollections(r.Context())
         if err != nil {
@@ -154,6 +160,7 @@ func (h AdminHandler) UpdatePhoto() http.HandlerFunc{
 			Name:        r.FormValue("name"),
 			Location:    r.FormValue("location"),
             Description: sql.NullString{String: r.FormValue("description"), Valid: true},
+            Imagepath: path,
             ID: int64(id),
         }
 
