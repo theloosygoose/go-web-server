@@ -81,6 +81,6 @@ func (h PhotoHandler) AllPhotos() http.HandlerFunc {
             return
         }
 
-        render(w, r, components.GalleryItems(res_p))
+        render(w, r, components.GalleryItems(res_p, "All Photos"))
     })
 }
