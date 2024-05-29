@@ -70,12 +70,12 @@ func PhotosTable(photos []tools.Photo) templ.Component {
 			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<table class=\"table-fixed w-full\"><thead class=\"w-full\"><tr><th class=\"p-1 text-center\">Name</th><th class=\"p-1 text-center\">Image</th><th class=\"p-1 text-center\">Options</th></tr></thead> <tbody id=\"collection-table-body\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<table class=\"table-fixed w-full\"><thead class=\"w-full divide-y divide-white\"><tr><th class=\"p-1 text-center\">Name</th><th class=\"p-1 text-center\">Image</th><th class=\"p-1 text-center\">Options</th></tr></thead> <tbody id=\"collection-table-body even:bg-slate-900\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		for _, p := range photos {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<tr class=\"even:bg-slate-900\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<tr>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -170,20 +170,20 @@ func rowOptions(p tools.Photo) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-confirm=\"Are you sure you want to delete this photo?\" hx-swap=\"delete\" hx-target=\"closest tr\" hx-trigger=\"click\">Delete</button> <button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 relative focus:ring-0 text-center transition-colors duration-150 justify-self-center text-xs text-white bg-gray-800 hover:bg-orange-800 p-2 inline-flex items-center\" hx-get=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-confirm=\"Are you sure you want to delete this photo?\" hx-swap=\"delete\" hx-target=\"closest tr\" hx-trigger=\"click\"><img src=\"dist/delete.svg\" alt=\"delete photo\" height=\"20px\" width=\"20px\"></button> <button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 relative focus:ring-0 text-center transition-colors duration-150 justify-self-center text-xs text-white bg-gray-800 hover:bg-orange-800 p-2 inline-flex items-center\" hx-get=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var8 string
 		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint("/admin/form/", p.ID))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 85, Col: 53}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 87, Col: 53}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-swap=\"innerHTML\" hx-target=\"#form-container\" hx-trigger=\"click\">Options </button></td>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-swap=\"innerHTML\" hx-target=\"#form-container\" hx-trigger=\"click\"><img src=\"dist/edit.svg\" alt=\"edit photo\" height=\"20px\" width=\"20px\"></button></td>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -207,14 +207,14 @@ func rowPhoto(p tools.Photo) templ.Component {
 			templ_7745c5c3_Var9 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"p-1\"><img src=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"p-1\"><div class=\"flex justify-center w-full\"><img src=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var10 string
 		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(os.Getenv("PHOTO_DIR") + "min_" + p.Imagepath)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 94, Col: 64}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 98, Col: 68}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 		if templ_7745c5c3_Err != nil {
@@ -227,13 +227,13 @@ func rowPhoto(p tools.Photo) templ.Component {
 		var templ_7745c5c3_Var11 string
 		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(p.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 94, Col: 79}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 98, Col: 83}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" height=\"400px\"></td>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" height=\"400px\"></div></td>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

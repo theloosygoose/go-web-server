@@ -150,11 +150,9 @@ func MainPhoto(photo tools.Photo) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var11 string
-		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(
-			os.Getenv("PHOTO_DIR") + "min_" + photo.Imagepath + " 2000w" + "," +
-				os.Getenv("PHOTO_DIR") + "med_" + photo.Imagepath + " 2500w")
+		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(os.Getenv("PHOTO_DIR") + "min_" + photo.Imagepath + " 2000w" + "," + os.Getenv("PHOTO_DIR") + "med_" + photo.Imagepath + " 2500w")
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 29, Col: 84}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 27, Col: 158}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 		if templ_7745c5c3_Err != nil {
@@ -167,20 +165,20 @@ func MainPhoto(photo tools.Photo) templ.Component {
 		var templ_7745c5c3_Var12 string
 		templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(photo.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 32, Col: 36}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 29, Col: 36}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" loading=\"eager\"><div class=\"absolute bottom-0 left-0 z-20 \n                opacity-0 \n                flex\n                flex-col\n                justify-center\n                pt-4\n                gap-y-2\n                transition ease-in-out duration-200\n                group-hover/mimage:opacity-90\n                bg-gray-900 h-fit *:text-md px-12 py-6 w-full min-h-[30%]\"><p>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" loading=\"eager\"><div class=\"absolute bottom-0 left-0 z-20 opacity-0 \n                flex flex-col justify-center pt-4 gap-y-2 \n                transition ease-in-out duration-200\n                group-active/mimage:opacity-90 group-hover/mimage:opacity-90 \n                bg-slate-900 h-fit *:text-md px-12 py-6 w-full min-h-[30%]\"><p>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var13 string
 		templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinStringErrs(photo.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 45, Col: 35}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 37, Col: 35}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var13))
 		if templ_7745c5c3_Err != nil {
@@ -193,7 +191,7 @@ func MainPhoto(photo tools.Photo) templ.Component {
 		var templ_7745c5c3_Var14 string
 		templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(photo.Location)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 46, Col: 39}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 38, Col: 39}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var14))
 		if templ_7745c5c3_Err != nil {
@@ -206,7 +204,7 @@ func MainPhoto(photo tools.Photo) templ.Component {
 		var templ_7745c5c3_Var15 string
 		templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.JoinStringErrs(photo.Date.String)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 47, Col: 42}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 39, Col: 42}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var15))
 		if templ_7745c5c3_Err != nil {
@@ -219,7 +217,7 @@ func MainPhoto(photo tools.Photo) templ.Component {
 		var templ_7745c5c3_Var16 string
 		templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.JoinStringErrs(photo.Description.String)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 48, Col: 65}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/photo/show.templ`, Line: 40, Col: 65}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var16))
 		if templ_7745c5c3_Err != nil {

@@ -42,9 +42,7 @@ INSERT INTO collections (name) VALUES (?) RETURNING *;
 
 -- name: DeleteCollection :exec
 DELETE FROM collections 
-WHERE id=?;
-DELETE FROM image_collections 
-WHERE collection_id=?;
+WHERE id=?; 
 
 -- name: PhotoIntoCollection :exec
 INSERT INTO image_collections (photo_id, collection_id) VALUES (?,?);
@@ -56,3 +54,7 @@ INNER JOIN image_collections AS link ON
 
 -- name: ClearPhotoCollections :exec
 DELETE FROM image_collections WHERE photo_id=?;
+
+-- name: ClearCollectionsPhotos :exec 
+DELETE FROM image_collections 
+WHERE collection_id=?;

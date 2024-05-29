@@ -170,6 +170,5 @@ func (h AdminHandler) UpdatePhoto() http.HandlerFunc{
 		}
 
         render(w, r, components.ReponseShow(res))
-
     })
 }

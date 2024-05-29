@@ -11,8 +11,9 @@ import (
 	"github.com/theloosygoose/goserver/internal/routes"
 	"github.com/theloosygoose/goserver/tools"
 
-    _"github.com/mattn/go-sqlite3"
+	_ "github.com/mattn/go-sqlite3"
 )
+
 
 func main() {
     err := godotenv.Load(".env")

@@ -4,8 +4,8 @@ run:
 	@go run cmd/goserver/main.go
 
 build:
-	@npx tailwindcss -i ./dist/input.css -o ./dist/tailwind.css
 	@templ generate
+	@npx tailwindcss -i dist/input.css -o dist/tailwind.css
 	@go build -o ./bin/main ./cmd/goserver/main.go
 
 generate:

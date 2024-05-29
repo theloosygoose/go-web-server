@@ -10,10 +10,10 @@ templ Base() {
     <script src="dist/htmx.min.js"></script>
     <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/preload.js"></script>
     <script src="dist/main.js" defer></script>
-    <link rel="stylesheet" href="/dist/tailwind.css"/>
+    <link rel="stylesheet" href="dist/tailwind.css"/>
     <title>Don Photography</title>
 </head>
-<body class="font-mono bg-black text-white" 
+<body class="bg-black text-white" 
     hx-trigger="load"
     hx-get="/photodata/random"
     hx-target="#main-photo"

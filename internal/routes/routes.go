@@ -2,11 +2,12 @@ package routes
 
 import (
 	"net/http"
-	"os"
 
+	"github.com/theloosygoose/goserver/dist"
 	"github.com/theloosygoose/goserver/internal/handler"
 	"github.com/theloosygoose/goserver/tools"
 )
+
 
 func NewServer(
     queries *tools.Queries,
@@ -19,8 +20,7 @@ func NewServer(
     cHandler,
     fHandler:= handler.CreateHandlers(queries)
 
-    dist := os.Getenv("STATIC_DIR")
-    fs := http.FileServer(http.Dir(dist))
+    fs := http.FileServer(http.FS(dist.Files))
     r.Handle("/dist/", http.StripPrefix("/dist/", fs))
 
 	r.HandleFunc("/", pHandler.MainPage())
@@ -45,7 +45,6 @@ func NewServer(
 
     r.HandleFunc("GET /admin/form/new", fHandler.NewForm())
     r.HandleFunc("GET /admin/form/{id}", fHandler.UpdateForm())
-
 
 	return r
 }

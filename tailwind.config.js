@@ -3,14 +3,10 @@ const plugin = require('tailwindcss/plugin')
 
 module.exports = {
     future: {
-        hoverOnlyWhenSupported: true,    
+        hoverOnlyWhenSupported: true,
     },
-    content: ["./internal/view/**/*.templ"],
-    theme: {
-        fontFamily: {
-            mono: ['Inconsolata', 'monospace']
-        }
-    },
+    content: ['internal/view/**/*.templ'],
+    theme: {},
     plugins: [
         plugin(function({ addVariant }) {
           addVariant('htmx-settling', ['&.htmx-settling', '.htmx-settling &'])

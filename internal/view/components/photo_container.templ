@@ -19,14 +19,14 @@ templ PhotoContainer(collections []tools.Collection, photos []tools.GetAllPhotos
 }
 
 templ Gallery(photos []tools.GetAllPhotosRow){
-    <div id="gallery" class="outline outline-gray-800 outline-offset-4 rounded-sm p-6
+    <div id="gallery" class="outline outline-gray-800 outline-offset-4 p-6
     flex flex-wrap h-fit gap-2 md:gap-3 justify-center mx-2">
         @GalleryItems(photos)
     </div>
 }
 
 templ GalleryEmpty(){
-    <div id="gallery" class="outline outline-gray-800 outline-offset-4 rounded-sm p-6 flex flex-wrap h-fit gap-2 md:gap-3 justify-center mx-2">
+    <div id="gallery" class="outline outline-gray-800 outline-offset-4 p-6 flex flex-wrap h-fit gap-2 md:gap-3 justify-center mx-2">
         { children... }
     </div>
 }
@@ -38,9 +38,9 @@ templ GalleryContainer(){
 }
 
 templ GalleryTabs(collections []tools.Collection){
-    <div class="w-full flex justify-center gap-1 align-center">
+    <div class="w-full flex justify-center gap-2 align-center mb-4 snap-x overflow-x-auto">
         <button 
-            class="p-2"
+            class="py-2 px-4 bg-slate-900 snap-center text-sm"
             hx-get="/photodata"
             hx-trigger="click"
             hx-swap="innerHTML"
@@ -49,7 +49,7 @@ templ GalleryTabs(collections []tools.Collection){
         </button>
         for _, collection := range collections{
             <button 
-                class="p-2"
+                class="py-2 px-4 bg-slate-900 snap-center text-sm"
                 hx-get={ "/collections/" + fmt.Sprint(collection.ID) }
                 hx-trigger="click"
                 hx-swap="innerHTML"
@@ -67,14 +67,13 @@ templ GalleryItems(photos []tools.GetAllPhotosRow){
             class="z-20 object-center object-cover max-w-32 max-h-32 md:max-w-52 md:max-h-52" 
             loading="lazy"
             src={ os.Getenv("PHOTO_DIR") + "sm_" + photo.Imagepath} 
-        alt={ photo.Name }
-        hx-trigger="click"
+            alt={ photo.Name }
+            hx-trigger="click"
             hx-target="#main-photo"
             hx-swap="innerHTML"
             hx-get={ fmt.Sprintf("/photodata/%d", photo.ID) }
-        preload="mouseover" preload-images="true"
-            />
-            </div>
+            preload="mouseover" preload-images="true"/>
+        </div>
 
     }
 }

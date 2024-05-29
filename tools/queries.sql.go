@@ -10,6 +10,16 @@ import (
 	"database/sql"
 )
 
+const clearCollectionsPhotos = `-- name: ClearCollectionsPhotos :exec
+DELETE FROM image_collections 
+WHERE collection_id=?
+`
+
+func (q *Queries) ClearCollectionsPhotos(ctx context.Context, collectionID int64) error {
+	_, err := q.db.ExecContext(ctx, clearCollectionsPhotos, collectionID)
+	return err
+}
+
 const clearPhotoCollections = `-- name: ClearPhotoCollections :exec
 DELETE FROM image_collections WHERE photo_id=?
 `

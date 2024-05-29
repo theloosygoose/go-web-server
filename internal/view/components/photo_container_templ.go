@@ -86,7 +86,7 @@ func Gallery(photos []tools.GetAllPhotosRow) templ.Component {
 			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"gallery\" class=\"outline outline-gray-800 outline-offset-4 rounded-sm p-6\n    flex flex-wrap h-fit gap-2 md:gap-3 justify-center mx-2\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"gallery\" class=\"outline outline-gray-800 outline-offset-4 p-6\n    flex flex-wrap h-fit gap-2 md:gap-3 justify-center mx-2\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -118,7 +118,7 @@ func GalleryEmpty() templ.Component {
 			templ_7745c5c3_Var4 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"gallery\" class=\"outline outline-gray-800 outline-offset-4 rounded-sm p-6 flex flex-wrap h-fit gap-2 md:gap-3 justify-center mx-2\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"gallery\" class=\"outline outline-gray-800 outline-offset-4 p-6 flex flex-wrap h-fit gap-2 md:gap-3 justify-center mx-2\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -182,12 +182,12 @@ func GalleryTabs(collections []tools.Collection) templ.Component {
 			templ_7745c5c3_Var6 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"w-full flex justify-center gap-1 align-center\"><button class=\"p-2\" hx-get=\"/photodata\" hx-trigger=\"click\" hx-swap=\"innerHTML\" hx-target=\"#gallery\">All Photos</button> ")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"w-full flex justify-center gap-2 align-center mb-4 snap-x overflow-x-auto\"><button class=\"py-2 px-4 bg-slate-900 snap-center text-sm\" hx-get=\"/photodata\" hx-trigger=\"click\" hx-swap=\"innerHTML\" hx-target=\"#gallery\">All Photos</button> ")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		for _, collection := range collections {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<button class=\"p-2\" hx-get=\"")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<button class=\"py-2 px-4 bg-slate-900 snap-center text-sm\" hx-get=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -281,7 +281,7 @@ func GalleryItems(photos []tools.GetAllPhotosRow) templ.Component {
 			var templ_7745c5c3_Var13 string
 			templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinStringErrs(photo.Name)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/components/photo_container.templ`, Line: 70, Col: 24}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/components/photo_container.templ`, Line: 70, Col: 28}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var13))
 			if templ_7745c5c3_Err != nil {

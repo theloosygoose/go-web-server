@@ -29,7 +29,7 @@ func CollectionForm() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form class=\"flex gap-2 justify-start\" hx-put=\"/collections\" hx-target=\"#collection-table-body\" hx-swap=\"beforeend\"><input class=\"w-1/3 block border-0 border-b-2 border-accent focus:ring-0 focus:border-b-4 bg-gray-800 rounded-md\" type=\"text\" name=\"collection-name\" id=\"collection-name\" value=\"New Collection Name\"> <button class=\"transition-colors duration-150 \n        bg-green-600 hover:bg-green-800 w-fit p-1 px-2\" type=\"submit\">Add </button></form>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form class=\"flex gap-2 justify-start mb-1\" hx-put=\"/collections\" hx-target=\"#collection-table-body\" hx-swap=\"beforeend\"><input class=\"w-1/3 block border-0 border-b-2 border-accent focus:ring-0 focus:border-b-4 bg-gray-800 rounded-md select-all\" type=\"text\" name=\"collection-name\" id=\"collection-name\" value=\"Name\"> <button class=\"transition-colors duration-150 bg-green-600 hover:bg-green-800 w-fit p-1 px-3\" type=\"submit\">Add </button></form>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -57,7 +57,7 @@ func CollectionTable(collections []tools.Collection) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<table class=\"table-fixed divide-y divide-gray-100 w-full mt-2 h-full\"><thead class=\"w-full\"><tr><th scope=\"col\" class=\"px-6 py-3\">Name</th><th scope=\"col\" class=\"px-6 py-3\">Delete</th></tr></thead> <tbody id=\"collection-table-body\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<table class=\"table-fixed w-full mt-3 h-full\"><thead class=\"w-full divide-y divide-gray-200\"><tr><th scope=\"col\" class=\"px-6 py-3\">Name</th><th scope=\"col\" class=\"px-6 py-3\">Delete</th></tr></thead> <tbody id=\"collection-table-body\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -98,13 +98,13 @@ func collectionDeleteButton(id int64) templ.Component {
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs("collections/" + strconv.Itoa(int(id)))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/components/collection.templ`, Line: 42, Col: 57}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/components/collection.templ`, Line: 41, Col: 57}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-trigger=\"click\" hx-target=\"closest tr\" hx-swap=\"outerHTML\" hx-confirm=\"Are you sure you want to delete this collection?\">X</button>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-trigger=\"click\" hx-target=\"closest tr\" hx-swap=\"outerHTML\" hx-confirm=\"Are you sure you want to delete this collection?\"><img src=\"dist/delete.svg\" class=\"bg-white/0\" height=\"20px\" width=\"20px\" alt=\"delete collections\"></button>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -128,14 +128,14 @@ func CollectionTableItem(collection tools.Collection) templ.Component {
 			templ_7745c5c3_Var5 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<tr class=\"py-1\"><td class=\"p-1 text-center \">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<tr class=\"py-1 even:bg-slate-900\"><td class=\"p-1 text-center \">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var6 string
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(collection.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/components/collection.templ`, Line: 54, Col: 54}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/components/collection.templ`, Line: 51, Col: 54}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 		if templ_7745c5c3_Err != nil {

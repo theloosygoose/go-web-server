@@ -47,8 +47,14 @@ func (h CollectionHandler) DeleteCollection() http.HandlerFunc {
             return
         }
 
-        err = h.Queries.DeleteCollection(r.Context(), int64(id))
+        err = h.Queries.ClearCollectionsPhotos(r.Context(), int64(id))
+        if err != nil {
+            log.Println("Could not Clear Collection Photos", err)
+            w.WriteHeader(http.StatusInternalServerError)
+            return
+        }
 
+        err = h.Queries.DeleteCollection(r.Context(), int64(id))
         if err != nil {
             log.Println("Could not Delete from Collection", err)
             w.WriteHeader(http.StatusInternalServerError)
