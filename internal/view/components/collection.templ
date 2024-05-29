@@ -12,10 +12,10 @@ templ CollectionForm(){
         hx-put="/collections" 
         hx-target="#collection-table-body"
         hx-swap="beforeend">
-        <input class="w-1/3 block border-0 border-b-2 border-accent focus:ring-0 focus:border-b-4 bg-gray-800 rounded-md" type="text" 
-        name="collection-name" id="collection-name" value="New Collection Name"/>
+        <input class="w-1/3 block border-0 border-b-2 border-accent focus:ring-0 focus:border-b-4 bg-gray-800 rounded-md select-all" type="text" 
+        name="collection-name" id="collection-name" value="Name"/>
         <button class="transition-colors duration-150 
-        bg-green-600 hover:bg-green-800 w-fit p-1 px-2" type="submit"> Add </button>
+        bg-green-600 hover:bg-green-800 w-fit p-1 px-3" type="submit"> Add </button>
     </form>
 }
 
