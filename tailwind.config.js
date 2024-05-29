@@ -2,6 +2,9 @@
 const plugin = require('tailwindcss/plugin')
 
 module.exports = {
+    future: {
+        hoverOnlyWhenSupported: true,    
+    },
     content: ["./internal/view/**/*.templ"],
     theme: {
         fontFamily: {
