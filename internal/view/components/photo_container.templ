@@ -19,14 +19,13 @@ templ PhotoContainer(collections []tools.Collection, photos []tools.GetAllPhotos
 }
 
 templ Gallery(photos []tools.GetAllPhotosRow){
-    <div id="gallery" class="outline outline-gray-800 outline-offset-4 p-6
-    flex flex-wrap h-fit gap-2 md:gap-3 justify-center mx-2">
+    <div id="gallery" class="p-2 md:p-6 flex flex-wrap h-fit gap-2 md:gap-3 justify-center mx-2">
         @GalleryItems(photos)
     </div>
 }
 
 templ GalleryEmpty(){
-    <div id="gallery" class="outline outline-gray-800 outline-offset-4 p-6 flex flex-wrap h-fit gap-2 md:gap-3 justify-center mx-2">
+    <div id="gallery" class="p-2 md:p-6 flex flex-wrap h-fit gap-2 md:gap-3 justify-center mx-2">
         { children... }
     </div>
 }
@@ -38,7 +37,7 @@ templ GalleryContainer(){
 }
 
 templ GalleryTabs(collections []tools.Collection){
-    <div class="w-full flex justify-center gap-2 align-center mb-4 px-2 flex-wrap">
+    <div class="w-full flex justify-center gap-2 align-center mb-6 px-2 flex-wrap">
         <button 
             class="py-2 px-4 bg-slate-900 snap-center text-sm"
             hx-get="/photodata"
