@@ -318,7 +318,7 @@ func form(isUpdate bool, value string) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		} else {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800\n        relative focus:ring-0 text-center \n        transition-colors duration-150\n        text-white\n        hover:bg-gray-900\n        inline-flex items-center\" type=\"submit\">Upload <span class=\"htmx-indicator absolute -top-1 -right-1 flex h-3 w-3\"><span class=\"animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75\"></span> <span class=\"relative inline-flex rounded-full h-3 w-3 bg-accent\"></span></span></button>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800\n        relative focus:ring-0 text-center \n        transition-colors duration-150\n        text-white\n        hover:bg-gray-900\n        inline-flex items-center\" type=\"submit\">Upload <span class=\"htmx-indicator absolute -top-1 -right-1 flex h-3 w-3\"><span class=\"animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75\"></span> <span class=\"relative inline-flex rounded-full h-3 w-3 bg-green-500\"></span></span></button>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -354,7 +354,7 @@ func formName(value string) templ.Component {
 		var templ_7745c5c3_Var13 string
 		templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinStringErrs(value)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/components/form_elements.templ`, Line: 108, Col: 65}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/components/form_elements.templ`, Line: 107, Col: 65}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var13))
 		if templ_7745c5c3_Err != nil {
@@ -391,7 +391,7 @@ func formLocation(value string) templ.Component {
 		var templ_7745c5c3_Var15 string
 		templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.JoinStringErrs(value)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/components/form_elements.templ`, Line: 119, Col: 69}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/components/form_elements.templ`, Line: 118, Col: 69}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var15))
 		if templ_7745c5c3_Err != nil {
@@ -421,20 +421,20 @@ func formDescription(value string) templ.Component {
 			templ_7745c5c3_Var16 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<label class=\"col-start-1\" for=\"description-input\"><span>Description</span> <textarea class=\"w-full block border-0 border-b-2 border-accent focus:ring-0 focus:border-b-4 bg-gray-800 rounded-md\" rows=\"5\" name=\"description\" id=\"description-input\" value=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<label class=\"col-start-1\" for=\"description-input\"><span>Description</span> <textarea class=\"w-full block border-0 border-b-2 border-accent focus:ring-0 focus:border-b-4 bg-gray-800 rounded-md\" rows=\"5\" name=\"description\" id=\"description-input\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var17 string
 		templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.JoinStringErrs(value)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/components/form_elements.templ`, Line: 130, Col: 72}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/components/form_elements.templ`, Line: 129, Col: 66}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var17))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"></textarea></label>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</textarea></label>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -499,7 +499,7 @@ func formImagePreview(value string) templ.Component {
 			var templ_7745c5c3_Var20 string
 			templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.JoinStringErrs("images/min_" + value)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/components/form_elements.templ`, Line: 158, Col: 103}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/components/form_elements.templ`, Line: 157, Col: 103}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var20))
 			if templ_7745c5c3_Err != nil {

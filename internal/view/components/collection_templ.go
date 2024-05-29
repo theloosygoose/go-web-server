@@ -57,7 +57,7 @@ func CollectionTable(collections []tools.Collection) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<table class=\"table-fixed w-full mt-3 h-full\"><thead class=\"w-full divide-y divide-gray-200\"><tr><th scope=\"col\" class=\"px-6 py-3\">Name</th><th scope=\"col\" class=\"px-6 py-3\">Delete</th></tr></thead> <tbody id=\"collection-table-body\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<table class=\"table-fixed w-full mt-3 h-full\"><thead class=\"w-full\"><tr><th scope=\"col\" class=\"px-6 py-3\">Name</th><th scope=\"col\" class=\"px-6 py-3\">Delete</th></tr></thead> <tbody id=\"collection-table-body\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -91,20 +91,20 @@ func collectionDeleteButton(id int64) templ.Component {
 			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<button class=\"bg-red-600 hover:bg-red-800 p-2 text-center\" hx-delete=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex justify-center w-full\"><button class=\"bg-red-700 hover:bg-red-800 py-2 px-3  text-center\" hx-delete=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs("collections/" + strconv.Itoa(int(id)))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/components/collection.templ`, Line: 41, Col: 57}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/components/collection.templ`, Line: 42, Col: 57}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-trigger=\"click\" hx-target=\"closest tr\" hx-swap=\"outerHTML\" hx-confirm=\"Are you sure you want to delete this collection?\"><img src=\"dist/delete.svg\" class=\"bg-white/0\" height=\"20px\" width=\"20px\" alt=\"delete collections\"></button>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-trigger=\"click\" hx-target=\"closest tr\" hx-swap=\"outerHTML\" hx-confirm=\"Are you sure you want to delete this collection?\"><img src=\"dist/delete.svg\" height=\"20px\" width=\"20px\" alt=\"delete collections\"></button></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -128,14 +128,14 @@ func CollectionTableItem(collection tools.Collection) templ.Component {
 			templ_7745c5c3_Var5 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<tr class=\"py-1 even:bg-slate-900\"><td class=\"p-1 text-center \">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<tr class=\"py-1 even:bg-slate-900 odd:bg-black\"><td class=\"p-1 text-center\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var6 string
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(collection.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/components/collection.templ`, Line: 51, Col: 54}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/components/collection.templ`, Line: 51, Col: 53}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 		if templ_7745c5c3_Err != nil {

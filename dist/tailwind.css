@@ -891,8 +891,8 @@ body {
   margin-bottom: 0.25rem;
 }
 
-.mb-4{
-  margin-bottom: 1rem;
+.mb-6{
+  margin-bottom: 1.5rem;
 }
 
 .mt-12{
@@ -1016,10 +1016,6 @@ body {
           user-select: all;
 }
 
-.snap-x{
-  scroll-snap-type: x var(--tw-scroll-snap-strictness);
-}
-
 .snap-center{
   scroll-snap-align: center;
 }
@@ -1073,28 +1069,8 @@ body {
   row-gap: 0.5rem;
 }
 
-.divide-y > :not([hidden]) ~ :not([hidden]){
-  --tw-divide-y-reverse: 0;
-  border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
-  border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
-}
-
-.divide-gray-200 > :not([hidden]) ~ :not([hidden]){
-  --tw-divide-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-divide-opacity));
-}
-
-.divide-white > :not([hidden]) ~ :not([hidden]){
-  --tw-divide-opacity: 1;
-  border-color: rgb(255 255 255 / var(--tw-divide-opacity));
-}
-
 .justify-self-center{
   justify-self: center;
-}
-
-.overflow-x-auto{
-  overflow-x: auto;
 }
 
 .text-balance{
@@ -1136,23 +1112,24 @@ body {
   background-color: rgb(17 24 39 / var(--tw-bg-opacity));
 }
 
+.bg-green-500{
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 197 94 / var(--tw-bg-opacity));
+}
+
 .bg-green-600{
   --tw-bg-opacity: 1;
   background-color: rgb(22 163 74 / var(--tw-bg-opacity));
 }
 
-.bg-red-600{
+.bg-red-700{
   --tw-bg-opacity: 1;
-  background-color: rgb(220 38 38 / var(--tw-bg-opacity));
+  background-color: rgb(185 28 28 / var(--tw-bg-opacity));
 }
 
 .bg-slate-900{
   --tw-bg-opacity: 1;
   background-color: rgb(15 23 42 / var(--tw-bg-opacity));
-}
-
-.bg-white\/0{
-  background-color: rgb(255 255 255 / 0);
 }
 
 .object-contain{
@@ -1182,10 +1159,6 @@ body {
   padding: 0.5rem;
 }
 
-.p-6{
-  padding: 1.5rem;
-}
-
 .px-1{
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -1194,6 +1167,11 @@ body {
 .px-12{
   padding-left: 3rem;
   padding-right: 3rem;
+}
+
+.px-2{
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 .px-3{
@@ -1297,18 +1275,6 @@ body {
   opacity: 0.75;
 }
 
-.outline{
-  outline-style: solid;
-}
-
-.outline-offset-4{
-  outline-offset: 4px;
-}
-
-.outline-gray-800{
-  outline-color: #1f2937;
-}
-
 .transition{
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -1379,6 +1345,11 @@ body {
 
 .file\:duration-150::file-selector-button{
   transition-duration: 150ms;
+}
+
+.odd\:bg-black:nth-child(odd){
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .even\:bg-slate-900:nth-child(even){
@@ -1529,6 +1500,10 @@ body {
 
   .md\:gap-3{
     gap: 0.75rem;
+  }
+
+  .md\:p-6{
+    padding: 1.5rem;
   }
 
   .md\:px-16{

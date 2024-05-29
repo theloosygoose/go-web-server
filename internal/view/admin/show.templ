@@ -48,16 +48,16 @@ templ Show() {
 
 templ PhotosTable(photos []tools.Photo){
     <table class="table-fixed w-full">
-        <thead class="w-full divide-y divide-white">
+        <thead class="w-full">
         <tr>
             <th class="p-1 text-center">Name</th>
             <th class="p-1 text-center">Image</th>
             <th class="p-1 text-center">Options</th>
         </tr>
         </thead>
-        <tbody id="collection-table-body even:bg-slate-900">
+        <tbody id="collection-table-body">
         for _, p := range photos{
-            <tr class="even: bg-slate-900">
+            <tr class="even: bg-slate-900 odd:bg-black">
                 @rowName(p)
                 @rowPhoto(p)
                 @rowOptions(p)
@@ -68,11 +68,11 @@ templ PhotosTable(photos []tools.Photo){
 }
 
 templ rowName(p tools.Photo){
-    <td>{ p.Name }</td>
+    <td class="text-center">{ p.Name }</td>
 }
 
 templ rowOptions(p tools.Photo){
-    <td class="p-1 flex justify-center gap-2 even:bg-slate-900">
+    <td class="p-1 flex justify-center gap-2">
         <button 
             class="w-fit h-fit px-3 py-2 rounded-sm col-start-1 relative focus:ring-0 text-center transition-colors duration-150 justify-self-center text-xs text-white bg-gray-800 hover:bg-red-800 p-2 inline-flex items-center"
             hx-delete={ fmt.Sprint("/photodata/", p.ID)}

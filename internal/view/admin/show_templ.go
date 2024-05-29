@@ -70,12 +70,12 @@ func PhotosTable(photos []tools.Photo) templ.Component {
 			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<table class=\"table-fixed w-full\"><thead class=\"w-full divide-y divide-white\"><tr><th class=\"p-1 text-center\">Name</th><th class=\"p-1 text-center\">Image</th><th class=\"p-1 text-center\">Options</th></tr></thead> <tbody id=\"collection-table-body even:bg-slate-900\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<table class=\"table-fixed w-full\"><thead class=\"w-full\"><tr><th class=\"p-1 text-center\">Name</th><th class=\"p-1 text-center\">Image</th><th class=\"p-1 text-center\">Options</th></tr></thead> <tbody id=\"collection-table-body\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		for _, p := range photos {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<tr>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<tr class=\"even: bg-slate-900 odd:bg-black\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -120,14 +120,14 @@ func rowName(p tools.Photo) templ.Component {
 			templ_7745c5c3_Var4 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"text-center\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var5 string
 		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(p.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 71, Col: 16}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 71, Col: 36}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
@@ -157,7 +157,7 @@ func rowOptions(p tools.Photo) templ.Component {
 			templ_7745c5c3_Var6 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"p-1 flex justify-center gap-2 even:bg-slate-900\"><button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 relative focus:ring-0 text-center transition-colors duration-150 justify-self-center text-xs text-white bg-gray-800 hover:bg-red-800 p-2 inline-flex items-center\" hx-delete=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"p-1 flex justify-center gap-2\"><button class=\"w-fit h-fit px-3 py-2 rounded-sm col-start-1 relative focus:ring-0 text-center transition-colors duration-150 justify-self-center text-xs text-white bg-gray-800 hover:bg-red-800 p-2 inline-flex items-center\" hx-delete=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -170,7 +170,7 @@ func rowOptions(p tools.Photo) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-confirm=\"Are you sure you want to delete this photo?\" hx-swap=\"delete\" hx-target=\"closest tr\" hx-trigger=\"click\"><img src=\"dist/delete.svg\" alt=\"delete photo\" height=\"20px\" width=\"20px\"></button> <button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 relative focus:ring-0 text-center transition-colors duration-150 justify-self-center text-xs text-white bg-gray-800 hover:bg-orange-800 p-2 inline-flex items-center\" hx-get=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-confirm=\"Are you sure you want to delete this photo?\" hx-swap=\"delete\" hx-target=\"closest tr\" hx-trigger=\"click\"><img src=\"dist/delete.svg\" alt=\"delete photo\" height=\"20px\" width=\"20px\"></button> <button class=\"w-fit h-fit px-3 py-2 rounded-sm col-start-1 relative focus:ring-0 text-center transition-colors duration-150 justify-self-center text-xs text-white bg-gray-800 hover:bg-orange-800 p-2 inline-flex items-center\" hx-get=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
