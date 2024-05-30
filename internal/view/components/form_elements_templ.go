@@ -313,7 +313,7 @@ func form(isUpdate bool, value string) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		if isUpdate {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800\n        relative focus:ring-0 text-center \n        transition-colors duration-150\n        text-white\n        hover:bg-gray-900\n        inline-flex items-center\" type=\"submit\">Update  <span class=\"htmx-indicator absolute -top-1 -right-1 flex h-3 w-3\"><span class=\"animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75\"></span> <span class=\"relative inline-flex rounded-full h-3 w-3 bg-accent\"></span></span></button>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800\n        relative focus:ring-0 text-center \n        transition-colors duration-150\n        text-white\n        hover:bg-gray-900\n        inline-flex items-center\" type=\"submit\">Update  <span class=\"htmx-indicator absolute -top-1 -right-1 flex h-3 w-3\"><span class=\"animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75\"></span> <span class=\"relative inline-flex rounded-full h-3 w-3 bg-green-500\"></span></span></button>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

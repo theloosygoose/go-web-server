@@ -37,7 +37,7 @@ func Show() templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"container w-full px-4\"><div id=\"form-container\" hx-get=\"/admin/form/new\" hx-trigger=\"load\" hx-swap=\"innerHTML\" hx-target=\"#form-container\"></div><div id=\"response-status\"></div></div><button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800\n        my-16\n        relative focus:ring-0 text-center \n        transition-colors duration-150\n        justify-self-center\n        text-white\n        hover:bg-gray-900\n        inline-flex items-center\" hx-get=\"/photodata/delete\" hx-swap=\"innerHTML\" hx-target=\"#view-res\" hx-trigger=\"click\">Delete Photos </button> <button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800\n        my-16\n        relative focus:ring-0 text-center \n        transition-colors duration-150\n        justify-self-center\n        text-white\n        hover:bg-gray-900\n        inline-flex items-center\" hx-get=\"/collections\" hx-swap=\"innerHTML\" hx-target=\"#view-res\" hx-trigger=\"click\">View Collections </button><div id=\"view-res\"></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"container w-full px-4\"><div id=\"form-container\" hx-get=\"/admin/form/new\" hx-trigger=\"load\" hx-swap=\"innerHTML\" hx-target=\"#form-container\"></div><div id=\"response-status\"></div></div><div class=\"w-full flex justify-center gap-4\"><button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800\n        my-16\n        relative focus:ring-0 text-center \n        transition-colors duration-150\n        justify-self-center\n        text-white\n        hover:bg-gray-900\n        inline-flex items-center\" hx-get=\"/photodata/delete\" hx-swap=\"innerHTML\" hx-target=\"#view-res\" hx-trigger=\"click\">Edit Photos</button> <button class=\"w-fit h-fit px-5 py-2 rounded-sm col-start-1 bg-gray-800\n        my-16\n        relative focus:ring-0 text-center \n        transition-colors duration-150\n        justify-self-center\n        text-white\n        hover:bg-gray-900\n        inline-flex items-center\" hx-get=\"/collections\" hx-swap=\"innerHTML\" hx-target=\"#view-res\" hx-trigger=\"click\">View Collections </button></div><div id=\"view-res\"></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -127,7 +127,7 @@ func rowName(p tools.Photo) templ.Component {
 		var templ_7745c5c3_Var5 string
 		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(p.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 71, Col: 36}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 75, Col: 36}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
@@ -157,33 +157,33 @@ func rowOptions(p tools.Photo) templ.Component {
 			templ_7745c5c3_Var6 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"p-1 flex justify-center gap-2 align-center\"><button class=\"w-fit h-fit px-3 py-2 rounded-sm col-start-1 relative focus:ring-0 text-center transition-colors duration-150 justify-self-center text-xs text-white bg-gray-800 hover:bg-red-800 p-2 inline-flex items-center\" hx-delete=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"p-1 h-full w-full flex justify-center gap-2 align-center\"><button class=\"w-fit h-fit px-2 py-1 rounded-sm col-start-1 relative focus:ring-0 text-center transition-colors duration-150 justify-self-center text-xs text-white bg-gray-800 hover:bg-red-800 p-2 inline-flex items-center\" hx-delete=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var7 string
 		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint("/photodata/", p.ID))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 78, Col: 55}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 82, Col: 55}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-confirm=\"Are you sure you want to delete this photo?\" hx-swap=\"delete\" hx-target=\"closest tr\" hx-trigger=\"click\"><img src=\"dist/delete.svg\" alt=\"delete photo\" height=\"20px\" width=\"20px\"></button> <button class=\"w-fit h-fit px-3 py-2 rounded-sm col-start-1 relative focus:ring-0 text-center transition-colors duration-150 justify-self-center text-xs text-white bg-gray-800 hover:bg-orange-800 p-2 inline-flex items-center\" hx-get=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-confirm=\"Are you sure you want to delete this photo?\" hx-swap=\"delete\" hx-target=\"closest tr\" hx-trigger=\"click\"><img src=\"dist/delete.svg\" alt=\"delete photo\" height=\"18px\" width=\"18px\"></button> <button class=\"w-fit h-fit px-2 py-1 rounded-sm col-start-1 relative focus:ring-0 text-center transition-colors duration-150 justify-self-center text-xs text-white bg-gray-800 hover:bg-orange-800 p-2 inline-flex items-center\" hx-get=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var8 string
 		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint("/admin/form/", p.ID))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 87, Col: 53}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 91, Col: 53}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-swap=\"innerHTML\" hx-target=\"#form-container\" hx-trigger=\"click\"><img src=\"dist/edit.svg\" alt=\"edit photo\" height=\"10px\" width=\"10px\"></button></td>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-swap=\"innerHTML\" hx-target=\"#form-container\" hx-trigger=\"click\"><img src=\"dist/edit.svg\" alt=\"edit photo\" height=\"18px\" width=\"18px\"></button></td>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -214,7 +214,7 @@ func rowPhoto(p tools.Photo) templ.Component {
 		var templ_7745c5c3_Var10 string
 		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(os.Getenv("PHOTO_DIR") + "min_" + p.Imagepath)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 98, Col: 68}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 102, Col: 68}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 		if templ_7745c5c3_Err != nil {
@@ -227,7 +227,7 @@ func rowPhoto(p tools.Photo) templ.Component {
 		var templ_7745c5c3_Var11 string
 		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(p.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 98, Col: 83}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/view/admin/show.templ`, Line: 102, Col: 83}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 		if templ_7745c5c3_Err != nil {
