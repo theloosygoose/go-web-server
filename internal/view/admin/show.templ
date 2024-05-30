@@ -76,23 +76,28 @@ templ rowName(p tools.Photo){
 }
 
 templ rowOptions(p tools.Photo){
-    <td class="p-1 h-full w-full flex justify-center gap-2 align-center">
-        <button 
+    <td class="p-1 h-full w-full">
+    <div class="flex justify-center gap-2 align-center h-full w-full">
+            <button 
             class="w-fit h-fit px-2 py-1 rounded-sm col-start-1 relative focus:ring-0 text-center transition-colors duration-150 justify-self-center text-xs text-white bg-gray-800 hover:bg-red-800 p-2 inline-flex items-center"
             hx-delete={ fmt.Sprint("/photodata/", p.ID)}
             hx-confirm="Are you sure you want to delete this photo?"
-            hx-swap="delete"
-            hx-target="closest tr"
-            hx-trigger="click">
-            <img src="dist/delete.svg" alt="delete photo" height="18px" width="18px"/>
+                hx-swap="delete"
+                hx-target="closest tr"
+                hx-trigger="click">
+                <img src="dist/delete.svg" alt="delete photo" height="18px" width="18px"/>
             </button>
-        <button 
-            class="w-fit h-fit px-2 py-1 rounded-sm col-start-1 relative focus:ring-0 text-center transition-colors duration-150 justify-self-center text-xs text-white bg-gray-800 hover:bg-orange-800 p-2 inline-flex items-center"
-            hx-get={ fmt.Sprint("/admin/form/", p.ID) }
-            hx-swap="innerHTML"
-            hx-target="#form-container"
-            hx-trigger="click">
-            <img src="dist/edit.svg" alt="edit photo" height="18px" width="18px"/></button>
+            <a href="#form-container">
+                <button 
+                class="w-fit h-fit px-2 py-1 rounded-sm col-start-1 relative focus:ring-0 text-center transition-colors duration-150 justify-self-center text-xs text-white bg-gray-800 hover:bg-orange-800 p-2 inline-flex items-center"
+                hx-get={ fmt.Sprint("/admin/form/", p.ID) }
+                hx-swap="innerHTML"
+                hx-target="#form-container"
+                hx-trigger="click">
+                    <img src="dist/edit.svg" alt="edit photo" height="18px" width="18px"/>
+                </button>
+            </a>
+    </div>
     </td>
 }
 
