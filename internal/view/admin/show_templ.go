@@ -157,7 +157,7 @@ func rowOptions(p tools.Photo) templ.Component {
 			templ_7745c5c3_Var6 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"p-1 flex justify-center gap-2\"><button class=\"w-fit h-fit px-3 py-2 rounded-sm col-start-1 relative focus:ring-0 text-center transition-colors duration-150 justify-self-center text-xs text-white bg-gray-800 hover:bg-red-800 p-2 inline-flex items-center\" hx-delete=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"p-1 flex justify-center gap-2 align-center\"><button class=\"w-fit h-fit px-3 py-2 rounded-sm col-start-1 relative focus:ring-0 text-center transition-colors duration-150 justify-self-center text-xs text-white bg-gray-800 hover:bg-red-800 p-2 inline-flex items-center\" hx-delete=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -183,7 +183,7 @@ func rowOptions(p tools.Photo) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-swap=\"innerHTML\" hx-target=\"#form-container\" hx-trigger=\"click\"><img src=\"dist/edit.svg\" alt=\"edit photo\" height=\"20px\" width=\"20px\"></button></td>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-swap=\"innerHTML\" hx-target=\"#form-container\" hx-trigger=\"click\"><img src=\"dist/edit.svg\" alt=\"edit photo\" height=\"10px\" width=\"10px\"></button></td>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

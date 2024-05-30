@@ -1014,12 +1014,6 @@ body {
           user-select: none;
 }
 
-.select-all{
-  -webkit-user-select: all;
-     -moz-user-select: all;
-          user-select: all;
-}
-
 .snap-center{
   scroll-snap-align: center;
 }
@@ -1283,6 +1277,16 @@ body {
 
 .font-semibold{
   font-weight: 600;
+}
+
+.text-green-300{
+  --tw-text-opacity: 1;
+  color: rgb(134 239 172 / var(--tw-text-opacity));
+}
+
+.text-red-700{
+  --tw-text-opacity: 1;
+  color: rgb(185 28 28 / var(--tw-text-opacity));
 }
 
 .text-white{

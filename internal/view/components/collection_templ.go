@@ -29,7 +29,7 @@ func CollectionForm() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form class=\"flex gap-2 justify-start mb-1\" hx-put=\"/collections\" hx-target=\"#collection-table-body\" hx-swap=\"beforeend\"><input class=\"w-1/3 block border-0 border-b-2 border-accent focus:ring-0 focus:border-b-4 bg-gray-800 rounded-md select-all\" type=\"text\" name=\"collection-name\" id=\"collection-name\" value=\"Name\"> <button class=\"transition-colors duration-150 bg-green-600 hover:bg-green-800 w-fit p-1 px-3\" type=\"submit\">Add </button></form>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form class=\"flex gap-2 justify-start mb-1\" hx-put=\"/collections\" hx-target=\"#collection-table-body\" hx-swap=\"beforeend\"><input class=\"w-1/3 block border-0 border-b-2 border-accent focus:ring-0 focus:border-b-4 bg-gray-800 rounded-md input:select-all\" type=\"text\" name=\"collection-name\" id=\"collection-name\" value=\"Collection Name\"> <button class=\"transition-colors duration-150 bg-green-600 hover:bg-green-800 w-fit p-1 px-3\" type=\"submit\">Add </button></form>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -91,7 +91,7 @@ func collectionDeleteButton(id int64) templ.Component {
 			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex justify-center w-full\"><button class=\"bg-red-700 hover:bg-red-800 py-2 px-3  text-center\" hx-delete=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex justify-center align-center w-full\"><button class=\"bg-red-700 hover:bg-red-800 py-2 px-3 text-center\" hx-delete=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -104,7 +104,7 @@ func collectionDeleteButton(id int64) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-trigger=\"click\" hx-target=\"closest tr\" hx-swap=\"outerHTML\" hx-confirm=\"Are you sure you want to delete this collection?\"><img src=\"dist/delete.svg\" height=\"20px\" width=\"20px\" alt=\"delete collections\"></button></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-trigger=\"click\" hx-target=\"closest tr\" hx-swap=\"outerHTML\" hx-confirm=\"Are you sure you want to delete this collection?\"><img src=\"dist/delete.svg\" height=\"10px\" width=\"10px\" alt=\"delete collections\"></button></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -22,7 +22,9 @@ func (h AdminHandler) CreatePhoto() http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
 		r.ParseMultipartForm(20)
-		var response types.Response
+		var res types.Response
+        res.Message = "Successfully Updated Photo"
+        res.Code = http.StatusOK
 
 		p := tools.CreatePhotoParams{
 			Name:        r.FormValue("name"),
@@ -44,6 +46,8 @@ func (h AdminHandler) CreatePhoto() http.HandlerFunc {
         id, err := h.Queries.CreatePhoto(r.Context(), p)
         if err != nil {
             log.Println("Could not add New Photo to Database: ", err)
+            res.Message = "Could not Add photo Into Database"
+            res.Code = http.StatusInternalServerError
             w.WriteHeader(http.StatusInternalServerError)
             return
         } 
@@ -52,6 +56,8 @@ func (h AdminHandler) CreatePhoto() http.HandlerFunc {
         c, err := h.Queries.GetAllCollections(r.Context())
         if err != nil {
             log.Println("Could not get all collections", err)
+            res.Message = "Could not Add photo Into Database"
+            res.Code = http.StatusInternalServerError
             return
         }
         log.Println("Got Collections to add new Photos")
@@ -69,10 +75,12 @@ func (h AdminHandler) CreatePhoto() http.HandlerFunc {
             err = h.Queries.PhotoIntoCollection(r.Context(), n)
             if err != nil {
                 log.Println("Error Adding Photo to Collection", err)
+                res.Message = "Could not Add photo Into Database"
+                res.Code = http.StatusInternalServerError
             }
         }
 
-		render(w, r, components.ReponseShow(response))
+		render(w, r, components.ReponseShow(res))
 	})
 
 }
@@ -124,15 +132,21 @@ func (h AdminHandler) UpdatePhoto() http.HandlerFunc{
 		id_string := r.PathValue("id")
         id, err := strconv.Atoi(id_string)
         var res types.Response
+        res.Message = "Successfully Updated Photo"
+        res.Code = http.StatusOK
 
 		err = h.Queries.ClearPhotoCollections(r.Context(), int64(id))
 		if err != nil {
             log.Println("Unable to Delete Photo From DB: ", err)
+            res.Code = http.StatusInternalServerError
+            res.Message = "Could not Delete Photo From DB"
 		}
 
         path, err := h.Queries.GetPhotoPath(r.Context(), int64(id))
         if err != nil {
             log.Println("Could not get photo path: ", err)
+            res.Code = http.StatusInternalServerError
+            res.Message = "Could not get photo path from DB"
             return
         }
 
@@ -140,6 +154,8 @@ func (h AdminHandler) UpdatePhoto() http.HandlerFunc{
         c, err := h.Queries.GetAllCollections(r.Context())
         if err != nil {
             log.Println("Could not get all collections", err)
+            res.Code = http.StatusInternalServerError
+            res.Message = "Could not get all collections"
             return
         }
 
@@ -153,6 +169,8 @@ func (h AdminHandler) UpdatePhoto() http.HandlerFunc{
             err = h.Queries.PhotoIntoCollection(r.Context(), n)
             if err != nil {
                 log.Println("Error Adding Photo to Collection", err)
+                res.Code = http.StatusInternalServerError
+                res.Message = fmt.Sprint("Error Adding Photo of ID: ", id, " into new collection")
             }
         }
 
@@ -166,7 +184,9 @@ func (h AdminHandler) UpdatePhoto() http.HandlerFunc{
 
 		err = h.Queries.UpdatePhoto(r.Context(), params)
 		if err != nil {
-            log.Println("Unable to Delete Photo From DB: ", err)
+            log.Println("Unable to Update From into DB: ", err)
+            res.Code = http.StatusInternalServerError
+            res.Message = fmt.Sprint("Unable to Update Photo into DB")
 		}
 
         render(w, r, components.ReponseShow(res))
