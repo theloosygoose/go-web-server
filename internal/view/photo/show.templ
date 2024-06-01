@@ -17,10 +17,8 @@ templ Index(photos []tools.GetAllPhotosRow, collections []tools.Collection){
 
 templ MainPhoto(photo tools.Photo){
     <div class={ "select-none md:w-auto group/mimage flex justify-center align-middle" }>
-        <div id="main-image-photo" class={"flex justify-center align-middle z-10" }>
+        <div id="main-image-photo" class={"flex justify-center align-middle z-10" } onclick="showDetails()">
             <div class={"relative blur-load", components.LazyImageStyle(photo.Imagepath) }>
-            <picture>
-            </picture>
                 <img
                     class="object-center object-contain w-auto max-h-[80svh]"
                     src={ os.Getenv("PHOTO_DIR") + "min_"+ photo.Imagepath} 
@@ -29,11 +27,7 @@ templ MainPhoto(photo tools.Photo){
                     alt={ photo.Name }
                     loading="eager"
                 />
-                <div class="absolute bottom-0 left-0 z-20 opacity-0 
-                flex flex-col justify-center pt-4 gap-y-2 
-                transition ease-in-out duration-200
-                group-active/mimage:opacity-90 group-hover/mimage:opacity-90 
-                bg-slate-900 h-fit *:text-md px-12 py-6 w-full min-h-[30%]">
+                <div id="main-details" class="details-hide absolute bottom-0 left-0 z-20 flex flex-col justify-center pt-4 gap-y-2 transition ease-in-out duration-200 bg-slate-900 h-fit *:text-md px-12 py-6 w-full min-h-[30%]">
                     <p>{ photo.Name }</p>
                     <p>{ photo.Location }</p>
                     <p>{ photo.Date.String }</p>
@@ -43,4 +37,3 @@ templ MainPhoto(photo tools.Photo){
         </div>
     </div>
 }
- 

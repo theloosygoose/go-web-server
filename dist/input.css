@@ -65,4 +65,12 @@
         display: inline;
     }
 
+    .details-show{
+        opacity: 80%;
+    }
+    
+    .details-hide{
+        opacity: 0%;
+    }
+
 }
