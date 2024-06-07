@@ -58,3 +58,11 @@ DELETE FROM image_collections WHERE photo_id=?;
 -- name: ClearCollectionsPhotos :exec 
 DELETE FROM image_collections 
 WHERE collection_id=?;
+
+-- name: CreateCategory :one
+INSERT INTO categories (name) VALUES (?) RETURNING *;
+
+-- name: DeleteCategory :exec
+DELETE FROM categories WHERE id=?;
+
+-- name: 

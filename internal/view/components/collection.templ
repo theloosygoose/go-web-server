@@ -49,6 +49,7 @@ templ collectionDeleteButton(id int64){
 templ CollectionTableItem(collection tools.Collection){
     <tr class="py-1 even:bg-slate-900 odd:bg-black">
         <td class="p-1 text-center">{ collection.Name }</td>
+        <td class="p-1 text-center">{ collection.Category }</td>
         <td class="p-1 flex justify-end">@collectionDeleteButton(collection.ID){}</td>
     </tr>
 }
