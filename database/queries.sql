@@ -1,3 +1,5 @@
+--Photos --
+
 -- name: GetPhotoById :one
 SELECT * FROM photos WHERE id = ? LIMIT 1;
 
@@ -25,6 +27,8 @@ UPDATE photos
 SET name=?, location=?,
 date=?, description=?, imagepath=?, i_height=?, i_width=?
 WHERE id = ?;
+
+-- Collections --
 
 -- name: GetCollectionPhotos :many
 SELECT img.id, img.name, img.date, img.imagepath, img.i_height, img.i_width, collec.name, collec.id
@@ -59,10 +63,26 @@ DELETE FROM image_collections WHERE photo_id=?;
 DELETE FROM image_collections 
 WHERE collection_id=?;
 
+--Categories --
+
 -- name: CreateCategory :one
 INSERT INTO categories (name) VALUES (?) RETURNING *;
 
 -- name: DeleteCategory :exec
 DELETE FROM categories WHERE id=?;
 
--- name: 
+-- name: ClearCategoryCollections :exec
+DELETE FROM category_collection
+WHERE category_id=?;
+
+-- name: ClearCollectionCategories :exec
+DELETE FROM category_collection
+WHERE collection_id=?;
+
+-- name: CollectionIntoCategory :exec
+INSERT INTO category_collection (category_id, collection_id) VALUES (?,?);
+
+-- name: CategoryIDGetCollections :exec
+SELECT name, id FROM collections
+INNER JOIN image_collections AS link ON
+    link.collection_id = collections.id WHERE link.photo_id=?;

@@ -30,6 +30,7 @@ func (h CategoryHandler) NewCategory() http.HandlerFunc {
 func (h CategoryHandler) DeleteCategory() http.HandlerFunc {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
+
     })
 }
 

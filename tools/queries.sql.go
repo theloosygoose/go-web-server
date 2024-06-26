@@ -10,6 +10,37 @@ import (
 	"database/sql"
 )
 
+const categoryIDGetCollections = `-- name: CategoryIDGetCollections :exec
+SELECT name, id FROM collections
+INNER JOIN image_collections AS link ON
+    link.collection_id = collections.id WHERE link.photo_id=?
+`
+
+func (q *Queries) CategoryIDGetCollections(ctx context.Context, photoID int64) error {
+	_, err := q.db.ExecContext(ctx, categoryIDGetCollections, photoID)
+	return err
+}
+
+const clearCategoryCollections = `-- name: ClearCategoryCollections :exec
+DELETE FROM category_collection
+WHERE category_id=?
+`
+
+func (q *Queries) ClearCategoryCollections(ctx context.Context, categoryID int64) error {
+	_, err := q.db.ExecContext(ctx, clearCategoryCollections, categoryID)
+	return err
+}
+
+const clearCollectionCategories = `-- name: ClearCollectionCategories :exec
+DELETE FROM category_collection
+WHERE collection_id=?
+`
+
+func (q *Queries) ClearCollectionCategories(ctx context.Context, collectionID int64) error {
+	_, err := q.db.ExecContext(ctx, clearCollectionCategories, collectionID)
+	return err
+}
+
 const clearCollectionsPhotos = `-- name: ClearCollectionsPhotos :exec
 DELETE FROM image_collections 
 WHERE collection_id=?
@@ -27,6 +58,33 @@ DELETE FROM image_collections WHERE photo_id=?
 func (q *Queries) ClearPhotoCollections(ctx context.Context, photoID int64) error {
 	_, err := q.db.ExecContext(ctx, clearPhotoCollections, photoID)
 	return err
+}
+
+const collectionIntoCategory = `-- name: CollectionIntoCategory :exec
+INSERT INTO category_collection (category_id, collection_id) VALUES (?,?)
+`
+
+type CollectionIntoCategoryParams struct {
+	CategoryID   int64
+	CollectionID int64
+}
+
+func (q *Queries) CollectionIntoCategory(ctx context.Context, arg CollectionIntoCategoryParams) error {
+	_, err := q.db.ExecContext(ctx, collectionIntoCategory, arg.CategoryID, arg.CollectionID)
+	return err
+}
+
+const createCategory = `-- name: CreateCategory :one
+
+INSERT INTO categories (name) VALUES (?) RETURNING id, name
+`
+
+// Categories --
+func (q *Queries) CreateCategory(ctx context.Context, name string) (Category, error) {
+	row := q.db.QueryRowContext(ctx, createCategory, name)
+	var i Category
+	err := row.Scan(&i.ID, &i.Name)
+	return i, err
 }
 
 const createCollection = `-- name: CreateCollection :one
@@ -68,6 +126,15 @@ func (q *Queries) CreatePhoto(ctx context.Context, arg CreatePhotoParams) (int64
 	var id int64
 	err := row.Scan(&id)
 	return id, err
+}
+
+const deleteCategory = `-- name: DeleteCategory :exec
+DELETE FROM categories WHERE id=?
+`
+
+func (q *Queries) DeleteCategory(ctx context.Context, id int64) error {
+	_, err := q.db.ExecContext(ctx, deleteCategory, id)
+	return err
 }
 
 const deleteCollection = `-- name: DeleteCollection :exec
@@ -164,6 +231,7 @@ func (q *Queries) GetAllPhotos(ctx context.Context) ([]GetAllPhotosRow, error) {
 }
 
 const getCollectionPhotos = `-- name: GetCollectionPhotos :many
+
 SELECT img.id, img.name, img.date, img.imagepath, img.i_height, img.i_width, collec.name, collec.id
     FROM photos AS img
 INNER JOIN image_collections AS link ON
@@ -183,6 +251,7 @@ type GetCollectionPhotosRow struct {
 	ID_2      int64
 }
 
+// Collections --
 func (q *Queries) GetCollectionPhotos(ctx context.Context, id int64) ([]GetCollectionPhotosRow, error) {
 	rows, err := q.db.QueryContext(ctx, getCollectionPhotos, id)
 	if err != nil {
@@ -216,9 +285,11 @@ func (q *Queries) GetCollectionPhotos(ctx context.Context, id int64) ([]GetColle
 }
 
 const getPhotoById = `-- name: GetPhotoById :one
+
 SELECT id, name, location, date, imagepath, description, i_height, i_width FROM photos WHERE id = ? LIMIT 1
 `
 
+// Photos --
 func (q *Queries) GetPhotoById(ctx context.Context, id int64) (Photo, error) {
 	row := q.db.QueryRowContext(ctx, getPhotoById, id)
 	var i Photo

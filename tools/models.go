@@ -8,6 +8,16 @@ import (
 	"database/sql"
 )
 
+type Category struct {
+	ID   int64
+	Name string
+}
+
+type CategoryCollection struct {
+	CollectionID int64
+	CategoryID   int64
+}
+
 type Collection struct {
 	ID   int64
 	Name string

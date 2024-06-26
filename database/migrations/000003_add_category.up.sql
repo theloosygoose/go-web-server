@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS categories
 name TEXT NOT NULL);
 
 CREATE TABLE IF NOT EXISTS category_collection
-(category_id INTEGER NOT NULL,
-collection_id INTEGER NOT NULL,
-FOREIGN KEY (category_id) REFERENCES categories(id),
-FOREIGN KEY (collection_id) REFERENCES collections(id));
+(collection_id INTEGER NOT NULL,
+category_id INTEGER NOT NULL,
+FOREIGN KEY (collection_id) REFERENCES collections(id),
+FOREIGN KEY (category_id) REFERENCES categories(id));
