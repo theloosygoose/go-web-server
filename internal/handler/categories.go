@@ -85,6 +85,4 @@ func (h CategoryHandler) ViewCategories() http.HandlerFunc {
         render(w, r, components.GalleryItems(pr, res[0].Name_2))
     })
 
-
-    })
 }
